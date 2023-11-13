@@ -13,15 +13,9 @@ const register = async (req, res) => {
     const hash = await bcrypt.hash(data.password, salt);
     data.password = hash;
 
-<<<<<<< HEAD
         const result = await User.create(data)
         console.log(result)
         const token = await Token.create(result.user_id)
-=======
-    const result = await User.create(data);
-    console.log(result);
-    const token = await Token.create(result.user_id);
->>>>>>> 53284df4df7cafd9e780e5732f37a50c51e85380
 
     res.status(201).json({ authenticated: true, token: token.token });
     // res.status(201).send(result)

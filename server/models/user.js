@@ -22,7 +22,7 @@ class User {
         try{
         const {username, password, email} = data;
             
-        let response = await db.query("INSERT INTO users'(username, password, email) VALUES ($1, $2, $3) RETURNING user_id;", [username, password, email]) 
+        let response = await db.query("INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING user_id;", [username, password, email]) 
 
         if (response.rows.length === 0) {
             throw new Error ("Failed to create username")

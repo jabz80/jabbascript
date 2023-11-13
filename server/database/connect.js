@@ -1,13 +1,13 @@
-const { Pool } = require("pg")
+const { Pool } = require('pg');
 
-require('dotenv').config() // needed for integration testing
+require('dotenv').config(); // needed for integration testing
 
-// Connect to the database 
+// Connect to the database
 
 const db = new Pool({
-    connectionString: process.env.DB_URL
-})
+  connectionString: process.env.DB_URL,
+});
 
 // Exporting db
 
-module.exports = db
+module.exports = db;

@@ -7,22 +7,36 @@ a {
   text-decoration: none;
 }
 
-.logo, .main-page-h1, .main-page-h2 {
+.logo {
   font-family: 'Kdam Thmor Pro', sans-serif;
 }
 
-.main-block {
+
+.main-page-marketing-block {
+  padding: 8rem 0;
+
+}
+
+.main-page-marketing-block-bg-1 {
+  background: url('../img/bg.png');
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.main-page-marketing-block-bg-2 {
   background: url('../img/footer-main-page-bg.png');
   background-repeat: repeat-x;
   background-position: bottom;
+  background-color: #FFF2DB;
 }
 
-.main-page-marketing-block {
-  margin: 8rem 0;
+.main-page-buttons {
+  padding: 4rem 0;
 }
 
 .bg-footer {
-  background-color: #4d8b8a;
+  background-color: #67AA83;
 }
 
 .main-page-subheading {
@@ -37,7 +51,8 @@ a {
   background-position: center;
 }
 
-h1, h2 {
+h1, h2, h3 {
+  font-family: 'Kdam Thmor Pro', sans-serif;
   margin-bottom: 2rem;
 }
 
@@ -57,24 +72,35 @@ h1, h2 {
 }
 
 .banner {
-  background-color: #dbfbfe;
+  background-image: url('../img/bnr-bg.gif');
+  background-color: #defbfe;
+  background-size: auto;
+  background-repeat: no-repeat;
+  animation: slidein 12s;
+
+  animation-fill-mode: backwards;
+  animation-iteration-count: infinite;
+  animation-direction: normal
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes slidein {
+  0% {
+    background-position: -20% 150px;
+
   }
 
-  to {
-    transform: rotate(360deg);
+  50% {
+    background-position: 50% 50px;
+
   }
+
+  100% {
+    background-position: 130% 150px;
+
+  }
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
 
 .card {
   padding: 2em;

@@ -10,4 +10,4 @@ export { default as FightingMode } from './FightingMode'
 export { default as Leaderboard } from './Leaderboard'
 
 //Account
-export { default as AccountSettings } from './AccountSettings'
+export { default as AccountPage } from './AccountPage'

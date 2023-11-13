@@ -109,3 +109,22 @@ h1, h2, h3 {
 .read-the-docs {
   color: #888;
 }
+
+.fight-page {
+  height: 100dvh;
+}
+
+.h-33 {
+  height: 33% !important;
+}
+
+.fight-bg {
+  background: url('../img/fight-bg.gif');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+}
+
+.flip {
+  transform: scaleX(-1);
+}

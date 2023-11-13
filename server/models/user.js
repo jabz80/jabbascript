@@ -1,15 +1,16 @@
 const db = require('../database/connect')
 
 class User {
-    constructor({user_id, username, password}){
+    constructor({user_id, username, password, email}){
         this.user_id = user_id;
         this.username = username;
         this.password = password;
+        this.email = email;
 
     }
 
     static async checkUsername (username){
-        const response = await db.query("SELECT * FROM user WHERE username = $1;", [username])
+        const response = await db.query("SELECT * FROM users WHERE username = $1;", [username])
 
         if (response.rows.length != 1){
             throw new Error("Unable to locate username!")
@@ -19,9 +20,9 @@ class User {
 
     static async create(data) {
         try{
-        const {username, password} = data;
+        const {username, password, email} = data;
             
-        let response = await db.query("INSERT INTO user (username, password) VALUES ($1, $2) RETURNING user_id;", [username, password]) 
+        let response = await db.query("INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING user_id;", [username, password, email]) 
 
         if (response.rows.length === 0) {
             throw new Error ("Failed to create username")
@@ -38,7 +39,7 @@ class User {
     }
 
     static async getOneById(id){
-        const response = await db.query("SELECT * FROM user WHERE user_id = $1", [id])
+        const response = await db.query("SELECT * FROM users WHERE user_id = $1", [id])
         
         if (response.rows.length != 1){
             throw new Error("Unable to locate user")

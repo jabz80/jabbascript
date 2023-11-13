@@ -1,10 +1,11 @@
+DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS "user" CASCADE;
 DROP TABLE IF EXISTS token CASCADE;
 DROP TABLE IF EXISTS user_score CASCADE;
 DROP TABLE IF EXISTS questions_battle;
 DROP TABLE IF EXISTS questions_story;
 
-CREATE TABLE "user" (
+CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY,
     username VARCHAR(200) UNIQUE NOT NULL,
     password VARCHAR(200) NOT NULL, 
@@ -17,7 +18,7 @@ CREATE TABLE token (
     user_id INT NOT NULL,
     token CHAR(36) UNIQUE NOT NULL,
     PRIMARY KEY (token_id),
-    FOREIGN KEY (user_id) REFERENCES "user"(user_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE user_score(
@@ -25,7 +26,7 @@ CREATE TABLE user_score(
     user_id INT NOT NULL,
     score INT NOT NULL,
     PRIMARY KEY (score_id),
-    FOREIGN KEY (user_id) REFERENCES "user"(user_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE questions_battle(

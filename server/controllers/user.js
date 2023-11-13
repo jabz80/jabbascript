@@ -14,6 +14,7 @@ const register = async (req,res) => {
         data.password = hash
 
         const result = await User.create(data)
+        console.log(result)
         const token = await Token.create(result.user_id)
 
         res.status(201).json({authenticated: true, token: token.token})

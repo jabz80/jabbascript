@@ -1,0 +1,85 @@
+body {
+  min-height: 100vh;
+  font-family: 'Fira Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo, .main-page-h1, .main-page-h2 {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+}
+
+.main-block {
+  background: url('../img/footer-main-page-bg.png');
+  background-repeat: repeat-x;
+  background-position: bottom;
+}
+
+.main-page-marketing-block {
+  margin: 8rem 0;
+}
+
+.bg-footer {
+  background-color: #4d8b8a;
+}
+
+.main-page-subheading {
+  font-size: 24px;
+  margin-bottom: 2rem;
+}
+
+.main-bage-right-block {
+  background: url('../img/bnr-land-1.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+h1, h2 {
+  margin-bottom: 2rem;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.banner {
+  background-color: #dbfbfe;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}

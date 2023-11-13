@@ -39,10 +39,10 @@ export default function Header() {
             </button>
             <div className="collapse navbar-collapse" id="mainNav">
               <div className="navbar-nav ms-auto">
-                <NavLink className="ms-5 nav-link" to="/">
+                <NavLink className="ms-5 nav-link" to="/story">
                   Story Mode
                 </NavLink>
-                <NavLink className="ms-5 nav-link" to="/account">
+                <NavLink className="ms-5 nav-link" to="/fight">
                   Fight Mode
                 </NavLink>
                 <NavLink className="ms-5 nav-link" to="/login">
@@ -50,6 +50,9 @@ export default function Header() {
                 </NavLink>
                 <NavLink className="ms-5 nav-link" to="/register">
                   Register
+                </NavLink>
+                <NavLink className="ms-5 nav-link" to="/account">
+                  Account
                 </NavLink>
               </div>
             </div>

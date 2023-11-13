@@ -6,7 +6,6 @@ class User {
         this.username = username;
         this.password = password;
         this.email = email;
-
     }
 
     static async checkUsername (username){
@@ -26,7 +25,7 @@ class User {
 
         if (response.rows.length === 0) {
             throw new Error ("Failed to create username")
-        }
+        } 
         return response.rows[0]
         } catch(err){ 
             if (err.message === 'duplicate key value violates unique constraint "user_username_key"'){

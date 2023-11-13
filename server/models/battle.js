@@ -8,7 +8,7 @@ class Battle {
   }
 
   static async getAll() {
-    const response = await db.query('SELECT * FROM question_battle');
+    const response = await db.query('SELECT * FROM questions_battle');
 
     if (response.rows.length == 0) {
       throw new Error('No battle questions were found');
@@ -19,7 +19,7 @@ class Battle {
 
   static async getOneById(id) {
     const response = await db.query(
-      'SELECT * FROM question_battle WHERE q_battle_id = $1',
+      'SELECT * FROM questions_battle WHERE q_battle_id = $1',
       [id]
     );
 

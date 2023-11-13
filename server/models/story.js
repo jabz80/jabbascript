@@ -8,7 +8,7 @@ class Story {
   }
 
   static async getAll() {
-    const response = await db.query('SELECT * FROM question_story');
+    const response = await db.query('SELECT * FROM questions_story');
 
     if (response.rows.length == 0) {
       throw new Error('No story questions were found');
@@ -19,7 +19,7 @@ class Story {
 
   static async getOneById(id) {
     const response = await db.query(
-      'SELECT * FROM question_story WHERE q_story_id = $1',
+      'SELECT * FROM questions_story WHERE q_story_id = $1',
       [id]
     );
 

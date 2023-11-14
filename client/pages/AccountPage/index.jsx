@@ -16,7 +16,7 @@ function Account() {
       }
 
       try {
-        const response = await axios.get('http://localhost:3000/token', {
+        const response = await axios.get('http://localhost:3005/token', {
           headers: {
             Authorization: token
           }

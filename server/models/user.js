@@ -51,7 +51,7 @@ class User {
         if (responseToken.rows.length != 1){
             throw new Error ("Unable to locate user")
         }
-        const user = await User.getOneById((await responseToken).rows[0].user_id)
+        const user = await User.getOneById((responseToken).rows[0].user_id)
         return user
     }
 

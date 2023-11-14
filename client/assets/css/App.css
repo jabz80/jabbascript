@@ -1,0 +1,130 @@
+body {
+  min-height: 100vh;
+  font-family: 'Fira Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+}
+
+
+.main-page-marketing-block {
+  padding: 8rem 0;
+
+}
+
+.main-page-marketing-block-bg-1 {
+  background: url('../img/bg.png');
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.main-page-marketing-block-bg-2 {
+  background: url('../img/footer-main-page-bg.png');
+  background-repeat: repeat-x;
+  background-position: bottom;
+  background-color: #FFF2DB;
+}
+
+.main-page-buttons {
+  padding: 4rem 0;
+}
+
+.bg-footer {
+  background-color: #67AA83;
+}
+
+.main-page-subheading {
+  font-size: 24px;
+  margin-bottom: 2rem;
+}
+
+.main-bage-right-block {
+  background: url('../img/bnr-land-1.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+h1, h2, h3 {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  margin-bottom: 2rem;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.banner {
+  background-image: url('../img/bnr-bg.gif');
+  background-color: #defbfe;
+  background-size: auto;
+  background-repeat: no-repeat;
+  animation: slidein 12s;
+
+  animation-fill-mode: backwards;
+  animation-iteration-count: infinite;
+  animation-direction: normal
+}
+
+@keyframes slidein {
+  0% {
+    background-position: -20% 150px;
+
+  }
+
+  50% {
+    background-position: 50% 50px;
+
+  }
+
+  100% {
+    background-position: 130% 150px;
+
+  }
+
+}
+
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.fight-page {
+  height: 100dvh;
+}
+
+.h-33 {
+  height: 33% !important;
+}
+
+.fight-bg {
+  background: url('../img/fight-bg.gif');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+}
+
+.flip {
+  transform: scaleX(-1);
+}

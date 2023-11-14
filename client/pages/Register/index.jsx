@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios'; // axios to post data
 import { useNavigate } from 'react-router-dom'; 
 import { toast } from 'react-toastify'; // toastify for notification
+import { FaUserAlt } from "react-icons/fa"; 
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -40,7 +41,6 @@ export default function Register() {
       toast.error(error.response?.data?.error || 'Failed to register');
     }
   };
-  ``
   
   return (
     <>
@@ -106,3 +106,5 @@ export default function Register() {
     </>
   );
 }
+
+

@@ -19,7 +19,7 @@ function Account() {
       }
 
       try {
-        const response = await axios.get('http://localhost:3005/token', {
+        const response = await axios.get('https://jabbascript-api.onrender.com/token', {
           headers: {
             Authorization: token
           }

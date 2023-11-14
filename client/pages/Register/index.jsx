@@ -26,7 +26,7 @@ export default function Register() {
     }
   
     try {
-      const response = await axios.post('http://localhost:3005/register', {
+      const response = await axios.post('https://jabbascript-api.onrender.com/register', {
         username: formData.username,
         email: formData.email,
         password: formData.password,

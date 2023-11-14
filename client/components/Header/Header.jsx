@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/logo.png";
+import { AuthContext } from "../../contexts/Auth";
 
 export default function Header() {
-  // const { authToken, logout } = useContext(AuthContext) || {};
-  // const navigate = useNavigate();
+  const { authToken, logout } = useContext(AuthContext) || {};
+  const navigate = useNavigate();
 
-  // const handleLogout = () => {
-  //   logout();
-  //   navigate("/login");
-  // };
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
 
@@ -39,21 +40,37 @@ export default function Header() {
             </button>
             <div className="collapse navbar-collapse" id="mainNav">
               <div className="navbar-nav ms-auto">
+                <NavLink className="ms-5 nav-link" to="/practice">
+                  Practice Fight
+                </NavLink>
                 <NavLink className="ms-5 nav-link" to="/story">
                   Story Mode
                 </NavLink>
-                <NavLink className="ms-5 nav-link" to="/fight">
-                  Fight Mode
-                </NavLink>
+                {authToken ? (
+                  <>
+                    <NavLink className="ms-5 nav-link" to="/multiplayer">
+                      Multiplayer Fight
+                    </NavLink>
+                    <NavLink className="ms-5 nav-link" to="/account">
+                      Account
+                    </NavLink>
+                    <button
+                    className="ms-5 nav-link btn btn-link"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                  </>
+                ):(
+                  <>
                 <NavLink className="ms-5 nav-link" to="/login">
                   Login
                 </NavLink>
                 <NavLink className="ms-5 nav-link" to="/register">
                   Register
                 </NavLink>
-                <NavLink className="ms-5 nav-link" to="/account">
-                  Account
-                </NavLink>
+
+                </>)}
               </div>
             </div>
           </div>

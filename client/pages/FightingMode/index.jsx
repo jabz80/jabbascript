@@ -2,13 +2,18 @@ import React, { useState } from 'react';
 import HTMLComponent from '../../components/HTMLInput/htmlCode';
 import CSSComponent from '../../components/CSSInput/cssCode';
 import JSComponent from '../../JSInput/jsCode';
-import { Fighting } from "../../components";
+import { Fighting, FightCodeSequence } from "../../components";
 
 function index() {
   const [htmlCode, setHtmlCode] = useState('');
   const [cssCode, setCssCode] = useState('');
   const [jsCode, setJsCode] = useState('');
+const [checkAnswer, setCheckAnswer] = useState(false)
 
+const isAnswerCorrect = () => {
+  console.log('hello');
+  setCheckAnswer(prevState => !prevState);
+}
   const handleOutput = () => {
     const iframe = document.getElementById('codeOutput');
     iframe.contentDocument.body.innerHTML = htmlCode + '<style>' + cssCode + '</style>';
@@ -33,7 +38,9 @@ function index() {
 
       <button className='btn text-white bg-success btn-lg'>Next</button>
     </div>
-    <Fighting />
+            <FightCodeSequence checkAnswer={checkAnswer} isAnswerCorrect={isAnswerCorrect}/>
+    <Fighting checkAnswer={checkAnswer} />
+       
     </>
   )
 }

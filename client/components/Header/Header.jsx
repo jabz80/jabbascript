@@ -13,7 +13,6 @@ export default function Header() {
   };
 
   return (
-
     <header className="bg-body-tertiary z-3">
       <div className="container">
         <nav className="navbar navbar-expand-lg">
@@ -22,7 +21,6 @@ export default function Header() {
               <img
                 src={Logo}
                 alt="Logo"
-
                 className="d-inline-block align-text-top me-2"
               />
               Koding Kombat

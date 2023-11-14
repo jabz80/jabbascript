@@ -27,7 +27,7 @@ const register = async (req, res) => {
 const logIn = async (req, res) => {
   try {
     // Storing the data from req.body
-    const { username, password, lastLoggedIn, streak } = req.body;
+    const { username, password } = req.body;
     // Check if username exists
     const user = await User.checkUsername(username);
     // Compare passwords using bcrypt

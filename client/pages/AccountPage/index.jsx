@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+
 function Account() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -18,8 +19,8 @@ function Account() {
       try {
         const response = await axios.get('http://localhost:3000/token', {
           headers: {
-            Authorization: token
-          }
+            Authorization: token,
+          },
         });
 
         setUserData(response.data);

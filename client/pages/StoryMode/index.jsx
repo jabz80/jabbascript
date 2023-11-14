@@ -1,8 +1,6 @@
-
+import { useEffect } from 'react';
 
 function index() {
-  
-
   return <div>index</div>;
 }
 

@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaUserAlt } from "react-icons/fa"; // login icon
 import axios from 'axios'; // axios for fetch calls
 import { useNavigate } from 'react-router-dom'; 
 import { toast } from 'react-toastify'; // used for displaying messages
 
+
+
+
 export default function Login() {
   const [loginData, setLoginData] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
 
   const handleChange = (e) => {
     setLoginData({ ...loginData, [e.target.id]: e.target.value });
   };
-  
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,15 +26,14 @@ export default function Login() {
         password: loginData.password,
       });
 
-      localStorage.setItem('token', response.data.token); 
+      localStorage.setItem('token', response.data.token);
       toast.success('Successfully logged in');
-      navigate('/account'); 
+      navigate('/account');
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error(error.response?.data?.error || 'Failed to login');
     }
   };
-
 
   return (
     <>

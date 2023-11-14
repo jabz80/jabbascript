@@ -1,13 +1,14 @@
-import { Outlet } from "react-router-dom";
-import { Header, Footer } from "../components";
+import { Outlet } from 'react-router-dom';
+import { Header, Footer, Multiplayer } from '../components';
 
 function index() {
-  
   return (
     <div className="fight-page d-flex flex-column">
       <Header />
 
-        <Outlet />
+      <Outlet />
+
+      <Multiplayer />
 
       {/* <Footer /> */}
     </div>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
+
 function Account() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,8 +22,8 @@ function Account() {
       try {
         const response = await axios.get('https://jabbascript-api.onrender.com/token', {
           headers: {
-            Authorization: token
-          }
+            Authorization: token,
+          },
         });
 
         setUserData(response.data);

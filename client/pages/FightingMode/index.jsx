@@ -1,14 +1,18 @@
-import React from 'react'
-import { Fighting } from "../../components";
+import React, {useState} from 'react'
+import { Fighting, FightCodeSequence } from "../../components";
 
 function index() {
+const [checkAnswer, setCheckAnswer] = useState(false)
+
+const isAnswerCorrect = () => {
+  console.log('hello');
+  setCheckAnswer(prevState => !prevState);
+}
+
   return (
     <>
-    <div className='mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column'>
-      <h1>Praktice Kombat</h1>
-      <button className='btn text-white bg-success btn-lg'>Next</button>
-    </div>
-    <Fighting />
+    <FightCodeSequence checkAnswer={checkAnswer} isAnswerCorrect={isAnswerCorrect}/>
+    <Fighting checkAnswer={checkAnswer} />
     </>
   )
 }

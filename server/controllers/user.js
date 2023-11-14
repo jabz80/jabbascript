@@ -13,9 +13,9 @@ const register = async (req, res) => {
     const hash = await bcrypt.hash(data.password, salt);
     data.password = hash;
 
-        const result = await User.create(data)
-        console.log(result)
-        const token = await Token.create(result.user_id)
+    const result = await User.create(data);
+    console.log(result);
+    const token = await Token.create(result.user_id);
 
     res.status(201).json({ authenticated: true, token: token.token });
     // res.status(201).send(result)
@@ -65,7 +65,8 @@ const logOut = async (req, res) => {
 
 const findByToken = async (req, res) => {
   try {
-    const token = req.headers['authorization'];
+    const token = req.headers.authorization;
+    console.log(token);
     const user = await User.getOneByToken(token);
     res.status(201).json(user);
   } catch (err) {
@@ -73,4 +74,53 @@ const findByToken = async (req, res) => {
   }
 };
 
-module.exports = { logIn, register, logOut, findByToken };
+const updateUser = async (req, res) => {
+  try {
+    const token = req.headers.authorization;
+    const editedToken = token.split(' ')[1];
+    const userPassword = req.body.password;
+
+    if (userPassword) {
+      //Generate salt with specific cost
+      const salt = await bcrypt.genSalt(
+        parseInt(process.env.BCRYPT_SALT_ROUNDS)
+      );
+
+      //Hash the password
+      const hashedPassword = await bcrypt.hash(userPassword, salt);
+
+      req.body.password = hashedPassword;
+    }
+
+    const updatedUser = await User.updateUser(req.body, editedToken);
+
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    console.log(err.message);
+    res.status(404).json({ error: err.message });
+  }
+};
+
+// const findByToken = async (req, res) => {
+//   try {
+//     const token = req.headers.authorization;
+//     const editedToken = token.split(' ')[1];
+//     const user = await User.getOneByToken(editedToken);
+//     res.status(201).json(user);
+//   } catch (err) {
+//     res.status(404).json({ error: err.message });
+//   }
+// };
+
+// const getOneById = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const result = await User.getOneById(id);
+//     res.status(200).json(result);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(404).json({ error: err.message });
+//   }
+// };
+
+module.exports = { logIn, register, logOut, findByToken, updateUser };

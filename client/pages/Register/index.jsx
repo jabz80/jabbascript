@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios'; // axios to post data
 import { useNavigate } from 'react-router-dom'; 
 import { toast } from 'react-toastify'; // toastify for notification
+import { FaUserAlt } from "react-icons/fa"; 
 
 
 export default function Register() {
@@ -26,7 +27,7 @@ export default function Register() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/register', {
+      const response = await axios.post('https://jabbascript-api.onrender.com/register', {
         username: formData.username,
         email: formData.email,
         password: formData.password,
@@ -41,8 +42,7 @@ export default function Register() {
       toast.error(error.response?.data?.error || 'Failed to register');
     }
   };
-  ``;
-
+  
   return (
     <>
       <form className="" onSubmit={handleSubmit}>
@@ -107,3 +107,5 @@ export default function Register() {
     </>
   );
 }
+
+

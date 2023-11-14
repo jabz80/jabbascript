@@ -1,14 +1,25 @@
-import React, { useState } from "react";
-import { FaUserAlt } from "react-icons/fa"; // login icon
-import axios from 'axios'; // axios for fetch calls
+import React, { useState, useEffect, useRef } from "react";
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
-import { toast } from 'react-toastify'; // used for displaying messages
+import { toast } from 'react-toastify';
 
 export default function Login() {
+
+  const [showForm, setShowForm] = useState(false);
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
   });
+
+  useEffect(() => {
+      let timer = setTimeout(() => {
+        setShowForm(true);
+      }, 2010);
+    
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   const handleChange = (e) => {
     setLoginData({ ...loginData, [e.target.id]: e.target.value });
@@ -34,53 +45,38 @@ export default function Login() {
 
 
   return (
-    <>
-      <form className="" onSubmit={handleSubmit}>
-        <div className="container mx-auto px-4 max-w-md">
-          <div className="flex items-center justify-center">
-            <h1 className="text-3xl text-center font-semibold">
-              <FaUserAlt className="text-2xl inline mr-2" />
-              Login
-            </h1>
-          </div>
-          <hr className="mt-3" />
-          <div className="mt-3">
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
-              value={loginData.username}
-              onChange={handleChange}
-              type="text"
-              className="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600"
-              placeholder="Enter Username"
-            />
-          </div>
-          <div className="mt-3">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              value={loginData.password}
-              onChange={handleChange}
-              type="password"
-              className="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600"
-              placeholder="Enter Password"
-            />
-          </div>
-          <div className="mt-5">
-            <button
-              type="submit"
-              className="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-700 duration-300 w-full rounded-md p-2 text-white"
-            >
-              Login
-            </button>
-          </div>
-          <div className="text-center mt-4">
-            <a href="/register" className="text-slate-600">
-              Need an account? Register here
-            </a>
-          </div>
+    
+<div className="curtain d-flex align-items-center">
+  <div className={`curtain__panel--left curtain__panel animate`} ></div>
+  {showForm && (
+    <div className="curtain__block d-flex justify-content-center align-items-center">
+    <form className="loginForm col-md-6 col-lg-4 bg-light shadow" onSubmit={handleSubmit}>
+      <div className="container mx-auto px-5 py-4">
+        <div className="d-flex align-items-center justify-content-center">
+          <h1 className="text-center">Login</h1>
         </div>
-      </form>
-    </>
+        <hr className="mt-3" />
+        <div className="mt-3">
+          <label htmlFor="username" className="form-label">Username</label>
+          <input id="username" value={loginData.username} onChange={handleChange} type="text" className="form-control" placeholder="Enter Username" />
+        </div>
+        <div className="mt-3">
+          <label htmlFor="password" className="form-label">Password</label>
+          <input id="password" value={loginData.password} onChange={handleChange} type="password"  className="form-control" placeholder="Enter Password" />
+        </div>
+        <div className="mt-5 text-center offset-3 col-6">
+          <button type="submit" className="btn bg-secondary bg-gradient text-white text-center w-100">Login</button>
+        </div>
+        <div className="text-center mt-4">
+          <a href="/register" className="text-slate-600">Need an account? Register here</a>
+        </div>
+      </div>
+    </form>
+  </div>)}
+  <div className={` curtain__panel--right curtain__panel animate`} ></div>
+</div>
+
+
+      
   );
 }

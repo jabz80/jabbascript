@@ -21,7 +21,7 @@ function index() {
   return (
     <>
     <div className='mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column py-5'>
-    <h1>Multiplayer Mode</h1>
+    {/* <h1>Multiplayer Mode</h1> */}
       <FightCodeSequence checkAnswer={checkAnswer} isAnswerCorrect={isAnswerCorrect} setHtmlCode={setHtmlCode} setCssCode={setCssCode} setJsCode={setJsCode} handleOutput={handleOutput}/>
     </div>
       <Fighting checkAnswer={checkAnswer} />

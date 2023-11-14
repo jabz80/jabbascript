@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import axios from 'axios'; // axios to post data
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
-import { toast } from 'react-toastify'; // toastify for notification
-import { FaUserAlt } from "react-icons/fa"; 
+import { toast } from 'react-toastify';
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -43,67 +42,36 @@ export default function Register() {
   };
   
   return (
-    <>
-      <form className="" onSubmit={handleSubmit}>
-        <div className="username container">
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            value={formData.username}
-            onChange={handleChange}
-            type="text"
-            className="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600"
-            placeholder="Enter Username"
-          />
+    <div className="d-flex justify-content-center align-items-center h-100">
+      <form className="bg-light  col-md-6 col-lg-4 p-5" onSubmit={handleSubmit}>
+        <div className="username">
+          <label htmlFor="username" className="form-label">Username</label>
+          <input id="username" value={formData.username} onChange={handleChange} type="text" className="form-control" placeholder="Enter Username" />
         </div>
-        <div className="Email container">
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            value={formData.email}
-            onChange={handleChange}
-            type="email"
-            className="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600"
-            placeholder="Enter Email"
-          />
+        <div className="Email mt-3">
+          <label htmlFor="email" className="form-label">Email</label>
+          <input id="email" value={formData.email} onChange={handleChange} type="email" className="form-control" placeholder="Enter Email" />
         </div>
-        <div className="password container">
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            value={formData.password}
-            onChange={handleChange}
-            type="password"
-            className="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600"
-            placeholder="Enter Password"
-          />
+        <div className="password mt-3">
+          <label htmlFor="password" className="form-label">Password</label>
+          <input id="password" value={formData.password} onChange={handleChange} type="password" className="form-control" placeholder="Enter Password" />
         </div>
-        <div className="password-confirm container">
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            id="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            type="password"
-            className="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600"
-            placeholder="Enter Password again"
-          />
+        <div className="password-confirm mt-3">
+          <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+          <input id="confirmPassword" value={formData.confirmPassword} onChange={handleChange} type="password" className="form-control" placeholder="Enter Password again"/>
         </div>
-        <div>
-          <a href="/login" className="text-slate-600">
+        <div className="mt-4 text-center">
+          <a href="/login">
             Already Registered? Click here to Sign In
           </a>
         </div>
-        <div className="mt-5">
-          <button
-            type="submit"
-            className="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-700 duration-300 w-full rounded-md p-2 text-white"
-          >
+        <div className="mt-4 text-center">
+          <button type="submit" className="btn btn-primary">
             Register
           </button>
         </div>
       </form>
-    </>
+    </div>
   );
 }
 

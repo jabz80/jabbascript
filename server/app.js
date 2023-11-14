@@ -33,4 +33,4 @@ app.use('/battle', battleRouter);
 app.use('/story', storyRouter);
 
 // Exporting the app
-module.exports = {app, io, server}
+module.exports = { app, io, server };

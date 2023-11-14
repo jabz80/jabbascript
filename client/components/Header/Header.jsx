@@ -2,10 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Logo from '../../assets/img/logo.png';
 
-import io from 'socket.io-client';
-
-const socket = io.connect('http://localhost:3000');
-
 export default function Header() {
   // const { authToken, logout } = useContext(AuthContext) || {};
   // const navigate = useNavigate();
@@ -14,10 +10,6 @@ export default function Header() {
   //   logout();
   //   navigate("/login");
   // };
-
-  const leaveRoom = () => {
-    socket.emit('jermaine');
-  };
 
   return (
     <header className="bg-body-tertiary z-3">
@@ -45,11 +37,7 @@ export default function Header() {
             </button>
             <div className="collapse navbar-collapse" id="mainNav">
               <div className="navbar-nav ms-auto">
-                <NavLink
-                  onClick={leaveRoom}
-                  className="ms-5 nav-link"
-                  to="/story"
-                >
+                <NavLink className="ms-5 nav-link" to="/story">
                   Story Mode
                 </NavLink>
                 <NavLink className="ms-5 nav-link" to="/fight">

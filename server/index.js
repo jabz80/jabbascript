@@ -6,6 +6,7 @@ const users = {};
 const rooms = {};
 
 let roomNumber = 1;
+console.log(rooms);
 
 io.on('connection', (socket) => {
   console.log(`User connected: ${socket.id}`);
@@ -23,12 +24,33 @@ io.on('connection', (socket) => {
     rooms[roomNumber].push(socket.id);
     console.log(rooms);
   });
-
   // Broadcast logic
 
   // Disconnection logic
 
+  // Disconnection logic
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+    
+    const userRoomNumber = users[socket.id];
+    if (userRoomNumber) {
+      const userIndex = rooms[userRoomNumber].indexOf(socket.id);
+
+      if (userIndex !== -1) {
+        rooms[userRoomNumber].splice(userIndex, 1);
+        console.log(rooms);
+      }
+    }
+
+    socket.leave(userRoomNumber);
+
+    // socket.broadcast.emit('user-disconnected', users[socket.id]); // use this same function on frontend to handle user leaving game page
+    // delete users[socket.id];
+  });
+
+  // Additional logic to handle 'jermaine' event
   socket.on('jermaine', () => {
+    console.log('Received jermaine event on the server');
     const userRoomNumber = users[socket.id];
     if (userRoomNumber) {
       const userIndex = rooms[userRoomNumber].indexOf(socket.id);

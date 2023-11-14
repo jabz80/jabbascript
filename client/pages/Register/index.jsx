@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios'; // axios to post data
 import { useNavigate } from 'react-router-dom'; 
 import { toast } from 'react-toastify'; // toastify for notification
 
+
 export default function Register() {
+
   const [formData, setFormData] = useState({
-    email:"",
-    username: "",
-    password: "",
-    confirmPassword: "",
+    email: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-    
   };
-  
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ export default function Register() {
       toast.error('Passwords do not match');
       return;
     }
-  
+
     try {
       const response = await axios.post('http://localhost:3000/register', {
         username: formData.username,
@@ -32,7 +33,7 @@ export default function Register() {
       });
       if (response.status === 200 || response.status === 201) {
         toast.success('Successfully registered');
-        navigate('/login'); 
+        navigate('/login');
       } else {
         toast.error('Failed to register');
       }
@@ -40,8 +41,8 @@ export default function Register() {
       toast.error(error.response?.data?.error || 'Failed to register');
     }
   };
-  ``
-  
+  ``;
+
   return (
     <>
       <form className="" onSubmit={handleSubmit}>

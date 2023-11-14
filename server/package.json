@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js",
+    "start": "node --env-file=.env ./index.js",
     "setup-db": "node ./database/setup.js",
     "dev": "nodemon ./index.js --env-file=.env",
     "both": "node ./database/setup.js && nodemon ./server/index.js",

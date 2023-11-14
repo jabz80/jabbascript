@@ -7,7 +7,7 @@ function Fighter({secondFighter, checkAnswer}) {
     <div className="progress" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
       <div className="progress-bar bg-success" style={{width: '100%'}}>100%</div>
     </div>
-    <img src={FighterImage} className={`object-fit-contain ${secondFighter ? 'flip': ''} ${checkAnswer ? 'fighter-shaking' : ''}`}/>
+    <img src={FighterImage} className={`object-fit-contain ${secondFighter ? 'flip': ''} ${secondFighter && checkAnswer ? 'fighter-shaking' : ''}`}/>
   </div>
   )
 }

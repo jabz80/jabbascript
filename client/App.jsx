@@ -13,7 +13,8 @@ function App() {
       </Route>
       <Route element={<Layouts.fight />}>
         <Route path="story" element={<Pages.StoryMode />} />
-        <Route path="fight" element={<Pages.FightingMode />} />
+        <Route path="practice" element={<Pages.PracticeMode />} />
+        <Route path="multiplayer" element={<Pages.MultiplayerMode />} />
       </Route>
       <Route element={<Layouts.auth />}>
         <Route path="login" element={<Pages.Login />} />

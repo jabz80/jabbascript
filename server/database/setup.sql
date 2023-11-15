@@ -2,8 +2,9 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS "user" CASCADE;
 DROP TABLE IF EXISTS token CASCADE;
 DROP TABLE IF EXISTS user_score CASCADE;
-DROP TABLE IF EXISTS questions_battle;
-DROP TABLE IF EXISTS questions_story;
+DROP TABLE IF EXISTS questions_battle CASCADE;
+DROP TABLE IF EXISTS questions_story CASCADE;
+DROP TABLE IF EXISTS avatar CASCADE;
 
 CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY,
@@ -36,6 +37,13 @@ CREATE TABLE questions_battle(
     PRIMARY KEY (q_battle_id)
 );
 
+CREATE TABLE avatar(
+  avatar_id INT GENERATED ALWAYS AS IDENTITY,
+  img_url VARCHAR(255) NOT NULL,
+  user_id INT,
+  PRIMARY KEY (avatar_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
 
 
 CREATE TABLE questions_story(
@@ -76,6 +84,46 @@ if 10 < num < 20:
 	print("In range")
 else:
 	print("Out of range")');
+
+INSERT INTO avatar(img_url)
+VALUES (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png'
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/2.png'
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/3.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/4.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/5.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/6.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/8.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/9.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10.png'
+    
+  );
 
 
 

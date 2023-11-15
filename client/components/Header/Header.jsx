@@ -5,11 +5,10 @@ import { AuthContext } from "../../contexts/Auth";
 
 export default function Header() {
   const { authToken, logout } = useContext(AuthContext) || {};
-  const navigate = useNavigate();
+
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
   };
 
   return (

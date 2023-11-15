@@ -1,50 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { UserContext } from '../../contexts/User';
 
 function Account() {
-  const [userData, setUserData] = useState(null);
+  const { userData } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
 
-
   useEffect(() => {
-    const fetchUserData = async () => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        toast.error('No authentication token');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const response = await axios.get('https://jabbascript-api.onrender.com/token', {
-          headers: {
-            Authorization: token,
-          },
-        });
-
-        setUserData(response.data);
-      } catch (error) {
-        toast.error(error.response?.data?.error || 'Unable to locate user');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, []);
+    if (userData) {
+      setLoading(false);
+    }
+  }, [userData]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
-
-  if (!userData) {
-    navigate('/login');
-  }
-
   return (
     <div>
       <h1>User Account Details</h1>
@@ -57,7 +28,7 @@ function Account() {
 
 const handleLogout = (navigate) => {
   localStorage.removeItem('token');
-  navigate('/login'); // Redirect to login page after logout
+  navigate('/');
 };
 
 export default Account;

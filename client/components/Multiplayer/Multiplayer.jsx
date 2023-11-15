@@ -8,13 +8,9 @@ export default function Gamepage() {
   const [roomNumber, setRoomNumber] = useState([]);
   const [fetchedQuestions, setFetchedQuestions] = useState([]);
   const [rooms, setRooms] = useState({});
-  console.log(roomNumber);
-  console.log(fetchedQuestions);
 
   //
   const submitAnswer = (answer) => {
-    console.log(`Room ${roomNumber}`, answer);
-
     socket.emit('submit_answer', {
       roomNumber,
       userId: socket.id,
@@ -49,8 +45,7 @@ export default function Gamepage() {
   // set room Number in state
   useEffect(() => {
     const handleRoomJoined = ({ roomNumber }) => {
-      console.log(roomNumber);
-      setRoomNumber((prevRoom) => [...prevRoom, roomNumber]);
+      setRoomNumber([roomNumber]);
     };
 
     socket.on('room_joined', handleRoomJoined);
@@ -92,20 +87,29 @@ export default function Gamepage() {
 
   useEffect(() => {
     const handleQuestions = ({ roomNumber, questions }) => {
-      console.log(roomNumber, questions);
-      const usersInRoom = rooms[roomNumber];
-      console.log('Questions received:', questions);
+      console.log(`hello world: ${roomNumber}`);
+      console.log(`battle questions: ${questions}`);
 
-      if (usersInRoom && usersInRoom.length === 2) {
-        console.log(`Received Questions in room ${roomNumber}: `, questions);
-        setFetchedQuestions((prevQuestions) => [
-          ...prevQuestions,
-          ...questions,
-        ]);
-      } else {
-        console.log(
-          `Not enough users in room ${roomNumber} to display questions`
-        );
+      if (roomNumber && questions) {
+        const usersInRoom = rooms[roomNumber];
+        console.log(usersInRoom);
+        console.log('Questions received:', questions);
+
+        if (
+          usersInRoom &&
+          usersInRoom.length === 2 &&
+          roomNumber[0] === roomNumber
+        ) {
+          console.log(`Received Questions in room ${roomNumber}: `, questions);
+          setFetchedQuestions((prevQuestions) => [
+            ...prevQuestions,
+            ...questions,
+          ]);
+        } else {
+          console.log(
+            `Not enough users in room ${roomNumber} to display questions`
+          );
+        }
       }
     };
 
@@ -114,7 +118,9 @@ export default function Gamepage() {
     return () => {
       socket.off('receive_question', handleQuestions);
     };
-  }, []);
+  }, [fetchedQuestions, rooms]);
+
+  console.log('Fetched Questions State: ', fetchedQuestions);
 
   useEffect(() => {
     const handleDisplayAnswers = ({ user1Answer, user2Answer }) => {

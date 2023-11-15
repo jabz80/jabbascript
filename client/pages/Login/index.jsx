@@ -4,9 +4,8 @@ import axios from 'axios'; // axios for fetch calls
 import { useNavigate } from 'react-router-dom'; 
 import { toast } from 'react-toastify'; // used for displaying messages
 
-import io from 'socket.io-client';
 
-const socket = io.connect('http://localhost:3000');
+
 
 export default function Login() {
   const [loginData, setLoginData] = useState({

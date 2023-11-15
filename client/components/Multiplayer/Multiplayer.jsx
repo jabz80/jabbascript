@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import io from 'socket.io-client';
 
-const socket = io.connect('http://localhost:3000');
+const socket = io.connect('https://jabbascript-api.onrender.com');
 
 export default function Gamepage() {
   const [fetchedQuestions, setFetchedQuestions] = useState([]);

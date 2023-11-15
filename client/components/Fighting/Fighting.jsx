@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Fighter from '../Fighter/Fighter'
 
-function Fighting({beamVisible, roundWinner, pointsPlayerOne, pointsPlayerTwo, healthPlayerOne, healthPlayerTwo}) {
+function Fighting({beamVisible, roundWinner, pointsPlayerOne, pointsPlayerTwo, healthPlayerOne, healthPlayerTwo, timer}) {
 
   return (
         <div className='w-100 fight-bg h-50'>
@@ -11,6 +11,7 @@ function Fighting({beamVisible, roundWinner, pointsPlayerOne, pointsPlayerTwo, h
           <Fighter firstFighter={true} roundWinner={roundWinner} healthPlayerOne={healthPlayerOne} healthPlayerTwo={healthPlayerTwo} />
         </div>
         <div className="col-4 text-center">
+          <h4>{String(Math.floor(timer / 60)).padStart(2, '0')}:{String(timer % 60).padStart(2, '0')}</h4>
           <h3>{pointsPlayerOne}:{pointsPlayerTwo}</h3>
           {beamVisible && roundWinner == 2 ? 
             <div className='d-flex h-75 beam flip'></div>

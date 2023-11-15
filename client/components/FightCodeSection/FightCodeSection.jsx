@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { AnswerForm, AnswerFormOutput } from '../index';
-import { Link } from 'react-router-dom';
 
 function FightCodeSection({ setHtmlCode, setCssCode, setJsCode, handleOutput, checkTheAnswer, questions, currentQuestionIndex, fightResult }) {
   return (
@@ -21,7 +20,7 @@ function FightCodeSection({ setHtmlCode, setCssCode, setJsCode, handleOutput, ch
               <AnswerFormOutput />
             </div>
             <div className='col-3 d-flex align-items-center justify-content-center'>
-              <button onClick={() => { checkTheAnswer() }} className={`btn btn-outline-primary btn-lg ${questions.length == currentQuestionIndex ? 'disabled' : ''}`}>Check</button>
+              <button onClick={() => { checkTheAnswer() }} className={`btn btn-outline-primary btn-lg ${questions.length+1 == currentQuestionIndex ? 'disabled' : ''}`}>Check</button>
             </div>
           </div>
         )}

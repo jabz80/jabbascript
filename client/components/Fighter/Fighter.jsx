@@ -15,7 +15,7 @@ function Fighter({firstFighter, robot, roundWinner, healthPlayerOne=100, healthP
 
     </div>
 
-    <div className={`${robot ? 'robot': 'fighter'} char-bg h-75 mt-4 ${robot && roundWinner == 1 ? 'fighter-shaking' : firstFighter && roundWinner == 2 ? 'fighter-shaking' : ''}`}/>
+    <div className={`${robot ? 'robot': 'fighter'}  fighterBlock char-bg h-75 mt-4`} id={`${robot && roundWinner == 1 ? 'fighter-shaking' : firstFighter && roundWinner == 2 && 'fighter-shaking'}`}/>
   </div>
   )
 }

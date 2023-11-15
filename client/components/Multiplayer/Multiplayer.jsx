@@ -63,7 +63,7 @@ export default function Gamepage() {
   // Listen for the 'updated_rooms' event to receive updated rooms information
   useEffect(() => {
     const handleUpdatedRooms = (updatedRooms) => {
-      console.log('Received rooms updated: ', updatedRooms);
+      console.log('Received rooms updated: ', updatedRooms.users);
 
       // Extract the rooms information and use it
       const { rooms } = updatedRooms;

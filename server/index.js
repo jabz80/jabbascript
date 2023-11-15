@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
       if (rooms[roomNumber] && !sentQuestions[roomNumber]) {
         const questions = await getQuestions();
         console.log(`Questions emitted to room ${roomNumber}: `, questions);
-        io.to(roomNumber).emit('receive_question', { roomNumber, questions });
+        io.to(parseInt(roomNumber)).emit('receive_question', { roomNumber, questions });
 
         // Mark that questions have been sent for this room
         sentQuestions[roomNumber] = true;

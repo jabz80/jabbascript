@@ -23,7 +23,13 @@ export default function Gamepage() {
   };
 
   const leaveRoom = () => {
+    // Manually leave the room
     socket.emit('jermaine');
+
+    // Remove fetched questions for the current room
+    setFetchedQuestions((prevQuestions) =>
+      prevQuestions.filter((q) => q.roomNumber !== roomNumber)
+    );
   };
 
   // socket.on('updated_rooms', (updatedRooms) => {
@@ -45,7 +51,7 @@ export default function Gamepage() {
   // set room Number in state
   useEffect(() => {
     const handleRoomJoined = ({ roomNumber }) => {
-      setRoomNumber([roomNumber]);
+      setRoomNumber(roomNumber);
     };
 
     socket.on('room_joined', handleRoomJoined);
@@ -55,25 +61,50 @@ export default function Gamepage() {
     };
   }, [rooms]);
 
+  // Listen for the 'player_joined' event to handle the case when a player joins
+  useEffect(() => {
+    const handlePlayerJoined = ({ userId }) => {
+      console.log(`Player with ID ${userId} has joined the game.`);
+      // Implement logic to notify the remaining player that someone joined
+      // You can use state to show a notification, update UI, etc.
+    };
+
+    socket.on('player_joined', handlePlayerJoined);
+
+    return () => {
+      socket.off('player_joined', handlePlayerJoined);
+    };
+  }, []);
+
   // Listen for the 'updated_rooms' event to receive updated rooms information
   useEffect(() => {
     const handleUpdatedRooms = (updatedRooms) => {
-      console.log('Received rooms updated: ', updatedRooms.users);
+      console.log('Received rooms updated: ', updatedRooms);
 
       // Extract the rooms information and use it
       const { rooms } = updatedRooms;
       //Set rooms state variable
       setRooms(rooms);
       Object.keys(rooms).forEach((roomNumber) => {
+        const sentQuestions = {};
         const usersInRoom = rooms[roomNumber];
 
         if (usersInRoom.length === 2) {
-          console.log(
-            `Room ${roomNumber} has two players. Emitting display_question.`
-          );
-          socket.emit('display_question', {
-            roomNumber,
-          });
+          // Check if the question has already been displayed for this room
+          if (!sentQuestions[roomNumber]) {
+            console.log(
+              `Room ${roomNumber} has two players. Emitting display_question.`
+            );
+            socket.emit('display_question', {
+              roomNumber,
+            });
+
+            // Mark that the question has been sent for this room
+            sentQuestions[roomNumber] = true;
+          }
+        } else {
+          // If the room is not full, reset the sentQuestions flag
+          sentQuestions[roomNumber] = false;
         }
       });
     };
@@ -87,12 +118,14 @@ export default function Gamepage() {
 
   useEffect(() => {
     const handleQuestions = ({ roomNumber, questions }) => {
-      console.log(`hello world: ${roomNumber}`);
-      console.log(`battle questions: ${questions}`);
-
       if (roomNumber && questions) {
         const usersInRoom = rooms[roomNumber];
-        console.log(usersInRoom);
+        console.log(
+          'users in room: ',
+          usersInRoom,
+          'room number: ',
+          roomNumber
+        );
         console.log('Questions received:', questions);
 
         if (
@@ -101,10 +134,20 @@ export default function Gamepage() {
           roomNumber[0] === roomNumber
         ) {
           console.log(`Received Questions in room ${roomNumber}: `, questions);
-          setFetchedQuestions((prevQuestions) => [
-            ...prevQuestions,
-            ...questions,
-          ]);
+
+          // Check if the roomNumber already exists in fetchedQuestions
+          const roomExists = fetchedQuestions.some(
+            (q) => q.roomNumber === roomNumber
+          );
+
+          // If the room doesn't exist, update the state
+          if (!roomExists) {
+            setFetchedQuestions((prevQuestions) => [
+              ...prevQuestions,
+              { roomNumber, questions },
+            ]);
+          }
+          console.log('fetched questions: ', fetchedQuestions);
         } else {
           console.log(
             `Not enough users in room ${roomNumber} to display questions`
@@ -113,12 +156,12 @@ export default function Gamepage() {
       }
     };
 
-    socket.on('receive_question', handleQuestions);
+    socket.once('receive_question', handleQuestions);
 
     return () => {
       socket.off('receive_question', handleQuestions);
     };
-  }, [fetchedQuestions, rooms]);
+  }, [roomNumber, rooms, fetchedQuestions]);
 
   console.log('Fetched Questions State: ', fetchedQuestions);
 
@@ -143,13 +186,50 @@ export default function Gamepage() {
     socket.on('display_answers', handleDisplayAnswers);
   }, []);
 
+  useEffect(() => {
+    return () => {
+      // Remove fetched questions for the current room when leaving
+      setFetchedQuestions((prevQuestions) =>
+        prevQuestions.filter((q) => q.roomNumber !== roomNumber)
+      );
+    };
+  }, [roomNumber]);
+
+  // Listen for the 'player_left' event to handle the case when a player leaves
+  useEffect(() => {
+    const handlePlayerLeft = ({ userId }) => {
+      console.log(`Player with ID ${userId} has left the game.`);
+      // Implement logic to notify the remaining player that someone left
+      // You can use state to show a notification, update UI, etc.
+    };
+
+    socket.on('player_left', handlePlayerLeft);
+
+    return () => {
+      socket.off('player_left', handlePlayerLeft);
+    };
+  }, []);
+
+  // cleanup socket connection when component unmounts
+  useEffect(() => {
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   return (
     <div>
       <button onClick={joinRoom}>Play Multiplayer</button>
       <button onClick={leaveRoom}>Leave Game</button>
       <button onClick={() => submitAnswer('Submitted Answer')}>Submit</button>
       {fetchedQuestions.map((q) => (
-        <div key={q.q_battle_id}>{q.question}</div>
+        <div key={q.roomNumber}>
+          {q.questions.map((questionObj) => (
+            <div key={questionObj.q_battle_id}>
+              <p>Q: {questionObj.question}</p>
+            </div>
+          ))}
+        </div>
       ))}
     </div>
   );

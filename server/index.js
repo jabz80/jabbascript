@@ -41,13 +41,13 @@ io.on('connection', (socket) => {
     console.log(joinedRoomNumber);
     console.log(rooms);
 
+    io.to(joinedRoomNumber).emit('player_joined', { userId: socket.id });
     io.emit('updated_room', { users, rooms }); // passes rooms
   });
 
   // Broadcast questions logic
   socket.on('display_question', async ({ roomNumber }) => {
     try {
-      console.log('Room number from display q func', roomNumber);
       if (rooms[roomNumber] && !sentQuestions[roomNumber]) {
         const questions = await getQuestions();
         io.to(parseInt(roomNumber)).emit('receive_question', {
@@ -136,6 +136,9 @@ io.on('connection', (socket) => {
 
       sentQuestions[roomNumber] = false;
       delete users[socket.id];
+
+      // Emit a 'player_left' event to notify other players in the room
+      io.to(userRoomNumber).emit('player_left', { userId: socket.id });
     }
 
     socket.leave(userRoomNumber);

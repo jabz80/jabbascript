@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Fighting, FightCodeSequence, AnswerForm } from "../../components";
+import { Fighting, FightCodeSection, AnswerForm } from "../../components";
 
 function index() {
   const [htmlCode, setHtmlCode] = useState('');
@@ -22,7 +22,7 @@ function index() {
     <>
     <div className='mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column py-5'>
       {/* <h1>Praktice Mode</h1> */}
-      <FightCodeSequence checkAnswer={checkAnswer} isAnswerCorrect={isAnswerCorrect} setHtmlCode={setHtmlCode} setCssCode={setCssCode} setJsCode={setJsCode} handleOutput={handleOutput}/>
+      <FightCodeSection checkAnswer={checkAnswer} isAnswerCorrect={isAnswerCorrect} setHtmlCode={setHtmlCode} setCssCode={setCssCode} setJsCode={setJsCode} handleOutput={handleOutput}/>
     </div>
       <Fighting checkAnswer={checkAnswer} />
   </>

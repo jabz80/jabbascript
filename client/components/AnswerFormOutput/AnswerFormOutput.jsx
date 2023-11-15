@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 function AnswerFormOutput() {
     useEffect(() => {
     const iframe = document.getElementById('codeOutput');
-    iframe.contentDocument.body.innerHTML = '<h3>Your Answer</h3>';
+    iframe.contentDocument.body.innerHTML = '<h3>Your Answer will be here</h3>';
     if (iframe && iframe.contentDocument) {
       const content = iframe.contentDocument.body.innerHTML;
     }

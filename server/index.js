@@ -47,10 +47,18 @@ io.on('connection', (socket) => {
   // Broadcast questions logic
   socket.on('display_question', async ({ roomNumber }) => {
     try {
+      console.log('Room number from display q func', roomNumber);
       if (rooms[roomNumber] && !sentQuestions[roomNumber]) {
         const questions = await getQuestions();
-        console.log(`Questions emitted to room ${roomNumber}: `, questions);
-        io.to(roomNumber).emit('receive_question', { roomNumber, questions });
+        io.to(parseInt(roomNumber)).emit('receive_question', {
+          roomNumber: roomNumber,
+          questions: questions,
+        });
+
+        // console.log(
+        //   `Questions emitted to room ${roomNumber}: `,
+        //   battleQuestions
+        // );
 
         // Mark that questions have been sent for this room
         sentQuestions[roomNumber] = true;

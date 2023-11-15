@@ -7,6 +7,7 @@ const users = {};
 const rooms = {};
 const sentQuestions = {};
 const userAnswers = {};
+let roomNumber = 1;
 
 const getQuestions = async () => {
   try {
@@ -18,33 +19,37 @@ const getQuestions = async () => {
   }
 };
 
-let roomNumber = 1;
-
 io.on('connection', (socket) => {
   console.log(`User connected: ${socket.id}`);
 
   // join room
 
   socket.on('join_room', () => {
-    while (rooms[roomNumber] && rooms[roomNumber].length >= 2) {
-      roomNumber++;
+    let joinedRoomNumber = roomNumber;
+
+    while (rooms[joinedRoomNumber] && rooms[joinedRoomNumber].length >= 2) {
+      joinedRoomNumber++;
     }
 
-    socket.join(roomNumber);
-    users[socket.id] = roomNumber;
-    rooms[roomNumber] = rooms[roomNumber] || [];
-    rooms[roomNumber].push(socket.id);
+    socket.join(joinedRoomNumber);
+    users[socket.id] = joinedRoomNumber;
+    rooms[joinedRoomNumber] = rooms[joinedRoomNumber] || [];
+    rooms[joinedRoomNumber].push(socket.id);
+    console.log(`User ${socket.id} joined room: ${joinedRoomNumber}`);
+
+    socket.emit('room_joined', { roomNumber: joinedRoomNumber });
+    console.log(joinedRoomNumber);
     console.log(rooms);
 
     io.emit('updated_room', { users, rooms }); // passes rooms
   });
 
-  // Broadcast logic
+  // Broadcast questions logic
   socket.on('display_question', async ({ roomNumber }) => {
     try {
       if (rooms[roomNumber] && !sentQuestions[roomNumber]) {
         const questions = await getQuestions();
-        // console.log(`Questions emitted to room ${roomNumber}: `, questions);
+        console.log(`Questions emitted to room ${roomNumber}: `, questions);
         io.to(roomNumber).emit('receive_question', { roomNumber, questions });
 
         // Mark that questions have been sent for this room
@@ -57,20 +62,26 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Log the received receive_question event
+  socket.on('receive_question', ({ roomNumber, questions }) => {
+    console.log(
+      `Received receive_question event for room ${roomNumber}: `,
+      questions
+    );
+  });
+
   // User answers logic
-
   socket.on('submit_answer', ({ roomNumber, userId, answer }) => {
-    // Store users answers in the room
-    userAnswers[roomNumber] = userAnswers[roomNumber] || {};
-    userAnswers[roomNumber][userId] = answer;
+    // Store users answers in the room along with user information
+    userAnswers[roomNumber] = userAnswers[roomNumber] || [];
+    userAnswers[roomNumber].push({ userId, answer });
 
-    //Check if both users answered
+    // Check if both users answered
     const answersInRoom = userAnswers[roomNumber];
-    const userIds = Object.keys(answersInRoom);
-    if (userIds.length === 2) {
-      //Both users have answered, emit the answers to both users
-      const user1Answer = answersInRoom[userIds[0]];
-      const user2Answer = answersInRoom[userIds[1]];
+    if (answersInRoom.length === 2) {
+      // Both users have answered, emit the answers to both users
+      const user1Answer = answersInRoom[0];
+      const user2Answer = answersInRoom[1];
 
       io.to(roomNumber).emit('display_answers', { user1Answer, user2Answer });
 
@@ -123,7 +134,6 @@ io.on('connection', (socket) => {
 
     // socket.broadcast.emit('user-disconnected', users[socket.id]); // use this same function on frontend to handle user leaving game page
     // delete users[socket.id];
-
     console.log(rooms);
   });
 });

@@ -3,7 +3,7 @@ import {AnswerForm, AnswerFormOutput} from '../index'
 function FightCodeSequence({isAnswerCorrect, setHtmlCode, setCssCode, setJsCode, handleOutput}) {
   return (
       <>
-      <div className='container my-5'>
+      <div className='container my-3'>
         <div className='row'>
           <div className='col-8'>
             <h3 id="fightRoundNumber">Round 1/10</h3>

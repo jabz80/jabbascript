@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Fighting, FightCodeSequence, AnswerForm } from "../../components";
+import { Fighting, FightCodeSequence } from "../../components";
 
 function index() {
   const [htmlCode, setHtmlCode] = useState('');

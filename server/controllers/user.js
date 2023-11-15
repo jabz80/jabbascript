@@ -99,28 +99,6 @@ const updateUser = async (req, res) => {
     console.log(err.message);
     res.status(404).json({ error: err.message });
   }
-};
-
-// const findByToken = async (req, res) => {
-//   try {
-//     const token = req.headers.authorization;
-//     const editedToken = token.split(' ')[1];
-//     const user = await User.getOneByToken(editedToken);
-//     res.status(201).json(user);
-//   } catch (err) {
-//     res.status(404).json({ error: err.message });
-//   }
-// };
-
-// const getOneById = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const result = await User.getOneById(id);
-//     res.status(200).json(result);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(404).json({ error: err.message });
-//   }
-// };
+}
 
 module.exports = { logIn, register, logOut, findByToken, updateUser };

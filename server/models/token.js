@@ -14,11 +14,6 @@ class Token {
         // UUID4 > generates 36 character random string
         const token = uuidv4();
 
-        console.log("user id >");
-        console.log(user_id)
-        
-        console.log("Entering SQL query")
-
         // Inserting the new token into the database for the corresponding user ID
         const response = await db.query("INSERT INTO token (user_id, token) VALUES ($1, $2) RETURNING token_id;",
             [user_id, token]);

@@ -76,16 +76,30 @@ h1, h2, h3 {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+
+
 .banner {
   background-image: url('../img/bnr-bg.gif');
-  background-color: #defbfe;
   background-size: auto;
   background-repeat: no-repeat;
   animation: slidein 12s;
-
   animation-fill-mode: backwards;
   animation-iteration-count: infinite;
-  animation-direction: normal
+  animation-direction: normal;
+  position: relative;
+}
+
+.banner::before {
+  content: '';
+  background: url('../img/clouds-bg.png'), #defbfe;
+  background-size: auto;
+  background-repeat: repeat;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  opacity: .8;
+  animation: linear left-to-right 20s infinite;
 }
 
 @keyframes slidein {
@@ -106,6 +120,19 @@ h1, h2, h3 {
 
 }
 
+@keyframes left-to-right {
+  0% {
+    background-position: 0%;
+
+  }
+
+  100% {
+    background-position: 100%;
+
+  }
+
+}
+
 
 .card {
   padding: 2em;
@@ -119,15 +146,28 @@ h1, h2, h3 {
   height: 100dvh;
 }
 
+.beam {
+  background-image: url(../../assets/img/beam.gif);
+  background-position: center;
+}
+
+.fighter {
+  background: url('../../assets/img/char.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
+}
+
 .h-33 {
   height: 33% !important;
 }
 
 .fight-bg {
-  background: url('../img/fight-bg.gif');
+  background: burlywood;
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
+  padding: 3rem 0;
 }
 
 .flip {

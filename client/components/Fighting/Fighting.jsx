@@ -1,19 +1,22 @@
 import React, {useState} from 'react'
 import Fighter from '../Fighter/Fighter'
 
+function Fighting({checkAnswer, beamVisible}) {
 
-function Fighting({checkAnswer}) {
   return (
-    <div className='h-33 fight-bg'>
-      <div className="container h-100">
-   
+        <div className='w-100 fight-bg h-33'>
+        <div className='container h-100'>
       <div className='row h-100'>
-        <div className="col-4">
+        <div className="col-4 h-100">
           <Fighter checkAnswer={checkAnswer} />
         </div>
-        <div className="col-4"></div>
         <div className="col-4">
-          <Fighter checkAnswer={checkAnswer} secondFighter={true} />
+          {checkAnswer && beamVisible &&
+          <div className="d-flex align-items-center h-100 beam"></div>
+          }
+        </div>
+        <div className="col-4">
+          <Fighter checkAnswer={checkAnswer} beamVisible={beamVisible} secondFighter={true} />
         </div>
         </div>
       </div>

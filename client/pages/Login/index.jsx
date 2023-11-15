@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaUserAlt } from "react-icons/fa"; // login icon
 import axios from 'axios'; // axios for fetch calls
 import { useNavigate } from 'react-router-dom'; 
 import { toast } from 'react-toastify'; // used for displaying messages

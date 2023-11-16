@@ -126,6 +126,20 @@ VALUES (
     
   );
 
+CREATE OR REPLACE FUNCTION set_initial_score()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO user_score (user_id, score)
+  VALUES (NEW.user_id, 0);
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+-- Create a trigger to call the function when a new user is inserted
+CREATE TRIGGER set_initial_score_trigger
+AFTER INSERT ON users
+FOR EACH ROW
+EXECUTE FUNCTION set_initial_score();
+
 
 
 

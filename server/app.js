@@ -6,11 +6,11 @@ const http = require('http');
 
 // Importing routers
 const userRouter = require('./routes/user');
-const avatarRouter = require('./routes/avatar');
 
 const path = require('path');
 const battleRouter = require('./routes/battle');
 const storyRouter = require('./routes/story');
+const scoreRouter = require('./routes/score');
 
 // Create server
 const app = express();
@@ -32,7 +32,7 @@ app.use(cors());
 app.use('/', userRouter);
 app.use('/battle', battleRouter);
 app.use('/story', storyRouter);
-app.use('/profile', avatarRouter);
+app.use('/score', scoreRouter);
 
 // Exporting the app
 module.exports = { app, io, server };

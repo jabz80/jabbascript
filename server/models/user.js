@@ -138,9 +138,11 @@ class User {
         err.message ===
         'duplicate key value violates unique constraint "users_username_key"'
       ) {
-        throw new Error('Username is already taken, try updating to something else');
+        throw new Error(
+          'Username is already taken, try updating to something else'
+        );
       } else {
-        throw new Error('A failure occured when updating data');
+        throw new Error('A failure occurred when updating data');
       }
     }
   }

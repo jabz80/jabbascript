@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import Axios from 'axios';
 
-const API_ENDPOINT = 'http://localhost:8000/compile';
+const API_ENDPOINT = 'http://localhost:3000/compile';
 
 function pythonIDE() {
   const [userCode, setUserCode] = useState('');

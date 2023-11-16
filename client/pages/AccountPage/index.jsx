@@ -22,6 +22,7 @@ function Account() {
       <h1>User Account Details</h1>
       <p>Username: {userData.username}</p>
       <p>Email: {userData.email}</p>
+      <p>Avatar: <img src={userData.img_url} className='w-25'/></p>
       <button onClick={() => handleLogout(navigate)}>Logout</button>
       <Points />
     </div>

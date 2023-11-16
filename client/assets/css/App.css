@@ -30,9 +30,13 @@ a {
 }
 
 .main-page-marketing-block-bg-2 {
-  background: url('../img/footer-main-page-bg.png');
+  background: url('../img/footer-main-page-bg.jpg'), #c7e8f7;
   background-repeat: repeat-x;
   background-position: bottom;
+  background-size: contain;
+}
+
+.bg-main-page-links-block {
   background-color: #FFF2DB;
 }
 
@@ -41,7 +45,7 @@ a {
 }
 
 .bg-footer {
-  background-color: #67AA83;
+  background-color: #aedbf2;
 }
 
 .main-page-subheading {
@@ -79,7 +83,8 @@ h1, h2, h3 {
 
 
 .banner {
-  background-image: url('../img/bnr-bg.gif');
+  background-image: url('../img/bnr-bg-new.gif');
+  /* background-image: url('../img/bnr-bg.gif'); */
   background-size: auto;
   background-repeat: no-repeat;
   animation: slidein 12s;
@@ -114,7 +119,7 @@ h1, h2, h3 {
   }
 
   100% {
-    background-position: 130% 150px;
+    background-position: 130% 10px;
 
   }
 

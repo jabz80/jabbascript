@@ -21,4 +21,23 @@ const getOneById = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getOneById };
+const updateScore = async (req, res) => {
+  try {
+    const { id } = req.params; // Assuming userId is provided in the request parameters
+
+    let newScore = req.body.newScore; // Assuming newScore is provided in the request body
+    const scoreToUpdate = await Score.getScoreByUser(id);
+
+    newScore ||= scoreToUpdate.newScore;
+
+    // Call the updateScore function in the Score model
+    const updatedScore = await Score.updateScore(id, newScore);
+
+    res.status(200).json(updatedScore);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = { getAll, getOneById, updateScore };

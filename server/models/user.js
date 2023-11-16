@@ -134,7 +134,14 @@ class User {
 
       return updatedUser;
     } catch (err) {
-      console.log(err);
+      if (
+        err.message ===
+        'duplicate key value violates unique constraint "users_username_key"'
+      ) {
+        throw new Error('Username is already taken, try updating to something else');
+      } else {
+        throw new Error('A failure occured when updating data');
+      }
     }
   }
 }

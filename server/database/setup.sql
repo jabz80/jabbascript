@@ -2,15 +2,25 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS "user" CASCADE;
 DROP TABLE IF EXISTS token CASCADE;
 DROP TABLE IF EXISTS user_score CASCADE;
-DROP TABLE IF EXISTS questions_battle;
-DROP TABLE IF EXISTS questions_story;
+DROP TABLE IF EXISTS questions_battle CASCADE;
+DROP TABLE IF EXISTS questions_story CASCADE;
+DROP TABLE IF EXISTS avatar CASCADE;
+
+CREATE TABLE avatar(
+  avatar_id INT GENERATED ALWAYS AS IDENTITY,
+  img_url VARCHAR(255) NOT NULL,
+  PRIMARY KEY (avatar_id)
+);
+
 
 CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY,
     username VARCHAR(200) UNIQUE NOT NULL,
     password VARCHAR(200) NOT NULL, 
     email VARCHAR(200) NOT NULL,
-    PRIMARY KEY (user_id)
+    avatar_id INT,
+    PRIMARY KEY (user_id),
+    FOREIGN KEY (avatar_id) REFERENCES avatar(avatar_id)
 );
 
 CREATE TABLE token (
@@ -35,7 +45,6 @@ CREATE TABLE questions_battle(
     answer VARCHAR(200) NOT NULL,
     PRIMARY KEY (q_battle_id)
 );
-
 
 
 CREATE TABLE questions_story(
@@ -76,6 +85,60 @@ if 10 < num < 20:
 	print("In range")
 else:
 	print("Out of range")');
+
+INSERT INTO avatar(img_url)
+VALUES (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png'
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/2.png'
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/3.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/4.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/5.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/6.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/8.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/9.png'
+
+  ),
+  (
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10.png'
+    
+  );
+
+CREATE OR REPLACE FUNCTION set_initial_score()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO user_score (user_id, score)
+  VALUES (NEW.user_id, 0);
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+-- Create a trigger to call the function when a new user is inserted
+CREATE TRIGGER set_initial_score_trigger
+AFTER INSERT ON users
+FOR EACH ROW
+EXECUTE FUNCTION set_initial_score();
 
 
 

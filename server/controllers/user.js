@@ -17,7 +17,9 @@ const register = async (req, res) => {
     console.log(result);
     const token = await Token.create(result.user_id);
 
-    res.status(201).json({ authenticated: true, token: token.token });
+    res
+      .status(201)
+      .json({ authenticated: true, token: token.token, data: result });
     // res.status(201).send(result)
   } catch (err) {
     res.status(401).json({ error: err.message });
@@ -66,8 +68,9 @@ const logOut = async (req, res) => {
 const findByToken = async (req, res) => {
   try {
     const token = req.headers.authorization;
+    const editedToken = token.split(' ')[1];
     console.log(token);
-    const user = await User.getOneByToken(token);
+    const user = await User.getOneByToken(editedToken);
     res.status(201).json(user);
   } catch (err) {
     res.status(404).json({ error: err.message });
@@ -78,7 +81,13 @@ const updateUser = async (req, res) => {
   try {
     const token = req.headers.authorization;
     const editedToken = token.split(' ')[1];
-    const userPassword = req.body.password;
+    let userPassword = req.body.password;
+
+    const userToUpdate = await User.getOneByToken(editedToken);
+    req.body.username ||= userToUpdate.username;
+    userPassword ||= userToUpdate.password;
+    req.body.email ||= userToUpdate.email;
+    req.body.avatar_id ||= userToUpdate.avatar_id;
 
     if (userPassword) {
       //Generate salt with specific cost
@@ -92,7 +101,12 @@ const updateUser = async (req, res) => {
       req.body.password = hashedPassword;
     }
 
-    const updatedUser = await User.updateUser(req.body, editedToken);
+    const updatedUser = await User.updateUser(
+      req.body,
+      editedToken,
+      true,
+      req.body.avatar_id
+    );
 
     res.status(200).json(updatedUser);
   } catch (err) {
@@ -100,27 +114,5 @@ const updateUser = async (req, res) => {
     res.status(404).json({ error: err.message });
   }
 };
-
-// const findByToken = async (req, res) => {
-//   try {
-//     const token = req.headers.authorization;
-//     const editedToken = token.split(' ')[1];
-//     const user = await User.getOneByToken(editedToken);
-//     res.status(201).json(user);
-//   } catch (err) {
-//     res.status(404).json({ error: err.message });
-//   }
-// };
-
-// const getOneById = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const result = await User.getOneById(id);
-//     res.status(200).json(result);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(404).json({ error: err.message });
-//   }
-// };
 
 module.exports = { logIn, register, logOut, findByToken, updateUser };

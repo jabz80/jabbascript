@@ -7,7 +7,7 @@
     "start": "node --env-file=.env ./index.js",
     "setup-db": "node ./database/setup.js",
     "dev": "nodemon ./index.js --env-file=.env",
-    "both": "node ./database/setup.js && node ./server/index.js",
+    "both": "node ./database/setup.js && node ./index.js",
     "test": "jest --testPathPattern=/unit/ --watchAll --verbose",
     "integrationTests": "jest --testPathPattern=/integration/ --watchAll --detectOpenHandles --runInBand --verbose",
     "coverage": "jest --colors --coverage",
@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -31,5 +32,8 @@
     "jest": "^29.7.0",
     "nodemon": "^3.0.1",
     "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }

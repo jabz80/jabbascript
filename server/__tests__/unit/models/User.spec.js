@@ -16,7 +16,8 @@ describe ('Users model', () =>{
                     user_id: 1,
                     username: 'constantinos',
                     password: 'stylianou',
-                    email: 'test1@example.com'
+                    email: 'test1@example.com',
+                    avatar_id: 1
                 }]
             })
 
@@ -56,14 +57,22 @@ describe ('Users model', () =>{
                 username: 'newConstantinos',
                 password: 'newStylianou',
                 email: 'test@example.com'
+                
             }
+
+            jest.spyOn(db, 'query').mockResolvedValueOnce({
+                rows: [{
+                    user_id:1
+                }]
+            })
 
             jest.spyOn(db, 'query').mockResolvedValueOnce({
                 rows: [{
                     user_id:1, 
                     username: 'newConstantinos',
                     password: 'newStylianou',
-                    email: 'test@example.com'
+                    email: 'test@example.com',
+                    img_url: 'http://example.com'
                 }]
             })
 
@@ -73,6 +82,7 @@ describe ('Users model', () =>{
             expect(createdUsername).toHaveProperty('username', 'newConstantinos')
             expect(createdUsername).toHaveProperty('password', 'newStylianou')
             expect(createdUsername).toHaveProperty('email', 'test@example.com')
+            expect(createdUsername).toHaveProperty('img_url', 'http://example.com')
         })
         
         it ('should throw an error when the database insertion fails', async () => {
@@ -144,20 +154,33 @@ describe ('Users model', () =>{
           jest.spyOn(db, 'query').mockResolvedValueOnce({
             rows: [{ user_id: userId }],
           })
+
+          jest.spyOn(db, 'query').mockResolvedValueOnce({
+            rows: [{
+                user_id:1, 
+                username: 'TestUser',
+                password: 'TestPassword',
+                email: 'test@example.com',
+                img_url: 'http://example.com'
+            }]
+        })
+
+
       
           const expectedUser = {
             user_id: userId,
             username: 'TestUser',
             password: 'TestPassword',
-            email: 'test@example.com'
-          }
+            email: 'test@example.com',
+            img_url: 'http://example.com'
+        }
           jest.spyOn(User, 'getOneById').mockResolvedValueOnce(expectedUser);
       
           const user = await User.getOneByToken(token);
       
           expect(db.query).toHaveBeenCalledWith('SELECT user_id FROM token WHERE token = $1', [token]);
           expect(User.getOneById).toHaveBeenCalledWith(userId);
-          expect(user).toEqual(new User(expectedUser));
+          expect(user).toEqual(expectedUser);
         })
       
         it('should throw an error when the token does not exist', async () => {
@@ -188,14 +211,17 @@ describe ('Users model', () =>{
         const updateData = {
             username: 'updateConstantinos',
             password: 'updateStylianou',
-            email: 'updateTest@example.com'
+            email: 'updateTest@example.com',
+            avatar_id: 1
+
         }
 
         const updatedUsername = {
             user_id:1,
             username: 'updateConstantinos',
             password: 'updateStylianou',
-            email: 'updateTest@example.com'
+            email: 'updateTest@example.com',
+            avatar_id: 1
         }
 
         jest.spyOn(db, 'query').mockResolvedValueOnce({
@@ -213,10 +239,10 @@ describe ('Users model', () =>{
         const token = 'nonexistent-token';
     
         jest.spyOn(User, 'getOneByToken').mockImplementationOnce(async () => {
-          throw new Error('Unable to locate user');
+          throw new Error('A failure occurred when updating data');
         });
     
-        await expect(User.updateUser({}, token)).rejects.toThrow('Unable to locate user');
+        await expect(User.updateUser({}, token)).rejects.toThrow('A failure occurred when updating data');
       })
 
     })

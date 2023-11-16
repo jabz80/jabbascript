@@ -9,6 +9,8 @@ const sentQuestions = {};
 const userAnswers = {};
 let roomNumber = 1;
 
+// Fetch Questions
+
 const getQuestions = async () => {
   try {
     const res = await fetch(`https://jabbascript-api.onrender.com/battle`);

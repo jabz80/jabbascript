@@ -11,6 +11,11 @@ a {
   font-family: 'Kdam Thmor Pro', sans-serif;
 }
 
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 
 .main-page-marketing-block {
   padding: 8rem 0;
@@ -25,9 +30,13 @@ a {
 }
 
 .main-page-marketing-block-bg-2 {
-  background: url('../img/footer-main-page-bg.png');
+  background: url('../img/footer-main-page-bg.jpg'), #c7e8f7;
   background-repeat: repeat-x;
   background-position: bottom;
+  background-size: contain;
+}
+
+.bg-main-page-links-block {
   background-color: #FFF2DB;
 }
 
@@ -36,7 +45,7 @@ a {
 }
 
 .bg-footer {
-  background-color: #67AA83;
+  background-color: #aedbf2;
 }
 
 .main-page-subheading {
@@ -71,16 +80,31 @@ h1, h2, h3 {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+
+
 .banner {
-  background-image: url('../img/bnr-bg.gif');
-  background-color: #defbfe;
+  background-image: url('../img/bnr-bg-new.gif');
+  /* background-image: url('../img/bnr-bg.gif'); */
   background-size: auto;
   background-repeat: no-repeat;
   animation: slidein 12s;
-
   animation-fill-mode: backwards;
   animation-iteration-count: infinite;
-  animation-direction: normal
+  animation-direction: normal;
+  position: relative;
+}
+
+.banner::before {
+  content: '';
+  background: url('../img/clouds-bg.png'), #defbfe;
+  background-size: auto;
+  background-repeat: repeat;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  opacity: .8;
+  animation: linear left-to-right 20s infinite;
 }
 
 @keyframes slidein {
@@ -95,7 +119,20 @@ h1, h2, h3 {
   }
 
   100% {
-    background-position: 130% 150px;
+    background-position: 130% 10px;
+
+  }
+
+}
+
+@keyframes left-to-right {
+  0% {
+    background-position: 0%;
+
+  }
+
+  100% {
+    background-position: 100%;
 
   }
 
@@ -114,22 +151,34 @@ h1, h2, h3 {
   height: 100dvh;
 }
 
+.beam {
+  background-image: url(../../assets/img/beam.gif);
+  background-position: center;
+}
+
+
+
 .h-33 {
   height: 33% !important;
 }
 
 .fight-bg {
-  background: url('../img/fight-bg.gif');
+  background: url('../img/b4.jpg');
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
+  padding: 3rem;
 }
 
 .flip {
   transform: scaleX(-1);
 }
 
-.fighter-shaking {
+.unflip {
+  transform: scaleX(1);
+}
+
+#fighter-shaking {
   animation: horizontal-shaking .5s;
 }
 
@@ -153,4 +202,123 @@ h1, h2, h3 {
   100% {
     transform: translateX(0)
   }
+}
+
+
+
+.curtain {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: azure
+}
+
+.loginForm {
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: opacity 2s ease;
+}
+
+.curtain__panel {
+  background: url('../img/metal.jpg');
+  width: 50%;
+  height: 100%;
+  float: left;
+  position: relative;
+  z-index: 2;
+  transition: transform 1s ease-out;
+  box-shadow: 0 0 15px rgb(71, 71, 71);
+}
+
+
+.curtain__block {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  background: transparent;
+}
+
+.curtain__panel--left.animate {
+  animation: slideLeft 2s ease-out;
+}
+
+.curtain__panel--right.animate {
+  animation: slideRight 2s ease-out;
+}
+
+.curtain__panel.animate {
+  transform: translateX(-200%);
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-10%);
+  }
+
+  50% {
+    transform: translateX(-30%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(0);
+
+  }
+
+  25% {
+    transform: translateX(10%);
+  }
+
+  50% {
+    transform: translateX(40%);
+  }
+
+  100% {
+    transform: translateX(100%);
+
+  }
+}
+
+#fightRoundDescription {
+  min-height: 3rem;
+}
+
+
+
+.robot {
+  background: url('../img/robot.png');
+}
+
+.fighter {
+  background: url('../../assets/img/char.png');
+
+}
+
+.char-bg {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
+}
+
+.fighterBlock {
+  animation: opacity 2s;
 }

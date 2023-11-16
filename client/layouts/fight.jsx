@@ -8,7 +8,7 @@ function index() {
 
       <Outlet />
 
-      <Multiplayer />
+      {/* <Multiplayer /> */}
 
       {/* <Footer /> */}
     </div>

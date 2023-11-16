@@ -6,12 +6,21 @@ DROP TABLE IF EXISTS questions_battle CASCADE;
 DROP TABLE IF EXISTS questions_story CASCADE;
 DROP TABLE IF EXISTS avatar CASCADE;
 
+CREATE TABLE avatar(
+  avatar_id INT GENERATED ALWAYS AS IDENTITY,
+  img_url VARCHAR(255) NOT NULL,
+  PRIMARY KEY (avatar_id)
+);
+
+
 CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY,
     username VARCHAR(200) UNIQUE NOT NULL,
     password VARCHAR(200) NOT NULL, 
     email VARCHAR(200) NOT NULL,
-    PRIMARY KEY (user_id)
+    avatar_id INT,
+    PRIMARY KEY (user_id),
+    FOREIGN KEY (avatar_id) REFERENCES avatar(avatar_id)
 );
 
 CREATE TABLE token (
@@ -35,14 +44,6 @@ CREATE TABLE questions_battle(
     question VARCHAR(200) NOT NULL,
     answer VARCHAR(200) NOT NULL,
     PRIMARY KEY (q_battle_id)
-);
-
-CREATE TABLE avatar(
-  avatar_id INT GENERATED ALWAYS AS IDENTITY,
-  img_url VARCHAR(255) NOT NULL,
-  user_id INT,
-  PRIMARY KEY (avatar_id),
-  FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 

@@ -1,11 +1,12 @@
 const db = require('../database/connect');
 
 class User {
-  constructor({ user_id, username, password, email }) {
+  constructor({ user_id, username, password, email, avatar_id }) {
     this.user_id = user_id;
     this.username = username;
     this.password = password;
     this.email = email;
+    this.avatar_id = avatar_id
   }
 
   static async checkUsername(username) {
@@ -25,8 +26,8 @@ class User {
       const { username, password, email } = data;
 
       let response = await db.query(
-        'INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING user_id;',
-        [username, password, email]
+        'INSERT INTO users (username, password, email, avatar_id) VALUES ($1, $2, $3, $4) RETURNING user_id;',
+        [username, password, email, 1] // setting avatar_id to 1 default
       );
 
       if (response.rows.length === 0) {
@@ -78,6 +79,17 @@ class User {
 
     return new User(response.rows[0]);
   }
+
+  static async updateUserAvatar(avatar_id, token) {
+    const user = await User.getOneByToken(token);
+    const response = await db.query(
+      'UPDATE users SET avatar_id = $1 WHERE user_id = $2 RETURNING *',
+      [avatar_id, user.user_id]
+    );
+
+    return new User(response.rows[0]);
+  }
+
 }
 
 module.exports = User;

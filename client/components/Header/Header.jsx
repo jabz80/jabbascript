@@ -13,7 +13,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-body-tertiary z-3">
+    <header className="bg-body-tertiary z-3 shadow-sm">
       <div className="container">
         <nav className="navbar navbar-expand-lg">
           <div className="container-fluid">

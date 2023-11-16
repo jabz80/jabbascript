@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios'; // axios for fetch calls
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
-import { toast } from 'react-toastify'; // used for displaying messages
+import { toast } from 'react-toastify';
 
 
 
@@ -40,6 +40,7 @@ export default function Login() {
       localStorage.setItem('token', response.data.token);
       toast.success('Successfully logged in');
       navigate('/account');
+      window.location.reload()
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.error || 'Failed to login');

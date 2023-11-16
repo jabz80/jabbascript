@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
+import { Points } from '../../components'
 
 
 function index() {
-  return <div>index</div>;
+  <Points/>
 }
 
 export default index

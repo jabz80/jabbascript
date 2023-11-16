@@ -7,3 +7,4 @@ export { default as FightCodeSequence } from './FightCodeSequence/FightCodeSeque
 export { default as AnswerForm } from './AnswerForm/AnswerForm';
 export { default as AnswerFormOutput } from './AnswerFormOutput/AnswerFormOutput';
 export { default as Multiplayer } from './Multiplayer/Multiplayer';
+export { default as PythonIDE } from './PythonIDE/PythonIDE';

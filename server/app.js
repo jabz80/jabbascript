@@ -11,6 +11,7 @@ const path = require('path');
 const battleRouter = require('./routes/battle');
 const storyRouter = require('./routes/story');
 const scoreRouter = require('./routes/score');
+const pythonRoute = require('./routes/pythonComplie');
 
 // Create server
 const app = express();
@@ -33,6 +34,7 @@ app.use('/', userRouter);
 app.use('/battle', battleRouter);
 app.use('/story', storyRouter);
 app.use('/score', scoreRouter);
+app.use('/compile', pythonRoute);
 
 // Exporting the app
 module.exports = { app, io, server };

@@ -1,22 +1,27 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Fighter from '../Fighter/Fighter'
 
-function Fighting({checkAnswer, beamVisible}) {
+function Fighting({beamVisible, roundWinner, pointsPlayerOne, pointsPlayerTwo, healthPlayerOne, healthPlayerTwo, timer, fightResult}) {
 
   return (
-        <div className='w-100 fight-bg h-33'>
+        <div className='w-100 fight-bg h-50'>
         <div className='container h-100'>
       <div className='row h-100'>
         <div className="col-4 h-100">
-          <Fighter checkAnswer={checkAnswer} />
+          <Fighter firstFighter={true} roundWinner={roundWinner} healthPlayerOne={healthPlayerOne} healthPlayerTwo={healthPlayerTwo} fightResult={fightResult} />
+        </div>
+        <div className="col-4 text-center">
+          {fightResult == '' && <h4>{String(Math.floor(timer / 60)).padStart(2, '0')}:{String(timer % 60).padStart(2, '0')}</h4>}
+          <h3>{pointsPlayerOne}:{pointsPlayerTwo}</h3>
+          {beamVisible && roundWinner == 2 ? 
+            <div className='d-flex h-75 beam flip'></div>
+             : ''}
+          {beamVisible && roundWinner == 1 ?
+            <div className='d-flex h-75 beam unflip'></div>
+            : ''}
         </div>
         <div className="col-4">
-          {checkAnswer && beamVisible &&
-          <div className="d-flex align-items-center h-100 beam"></div>
-          }
-        </div>
-        <div className="col-4">
-          <Fighter checkAnswer={checkAnswer} beamVisible={beamVisible} secondFighter={true} />
+          <Fighter robot={true} roundWinner={roundWinner} healthPlayerOne={healthPlayerOne} healthPlayerTwo={healthPlayerTwo}/>
         </div>
         </div>
       </div>

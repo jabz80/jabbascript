@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
       try {
         const response = await axios.get('https://jabbascript-api.onrender.com/token', {
           headers: {
-            Authorization: token,
+            Authorization: `Bearer: ${token}`
           },
         });
 

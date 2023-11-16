@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logo from "../../assets/img/logo.png";
 import { AuthContext } from "../../contexts/Auth";
 
@@ -9,10 +9,11 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
+    window.location.href = '/'
   };
 
   return (
-    <header className="bg-body-tertiary z-3">
+    <header className="bg-body-tertiary z-3 shadow-sm">
       <div className="container">
         <nav className="navbar navbar-expand-lg">
           <div className="container-fluid">

@@ -84,6 +84,7 @@ const updateUser = async (req, res) => {
     let userPassword = req.body.password;
 
     const userToUpdate = await User.getOneByToken(editedToken);
+    console.log(userToUpdate);
     req.body.username ||= userToUpdate.username;
     userPassword ||= userToUpdate.password;
     req.body.email ||= userToUpdate.email;

@@ -84,27 +84,21 @@ h1, h2, h3 {
 
 .banner {
   background-image: url('../img/bnr-bg-new.gif');
-  /* background-image: url('../img/bnr-bg.gif'); */
-  background-size: auto;
   background-repeat: no-repeat;
-  animation: slidein 12s;
-  animation-fill-mode: backwards;
-  animation-iteration-count: infinite;
-  animation-direction: normal;
+  animation: slidein 12s infinite;
   position: relative;
 }
 
 .banner::before {
   content: '';
   background: url('../img/clouds-bg.png'), #defbfe;
-  background-size: auto;
   background-repeat: repeat;
   height: 100%;
   width: 100%;
   position: absolute;
   z-index: -1;
   opacity: .8;
-  animation: linear left-to-right 20s infinite;
+  animation: left-to-right 20s infinite;
 }
 
 @keyframes slidein {
@@ -163,7 +157,8 @@ h1, h2, h3 {
 }
 
 .fight-bg {
-  background: url('../img/b4.jpg');
+  background: url('../img/b4-old.jpg');
+  /* background: bisque; */
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
@@ -303,16 +298,6 @@ h1, h2, h3 {
 }
 
 
-
-.robot {
-  background: url('../img/robot.png');
-}
-
-.fighter {
-  background: url('../../assets/img/char.png');
-
-}
-
 .char-bg {
   background-size: contain;
   background-repeat: no-repeat;
@@ -372,7 +357,8 @@ h1, h2, h3 {
 }
 
 .background-transition {
-  transition: background-image 2s ease-in-out; /* Adjust the duration of background change and easing as needed */
+  transition: background-image 2s ease-in-out;
+  /* Adjust the duration of background change and easing as needed */
   background-size: cover;
   min-height: 600px;
   position: relative;
@@ -389,6 +375,7 @@ h1, h2, h3 {
 .forest-4 {
   background-image: url('assets/img/forest-4.png');
 }
+
 .forest-5 {
   background-image: url('assets/img/forest-5.png');
 }
@@ -411,14 +398,14 @@ h1, h2, h3 {
   bottom: 0;
   margin-bottom: 130px;
   margin-right: 5px;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .fireball,
 .thunder,
 .wind {
-  width: 400px; 
-  height: 500px; 
+  width: 400px;
+  height: 500px;
 }
 
 /* end of story page styling */

@@ -3,7 +3,7 @@ import { Points } from '../../components'
 
 
 function index() {
-  <Points/>
+  return <Points/>
 }
 
 export default index

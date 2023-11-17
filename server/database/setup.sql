@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS user_score CASCADE;
 DROP TABLE IF EXISTS questions_battle CASCADE;
 DROP TABLE IF EXISTS questions_story CASCADE;
 DROP TABLE IF EXISTS avatar CASCADE;
+DROP TABLE IF EXISTS games CASCADE;
 
 CREATE TABLE avatar(
   avatar_id INT GENERATED ALWAYS AS IDENTITY,
@@ -53,6 +54,14 @@ CREATE TABLE questions_story(
   explanation VARCHAR(2000) NOT NULL,
   example VARCHAR(2000),
   PRIMARY KEY (q_story_id)
+);
+
+CREATE TABLE games(
+  game_id INT GENERATED ALWAYS AS IDENTITY,
+  user_id INT NOT NULL,
+  date_played DATE NOT NULL,
+  game_status BOOLEAN default NULL,
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 INSERT INTO questions_battle(question, answer)

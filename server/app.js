@@ -13,6 +13,7 @@ const storyRouter = require('./routes/story');
 const scoreRouter = require('./routes/score');
 const pythonRoute = require('./routes/pythonComplie');
 const avatarRouter = require('./routes/avatar');
+const gamesRouter = require('./routes/games');
 
 // Create server
 const app = express();
@@ -37,6 +38,7 @@ app.use('/story', storyRouter);
 app.use('/score', scoreRouter);
 app.use('/compile', pythonRoute);
 app.use('/avatar', avatarRouter);
+app.use('/games', gamesRouter);
 
 // Exporting the app
 module.exports = { app, io, server };

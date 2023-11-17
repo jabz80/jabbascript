@@ -307,3 +307,103 @@ h1, h2, h3 {
 .fighterBlock {
   animation: opacity 2s;
 }
+
+/* story mode styling */
+
+.dialogue-container {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  margin-right: 10px;
+}
+
+.avatar img {
+  width: 100px;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+
+.dialog-box {
+  border: 1px solid black;
+  background-color: #defbfe;
+  width: 20%;
+  height: 300px;
+  margin: 50px;
+  border-radius: 10px;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.dialog-box p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.ide-container {
+  background-color: #e5dfdf;
+  height: 50vh;
+  width: 100vw;
+}
+
+
+.fight-container {
+  background-color: aquamarine;
+  width: 100vw;
+  height: 45vh;
+}
+
+.background-transition {
+  transition: background-image 2s ease-in-out; /* Adjust the duration of background change and easing as needed */
+  background-size: cover;
+  min-height: 600px;
+  position: relative;
+}
+
+.forest-1 {
+  background-image: url('assets/img/forest-1.png');
+}
+
+.forest-2 {
+  background-image: url('assets/img/forest-2.jpeg');
+}
+
+.forest-4 {
+  background-image: url('assets/img/forest-4.png');
+}
+.forest-5 {
+  background-image: url('assets/img/forest-5.png');
+}
+
+.forest-night {
+  background-image: url('assets/img/forest-night.jpeg');
+}
+
+
+.fighter-img {
+  height: 200px;
+  position: absolute;
+  margin-bottom: 80px;
+  bottom: 0;
+  left: 0;
+}
+
+.projectile-img {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 130px;
+  margin-right: 5px;
+  z-index: 2; 
+}
+
+.fireball,
+.thunder,
+.wind {
+  width: 400px; 
+  height: 500px; 
+}
+
+/* end of story page styling */

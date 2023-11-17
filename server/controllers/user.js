@@ -84,19 +84,16 @@ const updateUser = async (req, res) => {
     let userPassword = req.body.password;
 
     const userToUpdate = await User.getOneByToken(editedToken);
-    console.log(userToUpdate);
     req.body.username ||= userToUpdate.username;
     userPassword ||= userToUpdate.password;
     req.body.email ||= userToUpdate.email;
     req.body.avatar_id ||= userToUpdate.avatar_id;
 
     if (userPassword) {
-      //Generate salt with specific cost
       const salt = await bcrypt.genSalt(
         parseInt(process.env.BCRYPT_SALT_ROUNDS)
-      );
+      )
 
-      //Hash the password
       const hashedPassword = await bcrypt.hash(userPassword, salt);
 
       req.body.password = hashedPassword;
@@ -107,7 +104,7 @@ const updateUser = async (req, res) => {
       editedToken,
       true,
       req.body.avatar_id
-    );
+    )
 
     res.status(200).json(updatedUser);
   } catch (err) {

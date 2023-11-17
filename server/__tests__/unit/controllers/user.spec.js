@@ -358,6 +358,5 @@ describe('user controller', () => {
             expect(mockJson).toHaveBeenCalledWith({ error: errorMessage })
 
         })
-
     })
 })

@@ -84,27 +84,21 @@ h1, h2, h3 {
 
 .banner {
   background-image: url('../img/bnr-bg-new.gif');
-  /* background-image: url('../img/bnr-bg.gif'); */
-  background-size: auto;
   background-repeat: no-repeat;
-  animation: slidein 12s;
-  animation-fill-mode: backwards;
-  animation-iteration-count: infinite;
-  animation-direction: normal;
+  animation: slidein 12s infinite;
   position: relative;
 }
 
 .banner::before {
   content: '';
   background: url('../img/clouds-bg.png'), #defbfe;
-  background-size: auto;
   background-repeat: repeat;
   height: 100%;
   width: 100%;
   position: absolute;
   z-index: -1;
   opacity: .8;
-  animation: linear left-to-right 20s infinite;
+  animation: left-to-right 20s infinite;
 }
 
 @keyframes slidein {
@@ -163,7 +157,8 @@ h1, h2, h3 {
 }
 
 .fight-bg {
-  background: url('../img/b4.jpg');
+  /* background: url('../img/b4.jpg'); */
+  background: bisque;
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
@@ -302,16 +297,6 @@ h1, h2, h3 {
   min-height: 3rem;
 }
 
-
-
-.robot {
-  background: url('../img/robot.png');
-}
-
-.fighter {
-  background: url('../../assets/img/char.png');
-
-}
 
 .char-bg {
   background-size: contain;

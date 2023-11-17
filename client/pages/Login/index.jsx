@@ -17,7 +17,7 @@ export default function Login() {
   useEffect(() => {
       let timer = setTimeout(() => {
         setShowForm(true);
-      }, 2010);
+      }, 2023);
     
     return () => {
       clearTimeout(timer);

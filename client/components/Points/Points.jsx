@@ -1,59 +1,51 @@
 import React, { useState, useEffect } from 'react';
-
-
-const dummyPoints = [
-    { id: 1, username: 'user1', score: 100 },
-    { id: 2, username: 'user2', score: 85 },
-    { id: 3, username: 'user3', score: 92 },
-    { id: 3, username: 'user4', score: 93 },
-    { id: 3, username: 'user5', score: 72 },
-    { id: 3, username: 'user6', score: 22 },
-    { id: 3, username: 'user7', score: 45 },
-    { id: 3, username: 'user8', score: 63 },
-    { id: 3, username: 'user9', score: 69 },
-  ];
-
-
-
-
+import { Link } from 'react-router-dom';
 const Points = () => {
-//   const [pointsData, setPointsData] = useState([]);
+  const [pointsData, setPointsData] = useState([]);
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch('/url to go here'); // Replace with your actual backend API endpoint
-//         const data = await response.json();
-//         setPointsData(data);
-//       } catch (error) {
-//         console.error('Error fetching points data:', error);
-//       }
-//     };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://jabbascript-api.onrender.com/score'); // Replace with your actual backend API endpoint
+        const data = await response.json();
+        setPointsData(data);
+      } catch (error) {
+        console.error('Error fetching points data:', error);
+      }
+    };
 
-//     fetchData();
-//   }, []); 
+    fetchData();
+  }, []); 
 
   return (
-    <div>
-      <h2>Points</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {dummyPoints.map((user, index) => (
-            <tr key={user.id}>
-              <td>{index + 1}</td>
-              <td>{user.username}</td>
-              <td>{user.score}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className='d-flex flex-column flex-grow-1 py-5 container'>
+      <h1>Leaderboard</h1>
+              {pointsData.length === 0 ?
+              <>
+       <p>'No players → no leaders!'</p>
+       <p><Link to="/register" className='btn btn-success'>Be the first one!</Link></p>
+              </>
+       :
+       <>
+      <div className='col-3'>
+        <div className='row border-bottom py-3'>
+          <div className='col-2 d-flex align-items-center justify-content-center'>Rank</div>
+          <div className='col-6 d-flex align-items-center justify-content-center'>Username</div>
+          <div className='col-4 d-flex align-items-center justify-content-center'>Score</div>
+        </div>
+
+        {pointsData.map((user, index) => (
+          <div className='row border-bottom py-3' key={user.id}>
+            <span className='col-2 d-flex align-items-center justify-content-center'>{index + 1}</span>
+            <span className='col-6 d-flex align-items-center justify-content-center'>{user.username}</span>
+            <span className='col-4 d-flex align-items-center justify-content-center'>{user.score}</span>
+          </div>
+        ))}
+      </div>
+        </>
+        }
+      
+
     </div>
   );
 };

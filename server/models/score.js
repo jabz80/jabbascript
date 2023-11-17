@@ -1,10 +1,11 @@
 const db = require('../database/connect');
 
 class Score {
-  constructor({ score_id, user_id, score }) {
+  constructor({ score_id, user_id, score, username }) {
     this.score_id = score_id;
     this.user_id = user_id;
     this.score = score;
+    this.username = username;
   }
 
   // When user is added we want to set score to 0 for that user
@@ -13,7 +14,8 @@ class Score {
     const response = await db.query(
       'SELECT user_score.user_id, user_score.score_id, user_score.score, users.username ' +
         'FROM user_score ' +
-        'JOIN users ON user_score.user_id = users.user_id '
+        'JOIN users ON user_score.user_id = users.user_id ' +
+        'ORDER BY user_score.score DESC'
     );
 
     return response.rows.map((s) => new Score(s));

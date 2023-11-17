@@ -90,12 +90,10 @@ const updateUser = async (req, res) => {
     req.body.avatar_id ||= userToUpdate.avatar_id;
 
     if (userPassword) {
-      //Generate salt with specific cost
       const salt = await bcrypt.genSalt(
         parseInt(process.env.BCRYPT_SALT_ROUNDS)
-      );
+      )
 
-      //Hash the password
       const hashedPassword = await bcrypt.hash(userPassword, salt);
 
       req.body.password = hashedPassword;
@@ -106,7 +104,7 @@ const updateUser = async (req, res) => {
       editedToken,
       true,
       req.body.avatar_id
-    );
+    )
 
     res.status(200).json(updatedUser);
   } catch (err) {

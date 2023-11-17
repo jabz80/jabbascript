@@ -82,7 +82,7 @@ class User {
     const user = await User.getOneById(responseToken.rows[0].user_id);
 
     const response = await db.query(
-      'SELECT users.user_id, users.username, users.email, avatar.img_url ' +
+      'SELECT users.user_id, users.username, users.email, users.password, avatar.img_url ' +
         'FROM users ' +
         'JOIN avatar ON users.avatar_id = avatar.avatar_id ' +
         'WHERE users.user_id = $1;',

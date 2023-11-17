@@ -32,8 +32,10 @@ describe('user controller', () => {
             jest.spyOn(bcrypt, 'hash').mockResolvedValue('hashedPassword')
 
             const userCreated = {
-                users_id: 1,
-                username: "newUser"
+                username: "newUser",
+                password: "hashedPassword",
+                email: "test@example.com",
+                img_url: "DefaultTestUrl.com"
             }
 
             const tokenData = {
@@ -47,7 +49,8 @@ describe('user controller', () => {
 
             const expectedResponse = {
                 authenticated: true,
-                token: tokenData.token
+                token: tokenData.token,
+                data: userCreated
               }
 
             await userController.register(mockReq, mockRes)
@@ -234,10 +237,11 @@ describe('user controller', () => {
             const userData = {
                 user_id:1,
                 username: 'existingUsername',
-                password: 'correctPasswordHashed'
+                password: 'correctPasswordHashed',
+                img_url: 'DefaultTestUrl.com'
             }
 
-            const mockReq = {headers: { authorization: 'test-token'}}
+            const mockReq = {headers: { authorization: 'Bearer test-token'}}
 
             jest.spyOn(User, 'getOneByToken').mockResolvedValue(userData)
 
@@ -251,7 +255,7 @@ describe('user controller', () => {
 
             const mockReq = {
                 headers: {
-                  authorization: 'test-token', // Replace with an invalid token
+                  authorization: 'Bearer test-token', // Replace with an invalid token
                 }}
 
             jest.spyOn(User, 'getOneByToken').mockRejectedValue(new Error("Failed to find user"))
@@ -276,28 +280,27 @@ describe('user controller', () => {
                   authorization: mockToken, // Replace with an invalid token
                 },
                 body: {
-                    user_id:1,
                     username: 'newUser',
                     password: 'newPassword',
-                    email: 'test@example.com'
+                    email: 'test@example.com',
+                    avatar_id: 1
                 }
             }
 
-            const editedToken = mockReq.headers.authorization.split(' ')[1]
 
             const updatedUserData= {
                 headers: {
-                  authorization: mockToken, // Replace with an invalid token
+                  authorization: mockToken, 
                 },
                 body: {
-                    user_id:1,
                     username: 'newUser',
-                    password: 'hashedPassword',
-                    email: 'test@example.com'
+                    password: 'newPassword',
+                    email: 'test@example.com',
+                    img_url: 'DefaultURL'
                 }
             }
 
-
+            jest.spyOn(User, 'getOneByToken').mockResolvedValue(updatedUserData)
 
             jest.spyOn(bcrypt, 'genSalt').mockResolvedValue(parseInt(process.env.BCRYPT_SALT_ROUNDS))
 
@@ -310,7 +313,8 @@ describe('user controller', () => {
             expect(bcrypt.genSalt).toHaveBeenCalledWith(parseInt(process.env.BCRYPT_SALT_ROUNDS))
             expect(bcrypt.hash).toHaveBeenCalledWith('newPassword', parseInt(process.env.BCRYPT_SALT_ROUNDS))
             expect(mockReq.body.password).toBe('hashedPassword')
-            expect(User.updateUser).toHaveBeenCalledWith(mockReq.body, editedToken)
+            expect(User.getOneByToken).toHaveBeenCalledWith('test-token')
+            expect(User.updateUser).toHaveBeenCalledWith(mockReq.body, 'test-token', true, 1)
             expect(mockStatus).toHaveBeenCalledWith(200)
             expect(mockJson).toHaveBeenCalledWith(updatedUserData)
           
@@ -326,10 +330,10 @@ describe('user controller', () => {
                   authorization: mockToken, // Replace with an invalid token
                 },
                 body: {
-                    user_id:1,
                     username: 'newUser',
                     password: 'newPassword',
-                    email: 'test@example.com'
+                    email: 'test@example.com',
+                    avatar_id:1
                 }
             }
 
@@ -348,7 +352,7 @@ describe('user controller', () => {
             expect(bcrypt.hash).toHaveBeenCalledWith('newPassword', parseInt(process.env.BCRYPT_SALT_ROUNDS))
             expect(mockReq.body.password).toBe('hashedPassword')
 
-            expect(User.updateUser).toHaveBeenCalledWith(mockReq.body, editedToken)
+            expect(User.updateUser).toHaveBeenCalledWith(mockReq.body, editedToken, true, 1)
 
             expect(mockStatus).toHaveBeenCalledWith(404)
             expect(mockJson).toHaveBeenCalledWith({ error: errorMessage })

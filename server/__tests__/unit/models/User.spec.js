@@ -28,6 +28,7 @@ describe ('Users model', () =>{
             expect(checkUsername).toHaveProperty('username', userName)
             expect(checkUsername).toHaveProperty('password', 'stylianou')
             expect(checkUsername).toHaveProperty('email', 'test1@example.com')
+            expect(checkUsername).toHaveProperty('avatar_id', 1)
             
         })
 
@@ -37,7 +38,8 @@ describe ('Users model', () =>{
                     user_id: 1,
                     username: 'constantinos',
                     password: 'stylianou',
-                    email: 'test@example.com'
+                    email: 'test@example.com',
+                    avatar_id: 1
                 }]
             })
 
@@ -196,14 +198,15 @@ describe ('Users model', () =>{
 
 
       describe('updateUser', () => {
-        it('should update a user based on a valid token', async () => {
+        it('should update user information without updating avatar', async () => {
         const token = 'test-token';
 
         const user = {
             user_id:1,
             username: 'Constantinos',
             password: 'Stylianou',
-            email: '@example.com'
+            email: '@example.com',
+            img_url: 'http://example.com'
         }
 
         jest.spyOn(User, 'getOneByToken').mockResolvedValueOnce(user)
@@ -212,27 +215,85 @@ describe ('Users model', () =>{
             username: 'updateConstantinos',
             password: 'updateStylianou',
             email: 'updateTest@example.com',
-            avatar_id: 1
-
         }
 
-        const updatedUsername = {
+        const updatedUserData = {
             user_id:1,
             username: 'updateConstantinos',
             password: 'updateStylianou',
             email: 'updateTest@example.com',
-            avatar_id: 1
+            img_url: 'http://example.com'
         }
 
         jest.spyOn(db, 'query').mockResolvedValueOnce({
-            rows: [updatedUsername]
+            rows: [updatedUserData]
         })
 
-        const result = await User.updateUser(updateData, token)
+        const result = await User.updateUser(updateData, token, false, null)
 
         expect(User.getOneByToken).toHaveBeenCalledWith(token)
         expect(db.query).toHaveBeenCalledWith('UPDATE users SET username = $1, password = $2, email = $3 WHERE user_id = $4 RETURNING *', [updateData.username, updateData.password, updateData.email, user.user_id])
-        expect(result).toEqual(new User(updatedUsername))
+        expect(result).toEqual(new User(updatedUserData))
+      })
+
+      it('should update user information and avatar when updateAvatar is true', async () => {
+        const token = 'test-token'
+
+        const user = {
+            user_id:1,
+            username: 'Constantinos',
+            password: 'Stylianou',
+            email: '@example.com',
+            img_url: 'http://example.com'
+        }
+
+        jest.spyOn(User, 'getOneByToken').mockResolvedValueOnce(user)
+
+        const updateData = {
+            username: 'updateConstantinos',
+            password: 'updateStylianou',
+            email: 'updateTest@example.com',
+            avatar_id: 2
+        }
+
+        const updatedUserDataNotJoin = {
+            user_id:1,
+            username: 'updateConstantinos',
+            password: 'updateStylianou',
+            email: 'updateTest@example.com',
+            avatar_id: updateData.avatar_id
+        }
+
+        const updatedUserDataJoin = {
+            user_id:1,
+            username: 'updateConstantinos',
+            password: 'updateStylianou',
+            email: 'updateTest@example.com',
+            img_url: 'http://UpdatedExample.com'
+        }
+
+        jest.spyOn(db, 'query').mockResolvedValueOnce({
+            rows: [updatedUserDataNotJoin]
+        })
+
+        jest.spyOn(db,'query').mockResolvedValueOnce({
+            rows:[updatedUserDataJoin]
+        })
+
+        const result = await User.updateUser(updateData, token, true, updateData.avatar_id)
+
+        expect(User.getOneByToken).toHaveBeenCalledWith(token)
+        expect(db.query).toHaveBeenCalledWith(
+          'UPDATE users SET username = $1, password = $2, email = $3, avatar_id = $4 WHERE user_id = $5 RETURNING *',
+          [updateData.username, updateData.password, updateData.email, updateData.avatar_id, user.user_id]
+        )
+        expect(db.query).toHaveBeenCalledWith(
+            'SELECT users.user_id, users.username, users.email, avatar.img_url ' +
+            'FROM users ' +
+            'JOIN avatar ON users.avatar_id = avatar.avatar_id ' +
+            'WHERE users.user_id = $1;', [updatedUserDataNotJoin.user_id] 
+        )
+        expect(result).toEqual(updatedUserDataJoin);
       })
 
       it('should throw an error when invalid token', async () => {

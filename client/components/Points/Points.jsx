@@ -30,14 +30,14 @@ const Points = () => {
       <div className='col-3'>
         <div className='row border-bottom py-3'>
           <div className='col-2 d-flex align-items-center justify-content-center'>Rank</div>
-          <div className='col-6 d-flex align-items-center justify-content-center'>Username</div>
+          <div className='col-6 d-flex align-items-center justify-content-start'>Username</div>
           <div className='col-4 d-flex align-items-center justify-content-center'>Score</div>
         </div>
 
         {pointsData.map((user, index) => (
-          <div className='row border-bottom py-3' key={user.id}>
+          <div className='row border-bottom py-3' key={user.user_id}>
             <span className='col-2 d-flex align-items-center justify-content-center'>{index + 1}</span>
-            <span className='col-6 d-flex align-items-center justify-content-center'>{user.username}</span>
+            <span className='col-6 d-flex align-items-center justify-content-start'>{user.username}</span>
             <span className='col-4 d-flex align-items-center justify-content-center'>{user.score}</span>
           </div>
         ))}

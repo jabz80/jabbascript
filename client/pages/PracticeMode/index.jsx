@@ -4,9 +4,7 @@ import { AuthContext } from "../../contexts/Auth";
 
 
 function index() {
-  const [htmlCode, setHtmlCode] = useState('');
-  const [cssCode, setCssCode] = useState('');
-  const [jsCode, setJsCode] = useState('');
+  const [pythonCode, setPythonCode] = useState('');
   const [answerPlaceholder, setAnswerPlaceholder] = useState(false)
   const [beamVisible, setBeamVisible] = useState(false);
   const [questions, setQuestions] = useState([]);
@@ -20,9 +18,9 @@ function index() {
   const [timer, setTimer] = useState(60)
 
   const { authToken } = useContext(AuthContext) || {};
-  const iframe = document.getElementById('codeOutput');
+  const currentCode = document.getElementById('codeOutput');
 
-
+console.log('pythonCode: '+pythonCode)
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -56,7 +54,8 @@ function index() {
   }, [timer]);
 
   const checkTheAnswer = () => {
-    if (iframe.contentDocument.body.textContent == questions[currentQuestionIndex].answer && currentQuestionIndex + 1 < questions.length) {
+    console.log(currentCode.innerHTML, questions[currentQuestionIndex].answer)
+    if (currentCode.innerHTML == questions[currentQuestionIndex].answer && currentQuestionIndex + 1 < questions.length) {
       setRoundWinner(1)
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setPointsPlayerOne((prevIndex) => prevIndex + 1);
@@ -84,17 +83,10 @@ function index() {
       setBeamVisible(false);
     }, 1000);
   };
-
-  const handleOutput = () => {
-    const iframe = document.getElementById('codeOutput');
-      iframe.contentDocument.body.innerHTML = htmlCode + '<style>' + cssCode + '</style>';
-      iframe.contentWindow.eval(jsCode);
-      setAnswerPlaceholder(!answerPlaceholder)
-    }
   return (
     <>
       <div className='mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column pt-5 pb-4'>
-        <FightCodeSection setHtmlCode={setHtmlCode} setCssCode={setCssCode} setJsCode={setJsCode} handleOutput={handleOutput} showBeam={showBeam} questions={questions} setQuestions={setQuestions} checkTheAnswer={checkTheAnswer} currentQuestionIndex={currentQuestionIndex} fightResult={fightResult} />
+        <FightCodeSection setPythonCode={setPythonCode} pythonCode={pythonCode} showBeam={showBeam} questions={questions} setQuestions={setQuestions} checkTheAnswer={checkTheAnswer} currentQuestionIndex={currentQuestionIndex} fightResult={fightResult} />
       </div>
       {!fightResult &&
       <Fighting beamVisible={beamVisible} roundWinner={roundWinner} pointsPlayerOne={pointsPlayerOne} pointsPlayerTwo={pointsPlayerTwo} healthPlayerOne={healthPlayerOne} healthPlayerTwo={healthPlayerTwo} timer={timer} fightResult={fightResult}/>

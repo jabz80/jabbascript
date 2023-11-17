@@ -40,18 +40,19 @@ CREATE TABLE user_score(
 );
 
 CREATE TABLE questions_battle(
-    q_battle_id INT GENERATED ALWAYS AS IDENTITY,
-    question VARCHAR(200) NOT NULL,
-    answer VARCHAR(200) NOT NULL,
-    PRIMARY KEY (q_battle_id)
+  q_battle_id INT GENERATED ALWAYS AS IDENTITY,
+  question VARCHAR(1000) NOT NULL,
+  answer VARCHAR(1000) NOT NULL,
+  PRIMARY KEY (q_battle_id)
 );
 
-
 CREATE TABLE questions_story(
-    q_story_id INT GENERATED ALWAYS AS IDENTITY,
-    question VARCHAR(200) NOT NULL,
-    answer VARCHAR(200) NOT NULL,
-    PRIMARY KEY (q_story_id)
+  q_story_id INT GENERATED ALWAYS AS IDENTITY,
+  section_id INT NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  explanation VARCHAR(2000) NOT NULL,
+  example VARCHAR(2000),
+  PRIMARY KEY (q_story_id)
 );
 
 INSERT INTO questions_battle(question, answer)
@@ -140,6 +141,73 @@ AFTER INSERT ON users
 FOR EACH ROW
 EXECUTE FUNCTION set_initial_score();
 
+INSERT INTO questions_story (section_id, title, explanation, example)
+VALUES (
+    1,
+    'Intro',
+    'Greetings warrior! Before fighting in Koding Kombat we must learn the ways of Python',
+    'Let us start our training.'
+  ),
+  (
+    1,
+    'Printing a message',
+    'First let us learn how to print a message. Pay attention.',
+    'print("Greetings fellow warrior.")'
+  ),
+  (
+    1,
+    'Variables',
+    'A variable is a way of storing information in a computer programme. This information can change depending on certain conditions. Let us now learn how to create a variable. Since I have 10 apples, I shall create a variable called "number_of_apples" and set it to 10.',
+    'number_of_apples = 10'
+  ),
+(
+    1,
+    'Strings',
+    'Computer programmers refer to blocks of text as strings. In Python a string is either surrounded by double quotes ("Hello world") or single quotes (''''Hello world''''). It doesn''t matter which kind you use, just be consistent.',
+    'When I write: print("Greetings fellow warrior.") ''Greetings fellow warrior'', is a string.'
+),
+  (
+    1,
+    'Quotes',
+    'Do you see the issue with the string in single quotes? The apostrophe in the string interferes with the string. So for this string, we should only use double quotes.',
+    'Let us now return to variables.'
+  ),
+  (
+    1,
+    'Number Variables',
+    'Let us now learn how to print what is stored inside a variable (number) I have 10 apples, so I have created a variable called "number_of_apples" and set it to 10. If I want to say how many apples I have I can write:',
+    'number_of_apples = 10\nprint(number_of_apples)'
+  ),
+  (
+    1,
+    'Changing Variables',
+    'Since the value stored in variables can be changed let me show you how to do so. I originally had 10 apples',
+    '// Initially I had 10 apples\nnumber_of_apples = 10\nprint(number_of_apples)\n// I have changed the number of apples to 8\nnumber_of_apples = 8\nprint(number_of_apples)'
+  ),
+  (
+    1,
+    'String Variables',
+    'Variables don''t just have to contain numbers. Strings can also be used as well. Just as before, allow me to show you how to print a variable.',
+    'teachers_greeting = "Greetings fellow student "\nprint(teachers_greeting)'
+  ),
+  (
+    1,
+    'Changing Variables II',
+    'I shall now change the value of teachers_greeting and print the new value.',
+    'teachers_greeting = "What is up? "\nprint(teachers_greeting)'
+  ),
+  (
+    1,
+    'Comments',
+    'We''re going to learn how to tell a computer to ignore a part of a program. Text written in a program but not run by the computer is called a comment. Python interprets anything after a # as a comment.',
+    'Comments can:\n1. Provide context for why something is written the way it is:\n# This variable will be used to count the number of apples there are\napple_count = 0\n2. Help other people reading the code understand it faster:\n# This code will calculate the likelihood that it will rain tomorrow\ncomplicated_rain_calculation_for_tomorrow()\n3. Ignore a line of code and see how a program will run without it:\n# useful_value = old_sloppy_code()\nuseful_value = new_clean_code()'
+  ),
+  (
+    1,
+    'Errors',
+    'Even the best of us make mistakes. Programming languages attempt to understand and explain these mistakes made in their programs. Python refers to these mistakes as errors and will point to the location where an error occurred with a ^ character. When programs throw errors that we didn''t expect to encounter we call those errors bugs. Programmers call the process of updating the program so that it no longer produces unexpected errors debugging.',
+    'Two common errors that we encounter while writing Python are SyntaxError and NameError.\n- SyntaxError means there is something wrong with the way your program is written — punctuation that does not belong, a command where it is not expected, or a missing parenthesis can all trigger a SyntaxError.\n- A NameError occurs when the Python interpreter sees a word it does not recognize. Code that contains something that looks like a variable but was never defined will throw a NameError.\nFor example, when the following code is run, we will get a Syntax Error:\nprint(''This message has mismatched quote marks!\'')'
+  );
 
 
 

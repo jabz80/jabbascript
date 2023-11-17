@@ -16,7 +16,8 @@ describe ('Users model', () =>{
                     user_id: 1,
                     username: 'constantinos',
                     password: 'stylianou',
-                    email: 'test1@example.com'
+                    email: 'test1@example.com',
+                    avatar_id: 1
                 }]
             })
 
@@ -27,6 +28,7 @@ describe ('Users model', () =>{
             expect(checkUsername).toHaveProperty('username', userName)
             expect(checkUsername).toHaveProperty('password', 'stylianou')
             expect(checkUsername).toHaveProperty('email', 'test1@example.com')
+            expect(checkUsername).toHaveProperty('avatar_id', 1)
             
         })
 
@@ -36,7 +38,8 @@ describe ('Users model', () =>{
                     user_id: 1,
                     username: 'constantinos',
                     password: 'stylianou',
-                    email: 'test@example.com'
+                    email: 'test@example.com',
+                    avatar_id: 1
                 }]
             })
 
@@ -56,14 +59,22 @@ describe ('Users model', () =>{
                 username: 'newConstantinos',
                 password: 'newStylianou',
                 email: 'test@example.com'
+                
             }
+
+            jest.spyOn(db, 'query').mockResolvedValueOnce({
+                rows: [{
+                    user_id:1
+                }]
+            })
 
             jest.spyOn(db, 'query').mockResolvedValueOnce({
                 rows: [{
                     user_id:1, 
                     username: 'newConstantinos',
                     password: 'newStylianou',
-                    email: 'test@example.com'
+                    email: 'test@example.com',
+                    img_url: 'http://example.com'
                 }]
             })
 
@@ -73,6 +84,7 @@ describe ('Users model', () =>{
             expect(createdUsername).toHaveProperty('username', 'newConstantinos')
             expect(createdUsername).toHaveProperty('password', 'newStylianou')
             expect(createdUsername).toHaveProperty('email', 'test@example.com')
+            expect(createdUsername).toHaveProperty('img_url', 'http://example.com')
         })
         
         it ('should throw an error when the database insertion fails', async () => {
@@ -144,20 +156,33 @@ describe ('Users model', () =>{
           jest.spyOn(db, 'query').mockResolvedValueOnce({
             rows: [{ user_id: userId }],
           })
+
+          jest.spyOn(db, 'query').mockResolvedValueOnce({
+            rows: [{
+                user_id:1, 
+                username: 'TestUser',
+                password: 'TestPassword',
+                email: 'test@example.com',
+                img_url: 'http://example.com'
+            }]
+        })
+
+
       
           const expectedUser = {
             user_id: userId,
             username: 'TestUser',
             password: 'TestPassword',
-            email: 'test@example.com'
-          }
+            email: 'test@example.com',
+            img_url: 'http://example.com'
+        }
           jest.spyOn(User, 'getOneById').mockResolvedValueOnce(expectedUser);
       
           const user = await User.getOneByToken(token);
       
           expect(db.query).toHaveBeenCalledWith('SELECT user_id FROM token WHERE token = $1', [token]);
           expect(User.getOneById).toHaveBeenCalledWith(userId);
-          expect(user).toEqual(new User(expectedUser));
+          expect(user).toEqual(expectedUser);
         })
       
         it('should throw an error when the token does not exist', async () => {
@@ -173,14 +198,15 @@ describe ('Users model', () =>{
 
 
       describe('updateUser', () => {
-        it('should update a user based on a valid token', async () => {
+        it('should update user information without updating avatar', async () => {
         const token = 'test-token';
 
         const user = {
             user_id:1,
             username: 'Constantinos',
             password: 'Stylianou',
-            email: '@example.com'
+            email: '@example.com',
+            img_url: 'http://example.com'
         }
 
         jest.spyOn(User, 'getOneByToken').mockResolvedValueOnce(user)
@@ -188,35 +214,96 @@ describe ('Users model', () =>{
         const updateData = {
             username: 'updateConstantinos',
             password: 'updateStylianou',
-            email: 'updateTest@example.com'
+            email: 'updateTest@example.com',
         }
 
-        const updatedUsername = {
+        const updatedUserData = {
             user_id:1,
             username: 'updateConstantinos',
             password: 'updateStylianou',
-            email: 'updateTest@example.com'
+            email: 'updateTest@example.com',
+            img_url: 'http://example.com'
         }
 
         jest.spyOn(db, 'query').mockResolvedValueOnce({
-            rows: [updatedUsername]
+            rows: [updatedUserData]
         })
 
-        const result = await User.updateUser(updateData, token)
+        const result = await User.updateUser(updateData, token, false, null)
 
         expect(User.getOneByToken).toHaveBeenCalledWith(token)
         expect(db.query).toHaveBeenCalledWith('UPDATE users SET username = $1, password = $2, email = $3 WHERE user_id = $4 RETURNING *', [updateData.username, updateData.password, updateData.email, user.user_id])
-        expect(result).toEqual(new User(updatedUsername))
+        expect(result).toEqual(new User(updatedUserData))
+      })
+
+      it('should update user information and avatar when updateAvatar is true', async () => {
+        const token = 'test-token'
+
+        const user = {
+            user_id:1,
+            username: 'Constantinos',
+            password: 'Stylianou',
+            email: '@example.com',
+            img_url: 'http://example.com'
+        }
+
+        jest.spyOn(User, 'getOneByToken').mockResolvedValueOnce(user)
+
+        const updateData = {
+            username: 'updateConstantinos',
+            password: 'updateStylianou',
+            email: 'updateTest@example.com',
+            avatar_id: 2
+        }
+
+        const updatedUserDataNotJoin = {
+            user_id:1,
+            username: 'updateConstantinos',
+            password: 'updateStylianou',
+            email: 'updateTest@example.com',
+            avatar_id: updateData.avatar_id
+        }
+
+        const updatedUserDataJoin = {
+            user_id:1,
+            username: 'updateConstantinos',
+            password: 'updateStylianou',
+            email: 'updateTest@example.com',
+            img_url: 'http://UpdatedExample.com'
+        }
+
+        jest.spyOn(db, 'query').mockResolvedValueOnce({
+            rows: [updatedUserDataNotJoin]
+        })
+
+        jest.spyOn(db,'query').mockResolvedValueOnce({
+            rows:[updatedUserDataJoin]
+        })
+
+        const result = await User.updateUser(updateData, token, true, updateData.avatar_id)
+
+        expect(User.getOneByToken).toHaveBeenCalledWith(token)
+        expect(db.query).toHaveBeenCalledWith(
+          'UPDATE users SET username = $1, password = $2, email = $3, avatar_id = $4 WHERE user_id = $5 RETURNING *',
+          [updateData.username, updateData.password, updateData.email, updateData.avatar_id, user.user_id]
+        )
+        expect(db.query).toHaveBeenCalledWith(
+            'SELECT users.user_id, users.username, users.email, avatar.img_url ' +
+            'FROM users ' +
+            'JOIN avatar ON users.avatar_id = avatar.avatar_id ' +
+            'WHERE users.user_id = $1;', [updatedUserDataNotJoin.user_id] 
+        )
+        expect(result).toEqual(updatedUserDataJoin);
       })
 
       it('should throw an error when invalid token', async () => {
         const token = 'nonexistent-token';
     
         jest.spyOn(User, 'getOneByToken').mockImplementationOnce(async () => {
-          throw new Error('Unable to locate user');
+          throw new Error('A failure occurred when updating data');
         });
     
-        await expect(User.updateUser({}, token)).rejects.toThrow('Unable to locate user');
+        await expect(User.updateUser({}, token)).rejects.toThrow('A failure occurred when updating data');
       })
 
     })

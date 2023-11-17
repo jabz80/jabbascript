@@ -1,10 +1,12 @@
 const db = require('../database/connect');
 
 class Story {
-  constructor({ q_story_id, question, answer }) {
+  constructor({ q_story_id, title, example, explanation, section_id }) {
     this.q_story_id = q_story_id;
-    this.question = question;
-    this.answer = answer;
+    this.title = title;
+    this.example = example;
+    this.explanation = explanation;
+    this.section_id = section_id;
   }
 
   static async getAll() {

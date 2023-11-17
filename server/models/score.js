@@ -1,10 +1,11 @@
 const db = require('../database/connect');
 
 class Score {
-  constructor({ score_id, user_id, score }) {
+  constructor({ score_id, user_id, score, username }) {
     this.score_id = score_id;
     this.user_id = user_id;
     this.score = score;
+    this.username = username;
   }
 
   // When user is added we want to set score to 0 for that user

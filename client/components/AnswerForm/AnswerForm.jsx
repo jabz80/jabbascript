@@ -37,19 +37,20 @@ const AnswerForm = ({ setPythonCode }) => {
                   width="100%"
                   theme="vs-dark"
                   defaultLanguage="python"
-                  defaultValue="print('Hello, World!')"
+                  defaultValue="#your code"
                   onChange={(value) => {
                     setUserCode(value);
                   }}
                 />
-                <button className="run-btn" onClick={compile}>
+                <button className="btn btn-info run-btn" onClick={compile}>
                   Run
                 </button>
               </div>
               <div className="col-6">
-                <h4>Input:</h4>
                 <div className="input-box">
                   <textarea
+                  placeholder='Your input here'
+                  className=' form-control'
                     id="code-inp"
                     onChange={(e) => setUserInput(e.target.value)}
                   ></textarea>

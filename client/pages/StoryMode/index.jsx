@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Story, SingleFighter } from "../../components";
-import { PythonIDE } from '../../components';
+import { AnswerForm, AnswerFormOutput } from '../../components';
 
 const dummyData = [
   "Hello! Welcome to the Story mode. Let's walk you through this. In the editor, you see your first question. Answer the question and hit ok.",
@@ -22,6 +22,7 @@ export default function Index() {
   const [showFireball, setShowFireball] = useState(false);
   const [showThunder, setShowThunder] = useState(false);
   const [showWind, setShowWind] = useState(false);
+  const [pythonCode, setPythonCode] = useState('');
 
   const fireAudio = new Audio("assets/img/magic-strike-5856.mp3");
   const thunderAudio = new Audio("assets/img/loud-thunder-7932.mp3");
@@ -123,7 +124,17 @@ export default function Index() {
 />
 
         <div>
-          <PythonIDE />
+          <div className="row">
+<div className="col-6">
+
+          <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} />
+</div>
+<div className="col-6">
+
+          <AnswerFormOutput pythonCode={pythonCode} />
+</div>
+          </div>
+
           <div>
             <p>{dialogue}</p>
             <input

@@ -1,4 +1,5 @@
 const Games = require('../models/games');
+const User = require('../models/user');
 
 const getAll = async (req, res) => {
   try {
@@ -23,9 +24,13 @@ const getOneById = async (req, res) => {
 
 const createGame = async (req, res) => {
   try {
-    const { id } = req.params;
+    const token = req.headers.authorization;
+    const editedToken = token.split(' ')[1];
+
+    const user = await User.getOneByToken(editedToken);
+
     const newGame = req.body;
-    const result = await Games.createGame(newGame, id);
+    const result = await Games.createGame(user.user_id, newGame);
     res.status(201).json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });

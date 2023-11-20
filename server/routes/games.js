@@ -12,7 +12,7 @@ const gamesRouter = Router();
 
 gamesRouter.get('/', getAll);
 gamesRouter.get('/:id', getOneById);
-gamesRouter.post('/:id', createGame);
+gamesRouter.post('/', createGame);
 gamesRouter.patch('/:id', updateGame);
 
 module.exports = gamesRouter;

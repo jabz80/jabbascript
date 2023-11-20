@@ -40,8 +40,8 @@ class Games {
     }
   }
 
-  static async createGame(data) {
-    const { user_id, date_played, game_status } = data;
+  static async createGame(user_id, data) {
+    const {date_played, game_status } = data;
 
     const response = await db.query(
       'INSERT INTO games(user_id, date_played, game_status) VALUES($1, $2, $3) RETURNING *',

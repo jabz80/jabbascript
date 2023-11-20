@@ -9,5 +9,7 @@ export { default as AnswerForm } from "./AnswerForm/AnswerForm";
 export { default as AnswerFormOutput } from "./AnswerFormOutput/AnswerFormOutput";
 export { default as Points } from "./Points/Points"
 export { default as Multiplayer} from "./Multiplayer/Multiplayer";
-export { default as PythonIDE } from './PythonIDE/PythonIDE';
+// export { default as PythonIDE } from './PythonIDE/PythonIDE';
+export { default as Story } from "./Story/Story"
+export { default as SingleFighter } from "./SingleFighter/SingleFighter"
 

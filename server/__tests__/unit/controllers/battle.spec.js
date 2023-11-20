@@ -40,8 +40,7 @@ describe('Battle controller', () => {
 
       it('sends an error upon fail', async () =>{
 
-        jest.spyOn(Battle,'getAll')
-            .mockRejectedValue(new Error('Something happened to your db'))
+        jest.spyOn(Battle,'getAll').mockRejectedValue(new Error('Something happened to your db'))
 
         await battleController.getAll(null, mockRes)
         expect(Battle.getAll).toHaveBeenCalledTimes(1)

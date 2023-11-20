@@ -32,7 +32,7 @@ describe('Story model', () => {
                 await Story.getAll()
             } catch(err){
                 expect(err).toBeDefined()
-                expect(err.message).toBe("No story questions were found")
+                expect(err.message).toBe("No storyline data was found")
             }
         })
     })
@@ -64,8 +64,10 @@ describe('Story model', () => {
             jest.spyOn(db, 'query').mockResolvedValueOnce({
                 rows: [{
                     q_story_id: 1,
-                    question: 'Sample story Q1',
-                    answer: 'Sample story A1'
+                    section_id: 1, 
+                    title:'Sample title 1', 
+                    explanation: 'Explanation 1', 
+                    example: 'Example 1'
                 }]
             })
 
@@ -74,7 +76,7 @@ describe('Story model', () => {
                 await Story.getOneById(qStoryId)
             } catch(err){
                 expect(err).toBeDefined()
-                expect(err.message).toBe("Unable to locate question")
+                expect(err.message).toBe("Unable to storyline data")
             }
         })
     })

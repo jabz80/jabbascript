@@ -14,7 +14,6 @@ const register = async (req, res) => {
     data.password = hash;
 
     const result = await User.create(data);
-    console.log(result);
     const token = await Token.create(result.user_id);
 
     res
@@ -69,7 +68,6 @@ const findByToken = async (req, res) => {
   try {
     const token = req.headers.authorization;
     const editedToken = token.split(' ')[1];
-    console.log(token);
     const user = await User.getOneByToken(editedToken);
     res.status(201).json(user);
   } catch (err) {
@@ -108,7 +106,6 @@ const updateUser = async (req, res) => {
 
     res.status(200).json(updatedUser);
   } catch (err) {
-    console.log(err.message);
     res.status(404).json({ error: err.message });
   }
 };

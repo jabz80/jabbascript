@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
-import Read from '../../assets/img/read.png'
-import KidCoder from '../../assets/img/computer_boy.png'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import Read from '../../assets/img/read.png';
+import KidCoder from '../../assets/img/computer_boy.png';
+import { Link } from 'react-router-dom';
+import { Multiplayer } from '../../components';
 
 function index() {
-
   return (
     <>
       <div className="d-flex main-page-marketing-block main-page-marketing-block-bg-1 align-items-center">
@@ -56,8 +56,9 @@ function index() {
           <img src={KidCoder} className="img-fluid" />
         </div>
       </div>
+      <Multiplayer />
     </>
   );
 }
 
-export default index
+export default index;

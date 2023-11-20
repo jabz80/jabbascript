@@ -5,11 +5,11 @@ import { UserContext } from '../../contexts/User';
 function Account() {
   const { userData } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
-  const [points, setPoints] = useState(0);
   const [avatars, setAvatars] = useState([]);
   const [selectedAvatar, setSelectedAvatar] = useState(0);
-const [submitClicked, setSubmitClicked] = useState(false);
-const [currentAvatarUrl, setCurrentAvatarUrl] = useState('')
+  const [points, setPoints] = useState(0);
+  const [submitClicked, setSubmitClicked] = useState(false);
+  const [currentAvatarUrl, setCurrentAvatarUrl] = useState('')
 
   const navigate = useNavigate();
 
@@ -57,24 +57,10 @@ const [currentAvatarUrl, setCurrentAvatarUrl] = useState('')
     }
   };
 
-  const updatePoints = async () => {
-    try {
-      await fetch(`https://jabbascript-api.onrender.com/score/${userData.user_id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'PATCH',
-        body: JSON.stringify({ 'newScore': points + 25 }),
-      });
-      setPoints(points + 25);
-    } catch (error) {
-      console.error('Error updating points:', error);
-    }
-  };
 
   useEffect(() => {
     if (userData) {
-      fetchUserPoints();
+      fetchUserPoints()
       getAllAvatars();
       setLoading(false);
     }
@@ -102,19 +88,8 @@ const [currentAvatarUrl, setCurrentAvatarUrl] = useState('')
             <form onSubmit={handleAvatarChange}>
               {avatars.map(avatar => (
                 <label key={avatar.avatar_id}>
-                  <input
-                    type="radio"
-                    id={avatar.avatar_id}
-                    name="avatar"
-                    onChange={clickHandler}
-                    style={{ display: 'none' }}
-                  />
-                  <img
-                    id={avatar.avatar_id}
-                    style={{ 'width': '100px', cursor: 'pointer', opacity: selectedAvatar === avatar.avatar_id ? 0.5 : 1, }}
-                    src={avatar.img_url}
-                    alt={`Avatar ${avatar.avatar_id}`}
-                  />
+                  <input type="radio" id={avatar.avatar_id} name="avatar" onChange={clickHandler} style={{ display: 'none' }} />
+                  <img id={avatar.avatar_id} style={{ 'width': '100px', cursor: 'pointer', opacity: selectedAvatar === avatar.avatar_id ? 0.5 : 1, }} src={avatar.img_url} alt={`Avatar ${avatar.avatar_id}`} />
                 </label>
               ))}
               <button className='btn btn-info' type="submit" >
@@ -126,7 +101,7 @@ const [currentAvatarUrl, setCurrentAvatarUrl] = useState('')
           <p><b>Username</b>: {userData.username}</p>
           <p><b>Email</b>: {userData.email}</p>
           <p>
-            <b>Points</b>: {points} | <Link onClick={updatePoints} className='small' to="#">Add 25 Points</Link>
+            <b>Points</b>: {points}
           </p>
           <button className='btn btn-info' onClick={() => handleLogout(navigate)}>Logout</button>
         </div>

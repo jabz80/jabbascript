@@ -122,19 +122,15 @@ export default function Index() {
   storyMessageData={storyMessage}
   inputIncorrect={inputIncorrect}
 />
-
         <div>
           <div className="row">
-<div className="col-6">
-
-          <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} />
-</div>
-<div className="col-6">
-
-          <AnswerFormOutput pythonCode={pythonCode} />
-</div>
+            <div className="col-6">
+              <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} />
+            </div>
+            <div className="col-6">
+              <AnswerFormOutput pythonCode={pythonCode} />
+            </div>
           </div>
-
           <div>
             <p>{dialogue}</p>
             <input

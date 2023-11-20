@@ -4,11 +4,18 @@ import io from 'socket.io-client';
 
 const socket = io.connect('http://localhost:3000');
 
-export default function Gamepage() {
-  const [roomNumber, setRoomNumber] = useState([]);
-  const [fetchedQuestions, setFetchedQuestions] = useState([]);
-  const [rooms, setRooms] = useState({});
-
+export default function Gamepage({
+  rooms,
+  setRooms,
+  setGameStarted,
+  fetchedQuestions,
+  setFetchedQuestions,
+  roomNumber,
+  setRoomNumber,
+  currentAmountOfPlayers,
+  setCurrentAmountOfPlayers,
+}) {
+  const gameStartHandler = () => setGameStarted(true);
   //
   const submitAnswer = (answer) => {
     socket.emit('submit_answer', {
@@ -20,6 +27,7 @@ export default function Gamepage() {
 
   const joinRoom = () => {
     socket.emit('join_room');
+    gameStartHandler();
   };
 
   const leaveRoom = () => {
@@ -86,9 +94,9 @@ export default function Gamepage() {
       //Set rooms state variable
       setRooms(rooms);
       Object.keys(rooms).forEach((roomNumber) => {
-        const sentQuestions = {};
+        const sentQuestions = [];
         const usersInRoom = rooms[roomNumber];
-
+        // setCurrentAmountOfPlayers(usersInRoom.length)
         if (usersInRoom.length === 2) {
           // Check if the question has already been displayed for this room
           if (!sentQuestions[roomNumber]) {
@@ -165,26 +173,26 @@ export default function Gamepage() {
 
   console.log('Fetched Questions State: ', fetchedQuestions);
 
-  useEffect(() => {
-    const handleDisplayAnswers = ({ user1Answer, user2Answer }) => {
-      console.log(
-        'User1Answer:',
-        user1Answer.userId,
-        'Answer:',
-        user1Answer.answer
-      );
-      console.log(
-        'User2Answer:',
-        user2Answer.userId,
-        'Answer:',
-        user2Answer.answer
-      );
+  // useEffect(() => {
+  //   const handleDisplayAnswers = ({ user1Answer, user2Answer }) => {
+  //     console.log(
+  //       'User1Answer:',
+  //       user1Answer.userId,
+  //       'Answer:',
+  //       user1Answer.answer
+  //     );
+  //     console.log(
+  //       'User2Answer:',
+  //       user2Answer.userId,
+  //       'Answer:',
+  //       user2Answer.answer
+  //     );
 
-      //Implement logic to display answers to users
-    };
+  //     //Implement logic to display answers to users
+  //   };
 
-    socket.on('display_answers', handleDisplayAnswers);
-  }, []);
+  //   socket.on('display_answers', handleDisplayAnswers);
+  // }, []);
 
   useEffect(() => {
     return () => {
@@ -216,21 +224,11 @@ export default function Gamepage() {
       socket.disconnect();
     };
   }, []);
-
   return (
     <div>
       <button onClick={joinRoom}>Play Multiplayer</button>
       <button onClick={leaveRoom}>Leave Game</button>
       <button onClick={() => submitAnswer('Submitted Answer')}>Submit</button>
-      {fetchedQuestions.map((q) => (
-        <div key={q.roomNumber}>
-          {q.questions.map((questionObj) => (
-            <div key={questionObj.q_battle_id}>
-              <p>Q: {questionObj.question}</p>
-            </div>
-          ))}
-        </div>
-      ))}
     </div>
   );
 }

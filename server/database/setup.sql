@@ -150,9 +150,21 @@ VALUES (
   ),
   (
     1,
+    'Question 1',
+    'Good, now you try. Print "Hello World" for me.',
+    'print("Hello World)'
+  ),
+  (
+    1,
     'Printing a message',
     'First let us learn how to print a message. Pay attention.',
     'print("Greetings fellow warrior.")'
+  ),
+  (
+    1,
+    'Question 2',
+    'Now you have 9 apples, create a variable called "number_of_apples" to define how many apples you have',
+    'number_of_apples = 9'
   ),
   (
     1,
@@ -160,17 +172,36 @@ VALUES (
     'A variable is a way of storing information in a computer programme. This information can change depending on certain conditions. Let us now learn how to create a variable. Since I have 10 apples, I shall create a variable called "number_of_apples" and set it to 10.',
     'number_of_apples = 10'
   ),
-(
+  (
+    1,
+    'Question 3',
+    'Set a variable called double_quotes to the string "She''s the fiercest knight in the empire" with double quotes.\nSet another variable called single_quotes to the string ''She''s the fiercest knight in the empire'' with single quotes.',
+    'double_quotes = "She''s the fiercest knight in the empire"\n single_quotes = ''She''s the fiercest knight in the empire'''
+  ),
+  (
     1,
     'Strings',
     'Computer programmers refer to blocks of text as strings. In Python a string is either surrounded by double quotes ("Hello world") or single quotes (''''Hello world''''). It doesn''t matter which kind you use, just be consistent.',
     'When I write: print("Greetings fellow warrior.") ''Greetings fellow warrior'', is a string.'
-),
+  ),
+  (
+    1,
+    'Question 4',
+    'Reset the variable single_quotes to the string ''Hello teacher''.',
+    'single_quotes = ''Hello teacher'''
+  ),
   (
     1,
     'Quotes',
     'Do you see the issue with the string in single quotes? The apostrophe in the string interferes with the string. So for this string, we should only use double quotes.',
     'Let us now return to variables.'
+  ),
+  (
+    1,
+    'Question 5',
+    'Your health right now is at 100%. Set a variable called "my_health" to 100. Then print my_health.',
+    'my_health = 100
+    print(my_health)'
   ),
   (
     1,
@@ -180,9 +211,23 @@ VALUES (
   ),
   (
     1,
+    'Question 6',
+    'Your health has now lowered to 85%. Change my_health to 85 and print my_health.',
+    'my_health = 85
+    print(my_health)'
+  ),
+  (
+    1,
     'Changing Variables',
     'Since the value stored in variables can be changed let me show you how to do so. I originally had 10 apples',
     '// Initially I had 10 apples\nnumber_of_apples = 10\nprint(number_of_apples)\n// I have changed the number of apples to 8\nnumber_of_apples = 8\nprint(number_of_apples)'
+  ),
+  (
+    1,
+    'Question 7',
+    'Show me how it''s done. Store the string "Greetings teacher" in a variable called my_greeting. Then print my_greeting.',
+    'my_greeting = "Greetings teacher"
+    print(my_greeting)'
   ),
   (
     1,
@@ -192,15 +237,37 @@ VALUES (
   ),
   (
     1,
+    'Question 8',
+    'Change what is stored in my_greeting to "How''s it going?"',
+    'my_greeting = "How''s it going?"
+    print(my_greeting)'
+  ),
+  (
+    1,
     'Changing Variables II',
     'I shall now change the value of teachers_greeting and print the new value.',
     'teachers_greeting = "What is up? "\nprint(teachers_greeting)'
   ),
   (
     1,
+    'Question 9',
+    'Write a comment to say how you''re finding your training so far',
+    '#'
+  ),
+  (
+    1,
     'Comments',
     'We''re going to learn how to tell a computer to ignore a part of a program. Text written in a program but not run by the computer is called a comment. Python interprets anything after a # as a comment.',
     'Comments can:\n1. Provide context for why something is written the way it is:\n# This variable will be used to count the number of apples there are\napple_count = 0\n2. Help other people reading the code understand it faster:\n# This code will calculate the likelihood that it will rain tomorrow\ncomplicated_rain_calculation_for_tomorrow()\n3. Ignore a line of code and see how a program will run without it:\n# useful_value = old_sloppy_code()\nuseful_value = new_clean_code()'
+  ),
+  (
+    1,
+    'Question 10',
+    'Fix the strings so there is no SyntaxError.
+    print(''This message has mismatched quote marks!")
+    print("Abracadabra'')',
+    'print(''This message has mismatched quote marks!'')  
+    print("Abracadabra")'
   ),
   (
     1,

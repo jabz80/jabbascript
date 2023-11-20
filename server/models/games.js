@@ -29,10 +29,14 @@ class Games {
         [id]
       );
 
+      if (response.rows.length === 0) {
+        throw new Error('No games were found for current user');
+      }
+
       return new Games(response.rows[0]);
     } catch (error) {
-      console.error('Error in getGamesById method:', error.message);
-      throw error;
+      console.log('Error in getGamesById method:', error.message);
+     
     }
   }
 

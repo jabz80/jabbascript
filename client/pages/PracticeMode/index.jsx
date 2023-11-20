@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext }  from 'react';
-import { Fighting, FightCodeSection } from "../../components";
+import { Fighting, FightCodeSection, Multiplayer } from "../../components";
 import { AuthContext } from "../../contexts/Auth";
 import { UserContext } from '../../contexts/User';
 
@@ -130,24 +130,51 @@ return (
       <div className="h-100  d-flex flex-column align-items-center justify-content-center">
         <div className="row">
           <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center">
-
-        <button className='btn btn-fantasy text-white mb-5' onClick={gameStartHandler}>Start The Game</button>
-        <h2>Game rules</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit omnis quaerat id ab veritatis sunt provident consequuntur, voluptate pariatur dolor distinctio aspernatur tenetur eveniet nostrum. Magnam fugit quidem ullam tempore.</p>
+            <button
+              className="btn btn-fantasy text-white mb-5"
+              onClick={gameStartHandler}
+            >
+              Start The Game
+            </button>
+            <h2>Game rules</h2>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit
+              omnis quaerat id ab veritatis sunt provident consequuntur,
+              voluptate pariatur dolor distinctio aspernatur tenetur eveniet
+              nostrum. Magnam fugit quidem ullam tempore.
+            </p>
           </div>
-
         </div>
       </div>
     ) : (
       <>
-        <div className='mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column pt-5 pb-4'>
-          <FightCodeSection setPythonCode={setPythonCode} pythonCode={pythonCode} showBeam={showBeam} questions={questions} setQuestions={setQuestions} checkTheAnswer={checkTheAnswer} currentQuestionIndex={currentQuestionIndex} fightResult={fightResult} />
+        <div className="mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column pt-5 pb-4">
+          <FightCodeSection
+            setPythonCode={setPythonCode}
+            pythonCode={pythonCode}
+            showBeam={showBeam}
+            questions={questions}
+            setQuestions={setQuestions}
+            checkTheAnswer={checkTheAnswer}
+            currentQuestionIndex={currentQuestionIndex}
+            fightResult={fightResult}
+          />
         </div>
         {!fightResult && (
-          <Fighting beamVisible={beamVisible} roundWinner={roundWinner} pointsPlayerOne={pointsPlayerOne} pointsPlayerTwo={pointsPlayerTwo} healthPlayerOne={healthPlayerOne} healthPlayerTwo={healthPlayerTwo} timer={timer} fightResult={fightResult} />
+          <Fighting
+            beamVisible={beamVisible}
+            roundWinner={roundWinner}
+            pointsPlayerOne={pointsPlayerOne}
+            pointsPlayerTwo={pointsPlayerTwo}
+            healthPlayerOne={healthPlayerOne}
+            healthPlayerTwo={healthPlayerTwo}
+            timer={timer}
+            fightResult={fightResult}
+          />
         )}
       </>
     )}
+    <Multiplayer />
   </>
-)}
+);}
 export default index

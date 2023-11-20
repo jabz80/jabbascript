@@ -7,7 +7,26 @@ const API_ENDPOINT = 'http://localhost:3000/compile';
 function pythonIDE({setPythonCode}) {
   const [userCode, setUserCode] = useState('');
   const [userInput, setUserInput] = useState('');
+
   function compile() {
+
+
+    Axios.post(API_ENDPOINT, {
+      code: userCode,
+      language: 'python',
+      input: userInput,
+    })
+      .then((res) => {
+        setPythonCode(res.data.output);
+      })
+      .catch((error) => {
+        console.error('Error occurred while compiling:', error);
+        setPythonCode('Error occurred while compiling.');
+      })
+
+  }
+
+  function SubmitCode() {
 
 
     Axios.post(API_ENDPOINT, {
@@ -41,6 +60,9 @@ function pythonIDE({setPythonCode}) {
         />
         <button className="run-btn" onClick={compile}>
           Run
+        </button>
+        <button className="run-btn" onClick={SubmitCode}>
+          Submit Code
         </button>
       </div>
       <div className="right-container">

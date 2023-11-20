@@ -45,6 +45,9 @@ const AnswerForm = ({ setPythonCode }) => {
                 <button className="btn btn-info run-btn" onClick={compile}>
                   Run
                 </button>
+                <button className="btn btn-info run-btn" onClick={compile}>
+                  Submit
+                </button>
               </div>
               {/* <div className="col-6">
                 <div className="input-box">

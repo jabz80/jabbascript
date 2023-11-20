@@ -10,7 +10,6 @@ function compile(req, res) {
     language: language,
     input: input,
   };
-  console.log(data);
   let config = {
     method: 'post',
     url: 'https://api.codex.jaagrav.in',
@@ -23,10 +22,8 @@ function compile(req, res) {
   Axios(config)
     .then((response) => {
       res.status(200).send(response.data);
-      console.log(response.data);
     })
     .catch((error) => {
-      console.log(error);
     });
 }
 

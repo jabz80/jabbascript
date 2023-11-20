@@ -6,10 +6,10 @@ TRUNCATE questions_story RESTART IDENTITY CASCADE;
 TRUNCATE avatar RESTART IDENTITY CASCADE;
 TRUNCATE games RESTART IDENTITY CASCADE;
 
-INSERT INTO avatar (img_url)
+INSERT INTO avatar (img_url, gender, skin_colour)
 VALUES
-('url_test1'),
-('url_test2');
+('url_test1', 'Male', 'Dark'),
+('url_test2', 'Female', 'Light');
 
 INSERT INTO users (username, password, email, avatar_id)
 VALUES

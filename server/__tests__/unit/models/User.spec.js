@@ -288,7 +288,7 @@ describe ('Users model', () =>{
           [updateData.username, updateData.password, updateData.email, updateData.avatar_id, user.user_id]
         )
         expect(db.query).toHaveBeenCalledWith(
-            'SELECT users.user_id, users.username, users.email, avatar.img_url ' +
+            'SELECT users.user_id, users.username, users.email, avatar.img_url, avatar.gender, avatar.skin_colour ' +
             'FROM users ' +
             'JOIN avatar ON users.avatar_id = avatar.avatar_id ' +
             'WHERE users.user_id = $1;', [updatedUserDataNotJoin.user_id] 

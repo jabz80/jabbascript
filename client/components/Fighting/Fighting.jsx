@@ -7,7 +7,7 @@ function Fighting({beamVisible, roundWinner, pointsPlayerOne, pointsPlayerTwo, h
         <div className='w-100 fight-bg h-50'>
         <div className='container h-100'>
       <div className='row h-100'>
-        <div className="col-4 h-100">
+        <div role="fighter-one" className="col-4 h-100">
           <Fighter firstFighter={true} roundWinner={roundWinner} healthPlayerOne={healthPlayerOne} healthPlayerTwo={healthPlayerTwo} fightResult={fightResult} />
         </div>
         <div className="col-4 text-center">
@@ -20,7 +20,7 @@ function Fighting({beamVisible, roundWinner, pointsPlayerOne, pointsPlayerTwo, h
             <div className='d-flex h-75 beam unflip'></div>
             : ''}
         </div>
-        <div className="col-4">
+        <div role="fighter-two" className="col-4">
           <Fighter robot={true} roundWinner={roundWinner} healthPlayerOne={healthPlayerOne} healthPlayerTwo={healthPlayerTwo}/>
         </div>
         </div>

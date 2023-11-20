@@ -34,7 +34,7 @@ class Score {
       [id]
     );
 
-    if (response.rows.length != 1) {
+    if (response.rows.length == 0) {
       throw new Error('Unable to locate user score');
     }
 

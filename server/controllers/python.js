@@ -22,7 +22,7 @@ function compile(req, res) {
   //calling the code compilation API
   Axios(config)
     .then((response) => {
-      res.send(response.data);
+      res.status(200).send(response.data);
       console.log(response.data);
     })
     .catch((error) => {

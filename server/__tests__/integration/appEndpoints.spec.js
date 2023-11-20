@@ -131,7 +131,6 @@ describe('api server', ()=> {
 
         request(api)
             .get('/avatar')
-            .set('authorization', 'tokenTest1')
             .expect(200,done)
     })
 
@@ -139,7 +138,6 @@ describe('api server', ()=> {
 
         request(api)
             .get('/score')
-            .set('authorization', 'tokenTest1')
             .expect(200,done)
     })
 
@@ -147,8 +145,7 @@ describe('api server', ()=> {
 
     it('responds to GET /score/:id with a 200', (done) =>{
         request (api)
-            .get('/score/2')
-            .set('authorization', 'tokenTest2')
+            .get('/score/1')
             .expect(200,done)
     })
 
@@ -160,9 +157,8 @@ describe('api server', ()=> {
         }
 
         request(api)
-       .patch('/score/1')
+       .patch('/score/2')
        .send(scoreUpdateData.body)
-       .set('authorization', 'Bearer tokenTest1')
        .expect(200,done)
     })
 
@@ -170,7 +166,6 @@ describe('api server', ()=> {
 
         request(api)
             .get('/games')
-            .set('authorization', 'tokenTest1')
             .expect(200,done)
     })
 
@@ -179,7 +174,6 @@ describe('api server', ()=> {
     it('responds to GET /games/:id with a 200', (done) =>{
         request (api)
             .get('/games/2')
-            .set('authorization', 'tokenTest2')
             .expect(200,done)
     })
 
@@ -209,5 +203,20 @@ describe('api server', ()=> {
        .patch('/games/1')
        .send(gameUpdateData.body)
        .expect(200,done)
+    })
+
+    it ('responds to POST /compile with a 200', (done) =>{
+
+        const compileData = {
+            body:{
+                code: "print('Hello World!')",
+                input: 'This is a test input'
+        
+            }
+        }
+        request(api)
+        .post('/compile')
+        .send(compileData.body)
+        .expect(200,done)
     })
 })

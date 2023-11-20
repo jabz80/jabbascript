@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext }  from 'react';
 import { Fighting, FightCodeSection } from "../../components";
 import { AuthContext } from "../../contexts/Auth";
 import { UserContext } from '../../contexts/User';
-
+const questions = require("../../assets/pythonQuestions/StoryMode/questions.json")
 
 function index() {
   const [pythonCode, setPythonCode] = useState('');

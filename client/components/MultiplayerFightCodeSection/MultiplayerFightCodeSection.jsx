@@ -1,33 +1,55 @@
-import React, {useContext, useEffect} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AnswerForm, AnswerFormOutput } from '../index';
-import { AuthContext } from "../../contexts/Auth";
+import { AuthContext } from '../../contexts/Auth';
 import { Link } from 'react-router-dom';
-import LoseImage from '../../assets/img/lose-image.png'
+import LoseImage from '../../assets/img/lose-image.png';
 import io from 'socket.io-client';
 
 const socket = io.connect('http://localhost:3000');
-function MultiplayerFightCodeSection({ setPythonCode, pythonCode, checkTheAnswer, fetchedQuestions, setFetchedQuestions, currentQuestionIndex, fightResult, roomNumber, currentAmountOfPlayers, rooms, setRooms, setCurrentAmountOfPlayers }) {
+function MultiplayerFightCodeSection({
+  setPythonCode,
+  pythonCode,
+  checkTheAnswer,
+  fetchedQuestions,
+  setFetchedQuestions,
+  currentQuestionIndex,
+  fightResult,
+  roomNumber,
+  currentAmountOfPlayers,
+  rooms,
+  setRooms,
+  setCurrentAmountOfPlayers,
+  currentRoomQuestion,
+  setCurrentRoomQuestion,
+  setCurrentQuestionIndex,
+  setRoomNumber,
+}) {
+  // console.log('currentRoomQuestion', currentRoomQuestion[0]);
+
   const { authToken } = useContext(AuthContext) || {};
- const gameStartHandler = () => setGameStarted(true);
-  //
+  // const gameStartHandler = () => setGameStarted(true);
+
   const submitAnswer = (answer) => {
+    // const currentQuestion = currentRoomQuestion[currentQuestionIndex];
     socket.emit('submit_answer', {
       roomNumber,
       userId: socket.id,
       answer,
+      question: currentQuestion,
+      currentRoomQuestion,
+      setCurrentQuestionIndex,
     });
   };
 
   const joinRoom = () => {
     socket.emit('join_room');
-     gameStartHandler()
-
+    // gameStartHandler();
+    setCurrentRoomQuestion([]);
   };
 
   const leaveRoom = () => {
     // Manually leave the room
     socket.emit('jermaine');
-
     // Remove fetched questions for the current room
     setFetchedQuestions((prevQuestions) =>
       prevQuestions.filter((q) => q.roomNumber !== roomNumber)
@@ -83,40 +105,41 @@ function MultiplayerFightCodeSection({ setPythonCode, pythonCode, checkTheAnswer
     const handleUpdatedRooms = (updatedRooms) => {
       console.log('Received rooms updated: ', updatedRooms);
 
-      // Extract the rooms information and use it
       const { rooms } = updatedRooms;
-      //Set rooms state variable
       setRooms(rooms);
-      Object.keys(rooms).forEach((roomNumber) => {
-        const sentQuestions = [];
-        const usersInRoom = rooms[roomNumber];
-        setCurrentAmountOfPlayers(usersInRoom.length)
-        if (usersInRoom.length === 2) {
+
+      // Check if the current room has two players
+      const usersInRoom = rooms[roomNumber];
+
+      if (usersInRoom.length === 2) {
+        // Check if there are more questions to display
+        if (currentQuestionIndex < fetchedQuestions.length) {
+          const { roomNumber: questionRoomNumber, questions } =
+            fetchedQuestions[currentQuestionIndex];
+
           // Check if the question has already been displayed for this room
-          if (!sentQuestions[roomNumber]) {
+          if (questionRoomNumber === roomNumber) {
             console.log(
-              // `Room ${roomNumber} has two players. Emitting display_question.`
+              `Room ${roomNumber} has two players. Emitting display_question.`
             );
             socket.emit('display_question', {
               roomNumber,
+              question: questions[currentQuestionIndex],
             });
 
-            // Mark that the question has been sent for this room
-            sentQuestions[roomNumber] = true;
+            // Increment the question index for the next question
+            setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
           }
-        } else {
-          // If the room is not full, reset the sentQuestions flag
-          sentQuestions[roomNumber] = false;
         }
-      });
+      }
     };
 
-    socket.on('updated_room', handleUpdatedRooms);
+    socket.on('updated_rooms', handleUpdatedRooms);
 
     return () => {
-      socket.off('updated_room', handleUpdatedRooms);
+      socket.off('updated_rooms', handleUpdatedRooms);
     };
-  }, [rooms]);
+  }, [rooms, roomNumber, currentQuestionIndex, fetchedQuestions]);
 
   useEffect(() => {
     const handleQuestions = ({ roomNumber, questions }) => {
@@ -165,8 +188,6 @@ function MultiplayerFightCodeSection({ setPythonCode, pythonCode, checkTheAnswer
     };
   }, [roomNumber, rooms, fetchedQuestions]);
 
-  console.log('Fetched Questions State: ', fetchedQuestions);
-
   useEffect(() => {
     const handleDisplayAnswers = ({ user1Answer, user2Answer }) => {
       console.log(
@@ -181,12 +202,19 @@ function MultiplayerFightCodeSection({ setPythonCode, pythonCode, checkTheAnswer
         'Answer:',
         user2Answer.answer
       );
+      if (user1Answer.answer === user1Answer.answer) {
+        console.log('wow');
+      }
+
+      console.log(
+        'Wow!!!1 ' + currentRoomQuestion[currentQuestionIndex]?.answer
+      );
 
       //Implement logic to display answers to users
     };
 
     socket.on('display_answers', handleDisplayAnswers);
-  }, []);
+  }, [currentRoomQuestion]);
 
   useEffect(() => {
     return () => {
@@ -218,50 +246,78 @@ function MultiplayerFightCodeSection({ setPythonCode, pythonCode, checkTheAnswer
       socket.disconnect();
     };
   }, []);
-  useEffect(() => {
 
-        console.log('QUESTIONS: ' + fetchedQuestions)
+  useEffect(() => {
+    const tempQuestions = [];
+
+    fetchedQuestions.forEach((q) => {
+      q.questions.forEach((questionObj) => {
+        tempQuestions.push(questionObj);
+      });
+    });
+    setCurrentRoomQuestion(tempQuestions);
   }, [fetchedQuestions]);
 
-
+  // const clickCheckTheAnswer = () => {
+  //   checkTheAnswer();
+  //   submitAnswer();
+  // };
   return (
     <>
-      <div className='container my-3' id='fightCodeSection'>
+      <div>
+        <button onClick={joinRoom}>Play Multiplayer</button>
+        <button onClick={leaveRoom}>Leave Game</button>
+        <button onClick={() => submitAnswer('Submitted Answer')}>Submit</button>
+      </div>
+      <div className="container my-3" id="fightCodeSection">
         {fightResult ? (
-          <div className='d-flex flex-column justify-content-center align-items-center'>
+          <div className="d-flex flex-column justify-content-center align-items-center">
             <h1>{fightResult}</h1>
-            {!authToken && 
-            <>
-            <img src={LoseImage}/>
-            <div className='lead mt-5 mb-3'>Join and practice more!</div>
-            <Link to="/register" className='btn btn-info'>Register</Link>
-            </>
-            }
+            {!authToken && (
+              <>
+                <img src={LoseImage} />
+                <div className="lead mt-5 mb-3">Join and practice more!</div>
+                <Link to="/register" className="btn btn-info">
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         ) : (
-          <div className='row'>
-            <div className='col-4'>
-              <h4>(Room number {roomNumber}) (users: {currentAmountOfPlayers})</h4>
-              <h3 id='fightRoundNumber'>Round {currentQuestionIndex + 1}/{fetchedQuestions.length}</h3>
-              <p id='fightRoundDescription'>{fetchedQuestions[currentQuestionIndex]?.question}</p>
-      {fetchedQuestions.map((q) => (
-        <div key={q.roomNumber}>
-          {q.questions.map((questionObj) => (
-            <p>{questionObj.question}</p>
-          ))}
-        </div>
-      ))}
+          <div className="row">
+            <div className="col-4">
+              <h4>
+                (Room number {roomNumber}) (users: {currentAmountOfPlayers})
+              </h4>
+              <h3 id="fightRoundNumber">
+                Round {currentQuestionIndex + 1}/{currentRoomQuestion.length}
+              </h3>
+              <p id="fightRoundDescription">
+                {currentRoomQuestion[currentQuestionIndex]?.question}
+              </p>
             </div>
-            <div className='col-8 d-flex align-items-center justify-content-center'>
+            <div className="col-8 d-flex align-items-center justify-content-center">
               <div className="row">
                 <div className="col-6">
-
-              <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} />
+                  <AnswerForm
+                    setPythonCode={setPythonCode}
+                    pythonCode={pythonCode}
+                  />
                 </div>
                 <div className="col-6">
-
-              <AnswerFormOutput pythonCode={pythonCode} />
-              <button onClick={() => { checkTheAnswer() }} className={`btn btn-outline-primary btn-lg ${fetchedQuestions.length+1 == currentQuestionIndex ? 'disabled' : ''}`}>Check</button>
+                  <AnswerFormOutput pythonCode={pythonCode} />
+                  <button
+                    onClick={() => {
+                      checkTheAnswer();
+                    }}
+                    className={`btn btn-outline-primary btn-lg ${
+                      currentRoomQuestion.length + 1 == currentQuestionIndex
+                        ? 'disabled'
+                        : ''
+                    }`}
+                  >
+                    Check
+                  </button>
                 </div>
               </div>
             </div>

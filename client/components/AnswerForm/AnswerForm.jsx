@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Editor from '@monaco-editor/react';
+import Axios from 'axios';
+const API_ENDPOINT = 'http://localhost:3000/compile';
 
-const AnswerForm = ({ setHtmlCode, setCssCode, setJsCode, handleOutput }) => {
+const AnswerForm = ({ setPythonCode }) => {
+
+  const [userCode, setUserCode] = useState('');
+  // const [userInput, setUserInput] = useState('');
+  function compile() {
+    Axios.post(API_ENDPOINT, {
+      code: userCode,
+      language: 'python',
+      // input: userInput,
+    })
+      .then((res) => {
+        setPythonCode(res.data.output);
+      })
+      .catch((error) => {
+        console.error('Error occurred while compiling:', error);
+        setPythonCode('Error occurred while compiling.');
+      })
+  }
   return (
   <div className="row">
     <div className="col">
@@ -8,20 +28,38 @@ const AnswerForm = ({ setHtmlCode, setCssCode, setJsCode, handleOutput }) => {
         <div className="Code">
           <div className="form-group row">
           <div className="mb-3 col">
-            <label htmlFor="html" className="form-label">HTML</label>
-            <textarea className="form-control" id="html" name="html" onChange={(e) => setHtmlCode(e.target.value)}></textarea>
+            <div className="row">
+              <div className="col">
+                <Editor
+                  min-height="10vh"
+                  height="10vh"
+                  width="100%"
+                  className=''
+                  theme="vs-dark"
+                  defaultLanguage="python"
+                  defaultValue="#code and print your output"
+                  onChange={(value) => {
+                    setUserCode(value);
+                  }}
+                />
+                <button className="btn btn-info run-btn" onClick={compile}>
+                  Run
+                </button>
+              </div>
+              {/* <div className="col-6">
+                <div className="input-box">
+                  <textarea
+                  placeholder='Your input here'
+                  className=' form-control'
+                    id="code-inp"
+                    onChange={(e) => setUserInput(e.target.value)}
+                  ></textarea>
+                </div>
+              </div> */}
+            </div>
           </div>
-          <div className="mb-3 col">
-            <label htmlFor="css" className="form-label">CSS</label>
-            <textarea className="form-control" id="css" name="css" onChange={(e) => setCssCode(e.target.value)}></textarea>
-          </div>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="javascript" className="form-label">JavaScript</label>
-            <textarea className="form-control" id="javascript" name="javascript" onChange={(e) => setJsCode(e.target.value)}></textarea>
           </div>
         </div>
-        <button className="btn btn-primary" onClick={handleOutput}>Run Code</button>
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@ function AnswerFormOutput({pythonCode}) {
     <>
     <div className='bg-secondary-subtle p-3 h-100 d-flex align-items-center justify-content-center flex-column'>
       <div className='Output' id='outputBlock'>
-        <div id='codeOutput'>
+        <div id='codeOutput' role="code-output">
           {pythonCode ? 
             <pre>{pythonCode}</pre> 
             : 

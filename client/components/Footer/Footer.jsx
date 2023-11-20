@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Footer() {
+function Footer({footerBg}) {
   return (
-    <footer className='bg-footer text-white w-100 d-flex py-3 justify-content-center'>2023 © JabbaScript™</footer>
+    <footer style={{backgroundColor: footerBg}} className='text-white w-100 d-flex py-3 justify-content-center'>2023 © JabbaScript™</footer>
   )
 }
 

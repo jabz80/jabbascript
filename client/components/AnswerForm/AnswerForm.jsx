@@ -6,13 +6,12 @@ const API_ENDPOINT = 'http://localhost:3000/compile';
 const AnswerForm = ({ setPythonCode }) => {
 
   const [userCode, setUserCode] = useState('');
-  const [userInput, setUserInput] = useState('');
-  console.log('userCode: '+userCode, 'userInput: '+userInput)
+  // const [userInput, setUserInput] = useState('');
   function compile() {
     Axios.post(API_ENDPOINT, {
       code: userCode,
       language: 'python',
-      input: userInput,
+      // input: userInput,
     })
       .then((res) => {
         setPythonCode(res.data.output);
@@ -30,14 +29,15 @@ const AnswerForm = ({ setPythonCode }) => {
           <div className="form-group row">
           <div className="mb-3 col">
             <div className="row">
-              <div className="col-6">
+              <div className="col">
                 <Editor
                   min-height="10vh"
                   height="10vh"
                   width="100%"
+                  className=''
                   theme="vs-dark"
                   defaultLanguage="python"
-                  defaultValue="#your code"
+                  defaultValue="#code and print your output"
                   onChange={(value) => {
                     setUserCode(value);
                   }}
@@ -46,7 +46,7 @@ const AnswerForm = ({ setPythonCode }) => {
                   Run
                 </button>
               </div>
-              <div className="col-6">
+              {/* <div className="col-6">
                 <div className="input-box">
                   <textarea
                   placeholder='Your input here'
@@ -55,7 +55,7 @@ const AnswerForm = ({ setPythonCode }) => {
                     onChange={(e) => setUserInput(e.target.value)}
                   ></textarea>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           </div>

@@ -43,8 +43,9 @@ export default function Register() {
   };
   
   return (
-    <div className="d-flex justify-content-center align-items-center h-100">
-      <form className="bg-light  col-md-6 col-lg-4 p-5" onSubmit={handleSubmit}>
+    <div className="d-flex justify-content-center align-items-center h-100 register-page">
+      <form className="form-fantasy col-md-6 col-lg-4 p-5 shadow" onSubmit={handleSubmit}>
+      <h1 className="text-center">Registration</h1>
         <div className="username">
           <label htmlFor="username" className="form-label">Username</label>
           <input id="username" value={formData.username} onChange={handleChange} type="text" className="form-control" placeholder="Enter Username" />
@@ -67,7 +68,7 @@ export default function Register() {
           </a>
         </div>
         <div className="mt-4 text-center">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-fantasy text-white">
             Register
           </button>
         </div>

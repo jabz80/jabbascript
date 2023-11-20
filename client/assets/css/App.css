@@ -44,9 +44,6 @@ a {
   padding: 4rem 0;
 }
 
-.bg-footer {
-  background-color: #aedbf2;
-}
 
 .main-page-subheading {
   font-size: 24px;
@@ -150,7 +147,30 @@ h1, h2, h3 {
   background-position: center;
 }
 
+.btn-fantasy {
+  background: url('../img/btn.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  max-width: 200px;
+  min-width: 180px;
+  white-space: nowrap;
+  font-size: 1rem;
+}
 
+.form-fantasy {
+  /* background: url('../img/form.jpg'); */
+  background-color: rgb(255, 255, 255, 0.75);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.register-page {
+  background: url('../img/register-bg.jpg'), #d0ebf2;
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
 
 .h-33 {
   height: 33% !important;
@@ -215,7 +235,6 @@ h1, h2, h3 {
 }
 
 .curtain__panel {
-  background: url('../img/metal.jpg');
   width: 50%;
   height: 100%;
   float: left;
@@ -225,6 +244,10 @@ h1, h2, h3 {
   box-shadow: 0 0 15px rgb(71, 71, 71);
 }
 
+.curtain__panel--left {
+
+  background: url('../img/metal.jpg');
+}
 
 .curtain__block {
   position: absolute;

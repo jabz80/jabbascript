@@ -22,16 +22,23 @@ function FightCodeSection({ setPythonCode, pythonCode, checkTheAnswer, questions
           </div>
         ) : (
           <div className='row'>
-            <div className='col-5'>
+            <div className='col-4'>
               <h3 id='fightRoundNumber'>Round {currentQuestionIndex + 1}/{questions.length}</h3>
               <p id='fightRoundDescription'>{questions[currentQuestionIndex]?.question}</p>
+
+            </div>
+            <div className='col-8 d-flex align-items-center justify-content-center'>
+              <div className="row">
+                <div className="col-6">
+
               <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} />
-            </div>
-            <div className='col-4'>
+                </div>
+                <div className="col-6">
+
               <AnswerFormOutput pythonCode={pythonCode} />
-            </div>
-            <div className='col-3 d-flex align-items-center justify-content-center'>
               <button onClick={() => { checkTheAnswer() }} className={`btn btn-outline-primary btn-lg ${questions.length+1 == currentQuestionIndex ? 'disabled' : ''}`}>Check</button>
+                </div>
+              </div>
             </div>
           </div>
         )}

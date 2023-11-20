@@ -18,6 +18,10 @@ class Score {
         'ORDER BY user_score.score DESC'
     );
 
+    if (response.rows.length == 0) {
+      throw new Error('No user scores were found');
+    }
+
     return response.rows.map((s) => new Score(s));
   }
 
@@ -29,6 +33,10 @@ class Score {
         'WHERE user_score.user_id = $1;',
       [id]
     );
+
+    if (response.rows.length != 1) {
+      throw new Error('Unable to locate user score');
+    }
 
     return response.rows[0];
   }

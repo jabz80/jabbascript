@@ -29,7 +29,7 @@ const AnswerForm = ({ setPythonCode }) => {
           <div className="form-group row">
           <div className="mb-3 col">
             <div className="row">
-              <div className="col">
+              <div className="col" role="textbox">
                 <Editor
                   min-height="10vh"
                   height="10vh"

@@ -10,6 +10,8 @@ DROP TABLE IF EXISTS games CASCADE;
 CREATE TABLE avatar(
   avatar_id INT GENERATED ALWAYS AS IDENTITY,
   img_url VARCHAR(255) NOT NULL,
+  gender VARCHAR(255) NOT NULL,
+  skin_colour VARCHAR(255) NOT NULL,
   PRIMARY KEY (avatar_id)
 );
 
@@ -96,44 +98,46 @@ if 10 < num < 20:
 else:
 	print("Out of range")');
 
-INSERT INTO avatar(img_url)
+INSERT INTO avatar(img_url, gender, skin_colour)
 VALUES (
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png'
+    'https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/k_f_b_300x400.png?raw=true', 
+    'Female', 
+    'Dark'
   ),
   (
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/2.png'
+    'https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/k_f_w_300x400.png?raw=true',
+    'Female',
+    'Light'
   ),
   (
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/3.png'
-
+    'https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/k_m_b_300x400.png?raw=true',
+    'Male',
+    'Dark'
   ),
   (
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/4.png'
-
+    'https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/k_m_w_300x400.png?raw=true',
+    'Male',
+    'Light'
   ),
   (
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/5.png'
-
+    'https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/m_f_b_300x400.png?raw=true',
+    'Female',
+    'Dark'
   ),
   (
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/6.png'
-
+    'https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/m_f_w_300x400.png?raw=true',
+    'Female',
+    'Light'
   ),
   (
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
-
+    'https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/m_m_b_300x400.png?raw=true',
+    'Male',
+    'Dark'
   ),
   (
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/8.png'
-
-  ),
-  (
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/9.png'
-
-  ),
-  (
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10.png'
-    
+    'https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/m_m_w_300x400.png?raw=true',
+    'Male',
+    'Light'
   );
 
 CREATE OR REPLACE FUNCTION set_initial_score()

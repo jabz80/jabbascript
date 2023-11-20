@@ -177,17 +177,16 @@ describe('api server', ()=> {
             .expect(200,done)
     })
 
-    it ('responds to POST /games/:id with a 200', (done) =>{
+    it ('responds to POST /games with a 200', (done) =>{
 
         const createGameData = {
             body:{
-              user_id: 1,
-              date_played: '2020-01-01',
               game_status: false
             }
         }
         request(api)
-        .post('/games/:id')
+        .post('/games')
+        .set('authorization', 'Bearer tokenTest1')
         .send(createGameData.body)
         .expect(201,done)
     })

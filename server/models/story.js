@@ -13,7 +13,7 @@ class Story {
     const response = await db.query('SELECT * FROM questions_story');
 
     if (response.rows.length == 0) {
-      throw new Error('No story questions were found');
+      throw new Error('No storyline data was found');
     }
 
     return response.rows.map((q) => new Story(q));
@@ -26,7 +26,7 @@ class Story {
     );
 
     if (response.rows.length != 1) {
-      throw new Error('Unable to locate question');
+      throw new Error('Unable to locate storyline data');
     }
 
     return new Story(response.rows[0]);

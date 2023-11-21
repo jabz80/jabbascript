@@ -3,6 +3,7 @@ import {
   MultiplayerFighting,
   MultiplayerFightCodeSection,
   Multiplayer,
+  ChatRoom,
 } from '../../components';
 import { AuthContext } from '../../contexts/Auth';
 import { UserContext } from '../../contexts/User';
@@ -141,7 +142,8 @@ function index() {
   };
   return (
     <>
-      <p>Available rooms to join: {Object.keys({ rooms }['rooms'])}</p>
+    <ChatRoom/>
+      {/* <p>Available rooms to join: {Object.keys({ rooms }['rooms'])}</p> */}
       {/* <Multiplayer
         rooms={rooms}
         setRooms={setRooms}
@@ -160,8 +162,8 @@ function index() {
           </div>
         </div>
       ) : ( */}
-      <>
-        <div className="mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column pt-5 pb-4">
+      {/* <> */}
+        {/* <div className="mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column pt-5 pb-4">
           <MultiplayerFightCodeSection
             setPythonCode={setPythonCode}
             pythonCode={pythonCode}
@@ -197,7 +199,7 @@ function index() {
             currentAmountOfPlayers={currentAmountOfPlayers}
           />
         )}
-      </>
+      </> */}
       {/* )} */}
     </>
   );

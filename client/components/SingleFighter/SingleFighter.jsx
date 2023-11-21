@@ -37,7 +37,7 @@ const SingleFighter = ({ correctAnswersCount, inputIncorrect, dialogue, last, qu
   return (
     <div className={`background-transition ${getBackgroundStyle()}`}>
       <div className="container h-100">
-<div className="row h-100">
+      <div className="row h-100">
         <div className="col-4 d-flex justify-content-start align-items-center">
          
       {inputIncorrect ? (
@@ -55,7 +55,7 @@ const SingleFighter = ({ correctAnswersCount, inputIncorrect, dialogue, last, qu
         />
       )}
         </div>
-        <div className="col-4">
+        <div className="col-4 d-flex h-100 justify-content-center align-items-center">
           {showFireball ?
           <img className="lightning" src="/assets/img/lightning.gif"/>
            :

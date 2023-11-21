@@ -38,7 +38,7 @@ const AnswerForm = ({ setPythonCode }) => {
                     setUserCode(value);
                   }}
                 />
-                <div class="btn-group mt-3" role="group" aria-label="Basic example">
+                <div className="btn-group mt-3" role="group" aria-label="Basic example">
 
                 <button className="btn run-btn" onClick={compile}>
                   Run ›

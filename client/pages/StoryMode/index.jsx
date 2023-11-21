@@ -71,10 +71,10 @@ export default function Index() {
 
   const handleShowFireballClick = () => {
     setShowFireball(true);
-    fireAudio.play();
+    // fireAudio.play();
     setTimeout(() => {
       setShowFireball(false);
-    }, 1500);
+    }, 1000);
   };
 
   const handleShowThunderClick = () => {
@@ -119,6 +119,7 @@ export default function Index() {
   return (
     <>
     {dialogueId == 0 ? 
+          '' : dialogueId == 8 ? 
           '' :
       <div className="container-md my-4">
           <div className="row">

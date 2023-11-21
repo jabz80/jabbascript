@@ -107,28 +107,26 @@ const startTheTimer = () => {
 };
 
   const checkTheAnswer = () => {
-    console.log(currentCode.innerHTML)
-    console.log(questions[currentQuestionIndex].answer.trim())
-
     if (currentCode.innerHTML.trim() == questions[currentQuestionIndex].answer.trim() && currentQuestionIndex + 1 <= questions.length) {
       setRoundWinner(1)
+      setTimer(60)
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setPointsPlayerOne((prevIndex) => prevIndex + 1);
       setHealthPlayerTwo((prevProgress) => Math.round((prevProgress - 100 / questions.length), 1))
-      addTenPointsToWinner()
-      startTheGame()
     } else {
       setRoundWinner(2)
+      setTimer(60)
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setPointsPlayerTwo((prevIndex) => prevIndex + 1);
       setHealthPlayerOne((prevProgress) => Math.round((prevProgress - 100 / questions.length), 1))
-      startTheGame()
     }
     showBeam();
     if (currentQuestionIndex == questions.length-1) {
       setTimer(0)
+      startTheGame()
       setCurrentQuestionIndex(currentQuestionIndex);
       if (pointsPlayerOne > pointsPlayerTwo) {
+        addTenPointsToWinner()
         setFightResult('You Win!');
       } else {
         setFightResult('You Lose!');
@@ -158,13 +156,10 @@ return (
       <div className="h-100 practice_bg d-flex flex-column align-items-center justify-content-center">
         <div className="row">
           <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center p-4 bg-light">
-
-
-        <h2>Game rules</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit omnis quaerat id ab veritatis sunt provident consequuntur, voluptate pariatur dolor distinctio aspernatur tenetur eveniet nostrum. Magnam fugit quidem ullam tempore.</p>
-                <button className='btn btn-fantasy text-white mt-4' onClick={gameStartHandler}>Start The Game</button>
+            <h2>Game rules</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit omnis quaerat id ab veritatis sunt provident consequuntur, voluptate pariatur dolor distinctio aspernatur tenetur eveniet nostrum. Magnam fugit quidem ullam tempore.</p>
+            <button className='btn btn-fantasy text-white mt-4' onClick={gameStartHandler}>Start The Game</button>
           </div>
-
         </div>
       </div>
     ) : (

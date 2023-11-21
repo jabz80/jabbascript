@@ -16,7 +16,7 @@ function FightCodeSection({ setPythonCode, pythonCode, checkTheAnswer, questions
             <>
             <img src={LoseImage}/>
             <div className='lead mt-5 mb-3'>Join and practice more!</div>
-            <Link to="/register" className='btn btn-info'>Register</Link>
+            <Link to="/register" className='btn btn-fantasy text-white'>Register</Link>
             </>
             }
           </div>

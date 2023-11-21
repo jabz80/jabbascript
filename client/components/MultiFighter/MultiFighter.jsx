@@ -27,10 +27,10 @@ function MultiplayerFighter({
         <div
           className="progress-bar bg-success"
           style={{
-            width: `${firstFighter ? healthPlayerOne : healthPlayerTwo}%`,
+            width: `${userData && currentAmountOfPlayers === 1 && firstFighter ? healthPlayerOne : healthPlayerTwo}%`,
           }}
         >
-          {firstFighter ? healthPlayerOne : healthPlayerTwo}%
+          {currentAmountOfPlayers === 1 && firstFighter ? healthPlayerOne : healthPlayerTwo}%
         </div>
       </div>
 

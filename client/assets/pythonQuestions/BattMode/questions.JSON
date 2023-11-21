@@ -1,0 +1,27 @@
+[
+    {
+        "Question": "Print \"Hello, World!\" to the console.",
+        "Code": "print(\"Hello, World!\")",
+        "Output": "Hello, World!\n"
+    },
+    {
+        "Question": "Create a variable called number and assign it to the number 10. Then print the value of the variable.",
+        "Code": "number=10\r\nprint(number)",
+        "Output": "10\n"
+    },
+    {
+        "Question": "Use a for loop and print out the numbers from 1 to 5",
+        "Code": "for i in range(1, 6):\r\nprint(i)",
+        "Output": "1\n2\n3\n4\n5\n"
+    },
+    {
+        "Question": "Create a list called fruits and assign the items \"apple, banana, orange\". Then use a for loop to print each item in the list.",
+        "Code": "fruits = [\"apple\", \"banana\", \"orange\"]\r\n +for fruit in fruits:\r\n + print(fruit)",
+        "Output": "apple\nbanana\norange\n"
+    },
+    {
+        "Question": "Create a list called fruits and assign the items \"apple, banana, orange\". Use the append function and add \"grape\" to the listThen use a for loop to print each item in the list.",
+        "Code": "fruits = [\"apple\", \"banana\", \"orange\"]\r\n + fruits.append(\"grape\")\r\n +for fruit in fruits:\r\n + print(fruit)",
+        "Output": "apple\nbanana\norange\ngrape\n"
+    }
+]

@@ -14,7 +14,7 @@ function Fighter({firstFighter, robot, roundWinner, healthPlayerOne=100, healthP
       <div className="progress-bar bg-success" style={{width: `${firstFighter ? healthPlayerOne : healthPlayerTwo}%`}}>{firstFighter ? healthPlayerOne : healthPlayerTwo}%</div>
     </div>
 
-    <div style={{'backgroundImage': `url(${firstFighter && !userData ? DefaultImage : !robot ? userData && userData.img_url : RobotImage})`}} className='fighterBlock char-bg h-75 mt-4' id={`${robot && roundWinner == 1 ? 'fighter-shaking' : firstFighter && roundWinner == 2 && 'fighter-shaking'}`}/>
+    <div role="background" style={{'backgroundImage': `url(${firstFighter && !userData ? DefaultImage : !robot ? userData && userData.img_url : RobotImage})`}} className='fighterBlock char-bg h-75 mt-4' id={`${robot && roundWinner == 1 ? 'fighter-shaking' : firstFighter && roundWinner == 2 && 'fighter-shaking'}`}/>
   </div>
   )
 }

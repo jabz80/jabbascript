@@ -103,7 +103,6 @@ function index() {
       answer,
       question: currentQuestion,
       currentRoomQuestion,
-      setCurrentQuestionIndex: setCurrentQuestionIndex,
     });
   };
 
@@ -180,6 +179,7 @@ function index() {
             setCurrentRoomQuestion={setCurrentRoomQuestion}
             setCurrentQuestionIndex={setCurrentQuestionIndex}
             setRoomNumber={setRoomNumber}
+            
           />
         </div>
         {!fightResult && (

@@ -24,8 +24,6 @@ const AnswerForm = ({ setPythonCode }) => {
   return (
 
           <div className="form-group row w-100 h-100">
-          
-    
 
                 <Editor
                   height="25vh"

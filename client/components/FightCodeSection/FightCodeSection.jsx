@@ -23,8 +23,12 @@ function FightCodeSection({ setPythonCode, pythonCode, checkTheAnswer, questions
         ) : (
           <div className='row'>
             <div className='col-4'>
+
+             
+
               <div className='h-100 flex-column d-flex justify-content-center'>
-              <h3 id='fightRoundNumber'>Round {currentQuestionIndex + 1}/{questions.length}</h3>
+         <h3 role="heading" id='fightRoundNumber'>Round {currentQuestionIndex + 1}/{questions.length}</h3>
+
               <p id='fightRoundDescription'>{questions[currentQuestionIndex]?.question}</p>
               </div>
             </div>

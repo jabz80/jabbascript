@@ -18,11 +18,11 @@ function index() {
   const [timer, setTimer] = useState(460)
   const [gameStarted, setGameStarted] = useState(false)
   const [points, setPoints] = useState(0);
+  const [currentCode, setCurrentCode] = useState('');
 
   const { userData } = useContext(UserContext);
   const { authToken } = useContext(AuthContext) || {};
 
-  const currentCode = document.getElementById('codeOutput');
 
 
   const fetchUserPoints = async () => {
@@ -36,6 +36,7 @@ function index() {
   };
 
   const startTheGame = async () => {
+    setCurrentCode(document.getElementById('codeOutput'))
     const token = localStorage.getItem('token');
     let winner = null;
     if (roundWinner === 1) {
@@ -106,7 +107,8 @@ const startTheTimer = () => {
 };
 
   const checkTheAnswer = () => {
-    if (currentCode.innerHTML == questions[currentQuestionIndex].answer && currentQuestionIndex + 1 <= questions.length) {
+
+    if (currentCode.innerHTML.trim() == questions[currentQuestionIndex].answer.trim() && currentQuestionIndex + 1 <= questions.length) {
       setRoundWinner(1)
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setPointsPlayerOne((prevIndex) => prevIndex + 1);
@@ -166,7 +168,7 @@ return (
     ) : (
       <>
         <div className='mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column'>
-          <FightCodeSection setPythonCode={setPythonCode} pythonCode={pythonCode} showBeam={showBeam} questions={questions} setQuestions={setQuestions} checkTheAnswer={checkTheAnswer} currentQuestionIndex={currentQuestionIndex} fightResult={fightResult} />
+          <FightCodeSection setPythonCode={setPythonCode} pythonCode={pythonCode} showBeam={showBeam} questions={questions} setQuestions={setQuestions} checkTheAnswer={checkTheAnswer} currentQuestionIndex={currentQuestionIndex} fightResult={fightResult} setCurrentCode={setCurrentCode} />
         </div>
         {!fightResult && (
           <Fighting beamVisible={beamVisible} roundWinner={roundWinner} pointsPlayerOne={pointsPlayerOne} pointsPlayerTwo={pointsPlayerTwo} healthPlayerOne={healthPlayerOne} healthPlayerTwo={healthPlayerTwo} timer={timer} fightResult={fightResult} />

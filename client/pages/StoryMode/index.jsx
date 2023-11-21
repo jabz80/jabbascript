@@ -1,68 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Story, SingleFighter } from "../../components";
-import { AnswerForm, AnswerFormOutput } from '../../components';
-
-const dummyData = [
-  "Hello! Welcome to the Story mode. Let's walk you through this. In the editor, you see your first question. Answer the question and hit ok.",
-  "Nice! Let's learn some more Python code to discover the mysteries of the forest. Are you ready? great you just need to answer the question and hit ok",
-  "You're doing great. As you tread deeper into the mystical forest, the whispers of ancient trees echo tales of your journey. Each question you answer brings you closer to unveiling the mysteries that lie ahead.",
-  "Wow! You're smashing this. The mystical creatures of the forest take notice of your growing prowess. The air is charged with magic, and your character is becoming a force to be reckoned with. Lets practice some magic. answer the question and watch your character do some magic",
-  "Excellent! Your journey through the mystical forest has sharpened your skills. The trees bow in respect to your determination. Now, armed with newfound knowledge, you're ready to face the challenges that await. Lets practice some more powers you have the power of lighting. answer the question to use your power.",
-  "Marvelous! The energy of the mystical forest responds to your progress. Enchanted flora and fauna guide your way. With each question answered, your character's strength becomes more profound. The time has come to put your skills to the test. Are you ready to confront the mysteries lurking in the heart of the forest?",
-  "Incredible! Your character's aura resonates with the ancient magic of the forest. Creatures of myth and legend acknowledge your presence. As you continue to answer questions, the path ahead becomes clearer. Now, armed with wisdom and strength, you stand at the threshold of a grand adventure. The forest awaits your next move. What challenges will you face next?"
-];
+import { PythonIDE, StoryAnswerFormOutput } from '../../components';
+import { AuthContext } from "../../contexts/Auth";
+import { UserContext } from "../../contexts/User";
 export default function Index() {
   const [dialogueId, setDialogueId] = useState(0);
+  const [questionsList, setQuestionsList] = useState([])
   const [inputIncorrect, setInputIncorrect] = useState(false);
   const [dialogue, setDialogue] = useState("");
   const [userAnswer, setUserAnswer] = useState("");
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   const [incorrectMessage, setIncorrectMessage] = useState("");
-  const [storyMessage, setStoryMessage] = useState(dummyData[0]);
+  // const [storyMessage, setStoryMessage] = useState();
   const [showFireball, setShowFireball] = useState(false);
   const [showThunder, setShowThunder] = useState(false);
   const [showWind, setShowWind] = useState(false);
   const [pythonCode, setPythonCode] = useState('');
+  const [currentCode, setCurrentCode] = useState('');
+  const [userCode, setUserCode] = useState('');
+  const [userInput, setUserInput] = useState('');
 
   const fireAudio = new Audio("assets/img/magic-strike-5856.mp3");
   const thunderAudio = new Audio("assets/img/loud-thunder-7932.mp3");
   const windAudio = new Audio("assets/img/woosh_low_long01-98755.mp3");
-
+  const { userData } = useContext(UserContext);
+  const { authToken } = useContext(AuthContext) || {};
   
 
   useEffect(() => {
     fetchQuestion();
   }, [dialogueId]);
 
-  const fetchQuestion = () => {
-    // Replace this with fetch call to the backend
-    const dummyQuestions = [
-      "What is the capital of France?",
-      "In which year did World War II end?",
-      "What is the square root of 144?",
-      "What is capital of UK",
-      "What is 2 + 2",
-      "Type 7",
-      "Enter 6",
-    ];
-
-    setDialogue(dummyQuestions[dialogueId]);
+  const fetchQuestion = async () => {
+    const response = await fetch('https://jabbascript-api.onrender.com/story')
+    const result = await response.json()
+    setQuestionsList(result)
+    setDialogue(result[dialogueId]);
   };
 
   const handleOkClick = () => {
-    const dummyAnswers = ["Paris", "1945", "12", "London", "4", "7", "6"];
-
-    const correctAnswer = dummyAnswers[dialogueId];
-
-    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+    
+    if (currentCode.innerHTML.trim() === dialogue.example.trim()) {
       setIsAnswerCorrect(true);
       setIncorrectMessage("");
-      setDialogueId((prevId) => prevId + 1);
+      // setDialogueId((prevId) => prevId + 1);
       setUserAnswer("");
       triggerFighterMove();
       setInputIncorrect(false);
       setIncorrectMessage("");
-
     } else {
       setIncorrectMessage("Wrong answer!");
       setInputIncorrect(true);
@@ -70,17 +55,15 @@ export default function Index() {
   };
 
   const triggerFighterMove = () => {
+    handleShowFireballClick()
     console.log("Fighter move triggered!");
   };
-  useEffect(() => {
-    console.log(dummyData.length);
-    console.log(dialogueId);
-    console.log(storyMessage);
-    console.log(dummyData[dialogueId]);
-    if (dialogueId <= dummyData.length) {
-      setStoryMessage(dummyData[dialogueId]);
-    }
-  }, [dialogueId]);
+
+  // useEffect(() => {
+  //   if (dialogueId <= dummyData.length) {
+  //     setStoryMessage(dummyData[dialogueId]);
+  //   }
+  // }, [dialogueId]);
 
   const showFireBallButton = dialogueId === 2;
   const showThunderButton = dialogueId === 3;
@@ -88,10 +71,10 @@ export default function Index() {
 
   const handleShowFireballClick = () => {
     setShowFireball(true);
-    fireAudio.play();
+    // fireAudio.play();
     setTimeout(() => {
       setShowFireball(false);
-    }, 1500);
+    }, 1000);
   };
 
   const handleShowThunderClick = () => {
@@ -113,99 +96,43 @@ export default function Index() {
     }, 4000);
   };
 
+  const [last, setLast] = useState(false)
+  const questionIncrementHandler = () => {
+    if(questionsList.length <= dialogueId + 1){
+      setLast(true)
+      return;
+    }
+    setDialogueId((prevState) => prevState + 1);
+    setDialogue(questionsList[dialogueId + 1]);
+  } 
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setInputIncorrect(false)
+    }, 1000);
+  },[inputIncorrect])
+
+  const inputCorrectHandler = (payload) => {
+    setInputIncorrect(payload)
+  }
+
   return (
     <>
-      <div className="container-md mb-5">
-      <Story
-  incorrectAnswer={storyMessage === 9}
-  updateStory={setStoryMessage}
-  storyMessageData={storyMessage}
-  inputIncorrect={inputIncorrect}
-/>
-        <div>
+    {dialogueId == 0 ? 
+          '' : dialogueId == 8 ? 
+          '' :
+      <div className="container-md my-4">
           <div className="row">
-            <div className="col-6">
-              <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} />
+            <div className="col-6">            
+              <PythonIDE  last={false} inputIncorrect={inputCorrectHandler} setPythonCode={setPythonCode} pythonCode={pythonCode} questionIncrementHandler={questionIncrementHandler} storyMode={true} userCode={userCode} setUserCode={setUserCode} userInput={userInput} setUserInput={setUserInput} />
             </div>
-            <div className="col-6">
-              <AnswerFormOutput pythonCode={pythonCode} />
+            <div className="col-6 text-wrap" >
+              <StoryAnswerFormOutput pythonCode={pythonCode} setPythonCode={setPythonCode} questions={questionsList} setCurrentCode={setCurrentCode} storyMode={true} userCode={userCode} setUserCode={setUserCode} userInput={userInput} setUserInput={setUserInput} questionIncrementHandler={questionIncrementHandler} handleOkClick={handleOkClick}/>
             </div>
           </div>
-          <div>
-            <p>{dialogue}</p>
-            <input
-              type="text"
-              value={userAnswer}
-              onChange={(e) => setUserAnswer(e.target.value)}
-              style={
-                inputIncorrect
-                  ? { borderColor: "red", boxShadow: "0 0 5px red" }
-                  : {}
-              }
-            />
-
-            <button
-              className="btn btn-warning btn-sm me-4 shadow-sm"
-              onClick={handleOkClick}
-            >
-              OK
-            </button>
-            {showFireBallButton && (
-              <button
-                className="btn btn-info btn-sm shadow-sm"
-                onClick={handleShowFireballClick}
-              >
-                Show Fireball
-              </button>
-            )}
-            {showThunderButton && (
-              <button
-                className="btn btn-info btn-sm shadow-sm"
-                onClick={handleShowThunderClick}
-              >
-                Show Thunder
-              </button>
-            )}
-            {showWindButton && (
-              <button
-                className="btn btn-info btn-sm shadow-sm"
-                onClick={handleShowWindClick}
-              >
-                Show Wind
-              </button>
-            )}
-            {showFireball && (
-              <img
-                src="assets/img/beam.gif"
-                alt="Fireball"
-                className="projectile-img fireball"
-              />
-            )}
-
-            {showThunder && (
-              <img
-                src="assets/img/lightning.gif"
-                alt="Thunder"
-                className="projectile-img thunder"
-              />
-            )}
-
-            {showWind && (
-              <img
-                src="assets/img/wind.gif"
-                alt="Wind"
-                className="projectile-img wind"
-              />
-            )}
-            {incorrectMessage && (
-              <div style={{ color: "red", marginTop: "10px" }}>
-                {incorrectMessage}
-              </div>
-            )}
-          </div>
-        </div>
       </div>
-      <SingleFighter correctAnswersCount={dialogueId} />
+    }
+      <SingleFighter inputIncorrect={inputIncorrect} correctAnswersCount={dialogueId} dialogue={dialogue} last={last} questionIncrementHandler={questionIncrementHandler} showFireball={showFireball} />
     </>
   );
 }

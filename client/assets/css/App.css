@@ -423,7 +423,8 @@ h1, h2, h3 {
   transition: background-image 2s ease-in-out;
   /* Adjust the duration of background change and easing as needed */
   background-size: cover;
-  min-height: 600px;
+  background-position: center;
+  height: 100%;
   position: relative;
 }
 
@@ -445,6 +446,53 @@ h1, h2, h3 {
 
 .forest-night {
   background-image: url('assets/img/forest-night.jpeg');
+}
+
+
+@keyframes horizontalMove {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(90vw);
+  }
+
+  /* Adjust the value as needed */
+}
+
+.dialog-box-container {
+  background: rgb(255, 255, 255, 0.80);
+}
+
+.npc {
+  height: 200px;
+  display: flex;
+  animation: opacity 1s ease-in-out;
+}
+
+.story-fighter-img {
+  height: 200px;
+  animation: horizontalMove 6s linear infinite;
+  /* Adjust time as needed */
+}
+
+.standing-fighter-img {
+  height: 200px;
+  /* position: absolute;
+  margin-bottom: 80px; */
+  /* bottom: 0;
+  left: 10%; */
+}
+
+.story-flying-img {
+  height: 150px;
+  position: absolute;
+  margin-bottom: 80px;
+  /* bottom: 0; */
+  left: 0;
+  animation: horizontalMove 3s linear infinite;
+  /* Adjust time as needed */
 }
 
 

@@ -67,6 +67,15 @@ CREATE TABLE games(
 );
 
 INSERT INTO questions_battle(question, answer)
+VALUES
+('Print "Hello, World!" to the console.', 'Hello, World!'),
+('Create a variable called number and assign it to the number 10. Then print the value of the variable.', '10'),
+('Use a for loop and print out the numbers from 1 to 5','1\n2\n3\n4\n5'),
+('Create a list called fruits and assign the items "apple, banana, orange". Then use a for loop to print each item in the list."','apple\nbanana\norange'),
+('Create a list called fruits and assign the items \"apple, banana, orange\". Use the append function and add \"grape\" to the listThen use a for loop to print each item in the list.','apple\nbanana\norange\ngrape'),
+('Create a function that adds two numbers and returns the result. Then call the function with add the numbers 6 and 7 together. Then print the results.','15');
+
+INSERT INTO avatar(img_url)
 VALUES (
     'Print "Hello, World!" to the console.',
     'Hello, World!'

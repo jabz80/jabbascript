@@ -24,11 +24,13 @@ const AnswerForm = ({ setPythonCode }) => {
   return (
 
           <div className="form-group row w-100 h-100">
+          
+    
 
                 <Editor
                   height="25vh"
                   width="100%"
-                  className='shadow-sm'
+                  className='shadow'
                   theme="vs-dark"
                   defaultLanguage="python"
                   defaultValue="#code and print your output"
@@ -36,7 +38,7 @@ const AnswerForm = ({ setPythonCode }) => {
                     setUserCode(value);
                   }}
                 />
-                <div class="btn-group mt-3" role="group" aria-label="Basic example">
+                <div className="btn-group mt-3" role="group" aria-label="Basic example">
 
                 <button className="btn run-btn" onClick={compile}>
                   Run ›

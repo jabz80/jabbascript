@@ -4,50 +4,33 @@ import Axios from 'axios';
 
 const API_ENDPOINT = 'http://localhost:3000/compile';
 
-function pythonIDE({setPythonCode}) {
-  const [userCode, setUserCode] = useState('');
+function pythonIDE({setPythonCode, questionIncrementHandler, inputIncorrect, last}) {
+  const [userCode, setUserCode] = useState("print('hi')");
   const [userInput, setUserInput] = useState('');
 
   function compile() {
-
-
+    console.log('compiling')
     Axios.post(API_ENDPOINT, {
       code: userCode,
       language: 'python',
       input: userInput,
     })
       .then((res) => {
-        setPythonCode(res.data.output);
-      })
+        if(res.data.error != ''){
+          setPythonCode(res.data.error);
+          inputIncorrect(true)
+        }
+        else{
+          setPythonCode(res.data.output);
+        }      })
       .catch((error) => {
+        inputIncorrect(true)
         console.error('Error occurred while compiling:', error);
         setPythonCode('Error occurred while compiling.');
       })
-
   }
-
-  function SubmitCode() {
-
-
-    Axios.post(API_ENDPOINT, {
-      code: userCode,
-      language: 'python',
-      input: userInput,
-    })
-      .then((res) => {
-        setPythonCode(res.data.output);
-      })
-      .catch((error) => {
-        console.error('Error occurred while compiling:', error);
-        setPythonCode('Error occurred while compiling.');
-      })
-
-  }
-
-
   return (
-    <div className="main">
-      <div className="left-container">
+      <div className="bg-dark-subtle p-3 rounded">
         <Editor
           height="30vh"
           width="100%"
@@ -58,22 +41,12 @@ function pythonIDE({setPythonCode}) {
             setUserCode(value);
           }}
         />
-        <button className="run-btn" onClick={compile}>
-          Run
-        </button>
-        <button className="run-btn" onClick={SubmitCode}>
-          Submit Code
-        </button>
-      </div>
-      <div className="right-container">
-        <h4>Input:</h4>
-        <div className="input-box">
-          <textarea
-            id="code-inp"
-            onChange={(e) => setUserInput(e.target.value)}
-          ></textarea>
-        </div>
-      </div>
+
+        {!last && <div className='mt-3 text-center'>
+          <button className="btn run-btn" onClick={compile}>
+            Run ›
+          </button>
+        </div>}
     </div>
   );
 }

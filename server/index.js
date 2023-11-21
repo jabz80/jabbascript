@@ -186,13 +186,11 @@ function handleRoundResult(
   setCurrentQuestionIndex
 ) {
   // Get the current question index from the client side
-  const currentQuestionIndex = currentRoomQuestion.findIndex(
-    (q) => q.question === question.question
-  );
-
+  let currentQuestionIndex = currentRoomQuestion.findIndex((q) => q.question === question.question)
+  console.log('currentQuestionIndex' + currentQuestionIndex)
   // Your existing logic for checking the answer and displaying the results
-  console.log(user1Answer, user2Answer);
-  console.log(question);
+  // console.log(user1Answer, user2Answer);
+  // console.log(question);
 
   if (
     question.answer === user1Answer.answer &&

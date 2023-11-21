@@ -22,19 +22,13 @@ const AnswerForm = ({ setPythonCode }) => {
       })
   }
   return (
-  <div className="row">
-    <div className="col">
-      <div className="IDE">
-        <div className="Code">
-          <div className="form-group row">
-          <div className="mb-3 col">
-            <div className="row">
-              <div className="col">
+
+          <div className="form-group row w-100 h-100">
+
                 <Editor
-                  min-height="10vh"
-                  height="10vh"
+                  height="25vh"
                   width="100%"
-                  className=''
+                  className='shadow-sm'
                   theme="vs-dark"
                   defaultLanguage="python"
                   defaultValue="#code and print your output"
@@ -42,13 +36,16 @@ const AnswerForm = ({ setPythonCode }) => {
                     setUserCode(value);
                   }}
                 />
-                <button className="btn btn-info run-btn" onClick={compile}>
-                  Run
+                <div class="btn-group mt-3" role="group" aria-label="Basic example">
+
+                <button className="btn run-btn" onClick={compile}>
+                  Run ›
                 </button>
-                <button className="btn btn-info run-btn" onClick={compile}>
-                  Submit
-                </button>
-              </div>
+                {/* <button className="btn border-dark run-btn" onClick={compile}>
+                  Submit ›
+                </button> */}
+                </div>
+           
               {/* <div className="col-6">
                 <div className="input-box">
                   <textarea
@@ -59,13 +56,8 @@ const AnswerForm = ({ setPythonCode }) => {
                   ></textarea>
                 </div>
               </div> */}
-            </div>
           </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
   );
 };
 

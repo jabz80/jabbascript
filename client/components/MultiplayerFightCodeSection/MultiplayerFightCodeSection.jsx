@@ -13,24 +13,23 @@ function MultiplayerFightCodeSection({
   fetchedQuestions,
   setFetchedQuestions,
   currentQuestionIndex,
+  setCurrentQuestionIndex,
   fightResult,
   roomNumber,
-  currentAmountOfPlayers,
+  setRoomNumber,
   rooms,
   setRooms,
+  currentAmountOfPlayers,
   setCurrentAmountOfPlayers,
   currentRoomQuestion,
   setCurrentRoomQuestion,
-  setCurrentQuestionIndex,
-  setRoomNumber,
 }) {
-  // console.log('currentRoomQuestion', currentRoomQuestion[0]);
 
   const { authToken } = useContext(AuthContext) || {};
-  // const gameStartHandler = () => setGameStarted(true);
+
 
   const submitAnswer = (answer) => {
-    // const currentQuestion = currentRoomQuestion[currentQuestionIndex];
+    const currentQuestion = currentRoomQuestion[currentQuestionIndex];
     socket.emit('submit_answer', {
       roomNumber,
       userId: socket.id,
@@ -43,8 +42,7 @@ function MultiplayerFightCodeSection({
 
   const joinRoom = () => {
     socket.emit('join_room');
-    // gameStartHandler();
-    setCurrentRoomQuestion([]);
+    // setCurrentRoomQuestion([]);
   };
 
   const leaveRoom = () => {
@@ -105,41 +103,41 @@ function MultiplayerFightCodeSection({
     const handleUpdatedRooms = (updatedRooms) => {
       console.log('Received rooms updated: ', updatedRooms);
 
+      // Extract the rooms information and use it
       const { rooms } = updatedRooms;
+      //Set rooms state variable
       setRooms(rooms);
-
-      // Check if the current room has two players
-      const usersInRoom = rooms[roomNumber];
-
-      if (usersInRoom.length === 2) {
-        // Check if there are more questions to display
-        if (currentQuestionIndex < fetchedQuestions.length) {
-          const { roomNumber: questionRoomNumber, questions } =
-            fetchedQuestions[currentQuestionIndex];
-
+      Object.keys(rooms).forEach((roomNumber) => {
+        const sentQuestions = [];
+        const usersInRoom = rooms[roomNumber];
+        // setCurrentAmountOfPlayers(usersInRoom.length)
+        if (usersInRoom.length === 2) {
           // Check if the question has already been displayed for this room
-          if (questionRoomNumber === roomNumber) {
+          if (!sentQuestions[roomNumber]) {
             console.log(
               `Room ${roomNumber} has two players. Emitting display_question.`
             );
             socket.emit('display_question', {
               roomNumber,
-              question: questions[currentQuestionIndex],
             });
 
-            // Increment the question index for the next question
-            setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+            // Mark that the question has been sent for this room
+            sentQuestions[roomNumber] = true;
           }
+        } else {
+          // If the room is not full, reset the sentQuestions flag
+          sentQuestions[roomNumber] = false;
         }
-      }
+      });
     };
 
-    socket.on('updated_rooms', handleUpdatedRooms);
+    socket.on('updated_room', handleUpdatedRooms);
 
     return () => {
-      socket.off('updated_rooms', handleUpdatedRooms);
+      socket.off('updated_room', handleUpdatedRooms);
     };
-  }, [rooms, roomNumber, currentQuestionIndex, fetchedQuestions]);
+  }, [rooms]);
+
 
   useEffect(() => {
     const handleQuestions = ({ roomNumber, questions }) => {
@@ -206,15 +204,13 @@ function MultiplayerFightCodeSection({
         console.log('wow');
       }
 
-      console.log(
-        'Wow!!!1 ' + currentRoomQuestion[currentQuestionIndex]?.answer
-      );
+  
 
       //Implement logic to display answers to users
     };
 
     socket.on('display_answers', handleDisplayAnswers);
-  }, [currentRoomQuestion]);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -258,10 +254,9 @@ function MultiplayerFightCodeSection({
     setCurrentRoomQuestion(tempQuestions);
   }, [fetchedQuestions]);
 
-  // const clickCheckTheAnswer = () => {
-  //   checkTheAnswer();
-  //   submitAnswer();
-  // };
+  const clickCheckTheAnswer = () => {
+    submitAnswer();
+  };
   return (
     <>
       <div>
@@ -295,6 +290,9 @@ function MultiplayerFightCodeSection({
               <p id="fightRoundDescription">
                 {currentRoomQuestion[currentQuestionIndex]?.question}
               </p>
+              <p id="answer">
+                {currentRoomQuestion[currentQuestionIndex]?.answer}
+              </p>
             </div>
             <div className="col-8 d-flex align-items-center justify-content-center">
               <div className="row">
@@ -308,7 +306,7 @@ function MultiplayerFightCodeSection({
                   <AnswerFormOutput pythonCode={pythonCode} />
                   <button
                     onClick={() => {
-                      checkTheAnswer();
+                      clickCheckTheAnswer();
                     }}
                     className={`btn btn-outline-primary btn-lg ${
                       currentRoomQuestion.length + 1 == currentQuestionIndex

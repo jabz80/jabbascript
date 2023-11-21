@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import Axios from 'axios';
-const API_ENDPOINT = 'http://localhost:3000/compile';
+const API_ENDPOINT = 'http://localhost:4000/compile';
 
 const AnswerForm = ({ setPythonCode }) => {
 
@@ -42,9 +42,15 @@ const AnswerForm = ({ setPythonCode }) => {
                     setUserCode(value);
                   }}
                 />
+                 <div className='mt-3'>
+
                 <button className="btn btn-info run-btn" onClick={compile}>
                   Run
                 </button>
+                <button className="btn btn-info run-btn ms-2" onClick={compile}>
+                  Submit
+                </button>
+                </div>
               </div>
               {/* <div className="col-6">
                 <div className="input-box">

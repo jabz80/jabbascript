@@ -408,6 +408,32 @@ h1, h2, h3 {
 }
 
 
+@keyframes horizontalMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(90vw); } /* Adjust the value as needed */
+}
+
+
+
+.story-fighter-img {
+  height: 200px;
+  position: absolute;
+  margin-bottom: 80px;
+  bottom: 0;
+  left: 0;
+  animation: horizontalMove 6s linear infinite; /* Adjust time as needed */
+}
+
+.story-flying-img {
+  height: 150px;
+  position: absolute;
+  margin-bottom: 80px;
+  /* bottom: 0; */
+  left: 0;
+  animation: horizontalMove 3s linear infinite; /* Adjust time as needed */
+}
+
+
 .fighter-img {
   height: 200px;
   position: absolute;

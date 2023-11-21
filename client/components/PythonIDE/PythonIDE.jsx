@@ -55,6 +55,24 @@ function pythonIDE({setPythonCode, questionIncrementHandler, inputIncorrect, las
 
   }
 
+  function SubmitCode() {
+
+
+    Axios.post(API_ENDPOINT, {
+      code: userCode,
+      language: 'python',
+      input: userInput,
+    })
+      .then((res) => {
+        setPythonCode(res.data.output);
+      })
+      .catch((error) => {
+        console.error('Error occurred while compiling:', error);
+        setPythonCode('Error occurred while compiling.');
+      })
+
+  }
+
 
   return (
     <div className="main">
@@ -69,6 +87,7 @@ function pythonIDE({setPythonCode, questionIncrementHandler, inputIncorrect, las
             setUserCode(value);
           }}
         />
+
         {!last && <div className='mt-3'>
           <button className="btn btn-info run-btn" onClick={compile}>
             Run
@@ -77,6 +96,7 @@ function pythonIDE({setPythonCode, questionIncrementHandler, inputIncorrect, las
             Submit Code
           </button>
         </div>}
+
       </div>
       {/* <div className="right-container">
         <h4>Input:</h4>

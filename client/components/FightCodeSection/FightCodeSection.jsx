@@ -8,7 +8,7 @@ function FightCodeSection({ setPythonCode, pythonCode, checkTheAnswer, questions
   const { authToken } = useContext(AuthContext) || {};
   return (
     <>
-      <div className='container my-3' id='fightCodeSection'>
+      <div className='container h-100 d-flex flex-column justify-content-center' id='fightCodeSection'>
         {fightResult ? (
           <div className='d-flex flex-column justify-content-center align-items-center'>
             <h1>{fightResult}</h1>
@@ -23,24 +23,28 @@ function FightCodeSection({ setPythonCode, pythonCode, checkTheAnswer, questions
         ) : (
           <div className='row'>
             <div className='col-4'>
-              <h3 role="heading" id='fightRoundNumber'>Round {currentQuestionIndex + 1}/{questions.length}</h3>
+
+             
+
+              <div className='h-100 flex-column d-flex justify-content-center'>
+         <h3 role="heading" id='fightRoundNumber'>Round {currentQuestionIndex + 1}/{questions.length}</h3>
+
               <p id='fightRoundDescription'>{questions[currentQuestionIndex]?.question}</p>
-
-            </div>
-            <div className='col-8 d-flex align-items-center justify-content-center'>
-              <div className="row">
-                <div className="col-6">
-
-              <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} />
-                </div>
-                <div className="col-6">
-
-              <AnswerFormOutput pythonCode={pythonCode} />
-              <button onClick={() => { checkTheAnswer() }} className={`btn btn-outline-primary btn-lg ${questions.length+1 == currentQuestionIndex ? 'disabled' : ''}`}>Check</button>
-                </div>
               </div>
             </div>
-          </div>
+            <div className='col-4 d-flex align-items-center justify-content-center bg-dark-subtle p-3 rounded'>
+
+
+              <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} />
+    </div>
+                <div className="col-4">
+
+              <AnswerFormOutput pythonCode={pythonCode} checkTheAnswer={checkTheAnswer} questions={questions} currentQuestionIndex={currentQuestionIndex} />
+
+                </div>
+              </div>
+            
+    
         )}
       </div>
     </>

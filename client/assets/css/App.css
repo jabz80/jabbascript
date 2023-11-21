@@ -176,8 +176,33 @@ h1, h2, h3 {
   height: 33% !important;
 }
 
+.account-bg {
+  background: url('../img/account_bg.png'), #defbfe;
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+
+.leaderboard-bg {
+  background: url('../img/footer-main-page-bg.png'), #c7e8f7;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.avatar-container {
+  position: relative;
+}
+
+.bi-pencil-square {
+  position: absolute;
+  top: 0;
+  right: 25%;
+  cursor: pointer
+}
+
 .fight-bg {
-  background: url('../img/b4-old.jpg');
+  background: url('../img/b5.jpg');
   /* background: bisque; */
   background-repeat: no-repeat;
   background-position: bottom;
@@ -219,16 +244,26 @@ h1, h2, h3 {
   }
 }
 
+.practice_bg {
+  background-image: url('../img/practice_bg.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
+.login-bg {
+  background: url('../img/login-bg.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 .curtain {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: azure
 }
 
 .loginForm {
+  background: rgb(255, 255, 255, 0.8);
   background-size: contain;
   background-repeat: no-repeat;
   animation: opacity 2s ease;
@@ -246,7 +281,12 @@ h1, h2, h3 {
 
 .curtain__panel--left {
 
-  background: url('../img/metal.jpg');
+  background: url('../img/left_wall.jpg');
+}
+
+.curtain__panel--right {
+
+  background: url('../img/right_wall.jpg');
 }
 
 .curtain__block {

@@ -157,13 +157,13 @@ function Account() {
 
         </div>
       </div>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
             <div className="d-flex flex-wrap text-center">
             <form onSubmit={handleAvatarChange}>
               {avatars.map(avatar => (
@@ -172,12 +172,12 @@ function Account() {
                   <img id={avatar.avatar_id} style={{'margin': '.5rem', 'width': '100px', cursor: 'pointer', opacity: selectedAvatar === avatar.avatar_id ? 0.5 : 1, }} src={avatar.img_url} alt={`Avatar ${avatar.avatar_id}`} />
                 </label>
               ))}
-                    <div class="modal-footer d-flex justify-content-center">
+                    <div className="modal-footer d-flex justify-content-center">
 
               <button className='btn btn-fantasy text-white' type="submit" >
                 Change Avatar
               </button>
-              <button type="button" class="btn btn-fantasy text-white" data-bs-dismiss="modal">Close</button>
+              <button type="button" className="btn btn-fantasy text-white" data-bs-dismiss="modal">Close</button>
               </div>
             </form>
           </div>

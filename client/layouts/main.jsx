@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Header, Footer, Banner } from "../components";
 
 function index() {
-  
+  const footerBg = "#b2dcf2";
   return (
     <>
       <Header />
@@ -10,7 +10,7 @@ function index() {
       <Banner />
         <Outlet />
       </div>
-      <Footer />
+      <Footer footerBg={footerBg} />
     </>
   );
 }

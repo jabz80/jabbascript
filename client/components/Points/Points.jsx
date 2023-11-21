@@ -6,7 +6,7 @@ const Points = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://jabbascript-api.onrender.com/score'); // Replace with your actual backend API endpoint
+        const response = await fetch('https://jabbascript-api.onrender.com/score');
         const data = await response.json();
         setPointsData(data);
       } catch (error) {
@@ -19,8 +19,9 @@ const Points = () => {
 
   return (
     <div className='d-flex flex-column flex-grow-1 py-5 container'>
-      <h1>Leaderboard</h1>
-              {pointsData.length === 0 ?
+      <div className='d-flex align-items-center flex-column h-100'>
+ <h1>Leaderboard</h1>
+              {!Array.isArray(pointsData)   ?
               <>
        <p>'No players → no leaders!'</p>
        <p><Link to="/register" className='btn btn-success'>Be the first one!</Link></p>
@@ -45,6 +46,8 @@ const Points = () => {
         </>
         }
       
+      </div>
+     
 
     </div>
   );

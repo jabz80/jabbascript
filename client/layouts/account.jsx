@@ -5,10 +5,9 @@ function index() {
   
   return (
     <>
-    <div className="d-flex flex-column" style={{'height' : '100dvh'}}>
+    <div className="d-flex flex-column account-bg" style={{'height' : '100dvh'}}>
       <Header />
         <Outlet />
-      <Footer />
     </div>
     </>
   );

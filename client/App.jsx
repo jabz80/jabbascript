@@ -26,6 +26,8 @@ function App() {
           </Route>
           <Route element={<Layouts.account />}>
             <Route path="account" element={<Pages.AccountPage />} />
+          </Route>
+          <Route element={<Layouts.leaderboard />}>
             <Route path="leaderboard" element={<Pages.Leaderboard />} />
           </Route>
         </Routes>

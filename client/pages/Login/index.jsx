@@ -49,11 +49,11 @@ export default function Login() {
 
   return (
     
-<div className="curtain d-flex align-items-center">
+<div className="curtain d-flex align-items-center login-bg">
   <div className={`curtain__panel--left curtain__panel animate`} ></div>
   {showForm && (
     <div className="curtain__block d-flex justify-content-center align-items-center">
-    <form className="loginForm col-md-6 col-lg-4 bg-light shadow" onSubmit={handleSubmit}>
+    <form className="loginForm col-md-6 col-lg-4 shadow" onSubmit={handleSubmit}>
       <div className="container mx-auto px-5 py-4">
         <div className="d-flex align-items-center justify-content-center">
           <h1 className="text-center">Login</h1>
@@ -68,7 +68,7 @@ export default function Login() {
           <input id="password" value={loginData.password} onChange={handleChange} type="password"  className="form-control" placeholder="Enter Password" />
         </div>
         <div className="mt-5 text-center offset-3 col-6">
-          <button type="submit" className="btn bg-secondary bg-gradient text-white text-center w-100">Login</button>
+          <button type="submit" className="btn btn-fantasy text-white text-center w-100">Login</button>
         </div>
         <div className="text-center mt-4">
           <a href="/register" className="text-slate-600">Need an account? Register here</a>

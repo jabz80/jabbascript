@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Story, SingleFighter } from "../../components";
+import React, { useState, useEffect } from 'react';
+import { Story, SingleFighter } from '../../components';
 import { AnswerForm, AnswerFormOutput } from '../../components';
-import PythonIDE from "../../components/PythonIDE/PythonIDE";
+import PythonIDE from '../../components/PythonIDE/PythonIDE';
 
 // const dummyData = [
 //   "Hello! Welcome to the Story mode. Let's walk you through this. In the editor, you see your first question. Answer the question and hit ok.",
@@ -14,23 +14,21 @@ import PythonIDE from "../../components/PythonIDE/PythonIDE";
 // ];
 export default function Index() {
   const [dialogueId, setDialogueId] = useState(0);
-  const [questionsList, setQuestionsList] = useState([])
+  const [questionsList, setQuestionsList] = useState([]);
   const [inputIncorrect, setInputIncorrect] = useState(false);
-  const [dialogue, setDialogue] = useState("");
-  const [userAnswer, setUserAnswer] = useState("");
+  const [dialogue, setDialogue] = useState('');
+  const [userAnswer, setUserAnswer] = useState('');
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
-  const [incorrectMessage, setIncorrectMessage] = useState("");
+  const [incorrectMessage, setIncorrectMessage] = useState('');
   // const [storyMessage, setStoryMessage] = useState();
   const [showFireball, setShowFireball] = useState(false);
   const [showThunder, setShowThunder] = useState(false);
   const [showWind, setShowWind] = useState(false);
   const [pythonCode, setPythonCode] = useState('');
 
-  const fireAudio = new Audio("assets/img/magic-strike-5856.mp3");
-  const thunderAudio = new Audio("assets/img/loud-thunder-7932.mp3");
-  const windAudio = new Audio("assets/img/woosh_low_long01-98755.mp3");
-
-  
+  const fireAudio = new Audio('assets/img/magic-strike-5856.mp3');
+  const thunderAudio = new Audio('assets/img/loud-thunder-7932.mp3');
+  const windAudio = new Audio('assets/img/woosh_low_long01-98755.mp3');
 
   useEffect(() => {
     fetchQuestion();
@@ -48,35 +46,34 @@ export default function Index() {
     //   "Enter 6",
     // ];
 
-    const response = await fetch('http://localhost:3000/story')
-    const result = await response.json()
-    setQuestionsList(result)
-    console.log(result)
+    const response = await fetch('https://jabbascript-api.onrender.com/story');
+    const result = await response.json();
+    setQuestionsList(result);
+    console.log(result);
     setDialogue(result[dialogueId]);
   };
 
   const handleOkClick = () => {
-    const dummyAnswers = ["Paris", "1945", "12", "London", "4", "7", "6"];
+    const dummyAnswers = ['Paris', '1945', '12', 'London', '4', '7', '6'];
 
     const correctAnswer = dummyAnswers[dialogueId];
 
     if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
       setIsAnswerCorrect(true);
-      setIncorrectMessage("");
+      setIncorrectMessage('');
       setDialogueId((prevId) => prevId + 1);
-      setUserAnswer("");
+      setUserAnswer('');
       triggerFighterMove();
       setInputIncorrect(false);
-      setIncorrectMessage("");
-
+      setIncorrectMessage('');
     } else {
-      setIncorrectMessage("Wrong answer!");
+      setIncorrectMessage('Wrong answer!');
       setInputIncorrect(true);
     }
   };
 
   const triggerFighterMove = () => {
-    console.log("Fighter move triggered!");
+    console.log('Fighter move triggered!');
   };
 
   // useEffect(() => {
@@ -116,43 +113,48 @@ export default function Index() {
     }, 4000);
   };
 
-  const [last, setLast] = useState(false)
+  const [last, setLast] = useState(false);
   const questionIncrementHandler = () => {
-    if(questionsList.length <= dialogueId + 1){
-      setLast(true)
+    if (questionsList.length <= dialogueId + 1) {
+      setLast(true);
       return;
     }
     setDialogueId((prevState) => prevState + 1);
     setDialogue(questionsList[dialogueId + 1]);
-  } 
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     setTimeout(() => {
-      setInputIncorrect(false)
+      setInputIncorrect(false);
     }, 1000);
-  },[inputIncorrect])
+  }, [inputIncorrect]);
 
   const inputCorrectHandler = (payload) => {
-    setInputIncorrect(payload)
-  }
-
+    setInputIncorrect(payload);
+  };
 
   return (
     <>
       <div className="container-md mb-5">
-      <Story
-        // inputIncorrect={inputIncorrect}
-        inputIncorrect={''}
-        dialogue={dialogue}
-        last={false}
-      />
+        <Story
+          // inputIncorrect={inputIncorrect}
+          inputIncorrect={''}
+          dialogue={dialogue}
+          last={false}
+        />
         <div>
           <div className="row">
             <div className="col-6">
               {/* <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} /> */}
-              <PythonIDE  last={false} inputIncorrect={inputCorrectHandler} setPythonCode={setPythonCode} pythonCode={pythonCode} questionIncrementHandler={questionIncrementHandler} />
+              <PythonIDE
+                last={false}
+                inputIncorrect={inputCorrectHandler}
+                setPythonCode={setPythonCode}
+                pythonCode={pythonCode}
+                questionIncrementHandler={questionIncrementHandler}
+              />
             </div>
-            <div className="col-6 text-wrap" >
+            <div className="col-6 text-wrap">
               <AnswerFormOutput pythonCode={pythonCode} />
             </div>
           </div>
@@ -230,8 +232,10 @@ export default function Index() {
           </div> */}
         </div>
       </div>
-      <SingleFighter inputIncorrect={inputIncorrect} correctAnswersCount={dialogueId} />
+      <SingleFighter
+        inputIncorrect={inputIncorrect}
+        correctAnswersCount={dialogueId}
+      />
     </>
   );
 }
-

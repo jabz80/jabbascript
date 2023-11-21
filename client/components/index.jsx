@@ -5,7 +5,7 @@ export { default as Fighter } from './Fighter/Fighter';
 export { default as Fighting } from './Fighting/Fighting';
 export { default as FightCodeSection } from './FightCodeSection/FightCodeSection';
 
-export { default as Multiplayer } from './Multiplayer/Multiplayer';
+
 export { default as MultiplayerFighting } from './MultiplayerFighting/MultiplayerFighting';
 export { default as MultiFighter } from './MultiFighter/MultiFighter';
 export { default as MultiplayerFightCodeSection } from './MultiplayerFightCodeSection/MultiplayerFightCodeSection';

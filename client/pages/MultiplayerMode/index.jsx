@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import {
   MultiplayerFighting,
   MultiplayerFightCodeSection,
-  Multiplayer,
   ChatRoom,
 } from '../../components';
 import { AuthContext } from '../../contexts/Auth';

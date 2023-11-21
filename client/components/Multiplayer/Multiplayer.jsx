@@ -12,8 +12,7 @@ export default function Gamepage({
   setFetchedQuestions,
   roomNumber,
   setRoomNumber,
-  currentAmountOfPlayers,
-  setCurrentAmountOfPlayers,
+
 }) {
   const gameStartHandler = () => setGameStarted(true);
   //
@@ -35,26 +34,8 @@ export default function Gamepage({
     socket.emit('jermaine');
 
     // Remove fetched questions for the current room
-    setFetchedQuestions((prevQuestions) =>
-      prevQuestions.filter((q) => q.roomNumber !== roomNumber)
-    );
   };
 
-  // socket.on('updated_rooms', (updatedRooms) => {
-  //   console.log('Received rooms updated: ', updatedRooms);
-  // });
-
-  // useEffect(() => {
-  //   const handleBeforeUnload = () => {
-  //     leaveRoom();
-  //   };
-
-  //   window.addEventListener('beforeunload', handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener('beforeunload', handleBeforeUnload);
-  //   };
-  // }, []);
 
   // set room Number in state
   useEffect(() => {
@@ -143,19 +124,6 @@ export default function Gamepage({
         ) {
           console.log(`Received Questions in room ${roomNumber}: `, questions);
 
-          // Check if the roomNumber already exists in fetchedQuestions
-          const roomExists = fetchedQuestions.some(
-            (q) => q.roomNumber === roomNumber
-          );
-
-          // If the room doesn't exist, update the state
-          if (!roomExists) {
-            setFetchedQuestions((prevQuestions) => [
-              ...prevQuestions,
-              { roomNumber, questions },
-            ]);
-          }
-          console.log('fetched questions: ', fetchedQuestions);
         } else {
           console.log(
             `Not enough users in room ${roomNumber} to display questions`
@@ -163,43 +131,15 @@ export default function Gamepage({
         }
       }
     };
+},[])
 
     socket.once('receive_question', handleQuestions);
 
-    return () => {
-      socket.off('receive_question', handleQuestions);
-    };
-  }, [roomNumber, rooms, fetchedQuestions]);
 
-  console.log('Fetched Questions State: ', fetchedQuestions);
 
-  // useEffect(() => {
-  //   const handleDisplayAnswers = ({ user1Answer, user2Answer }) => {
-  //     console.log(
-  //       'User1Answer:',
-  //       user1Answer.userId,
-  //       'Answer:',
-  //       user1Answer.answer
-  //     );
-  //     console.log(
-  //       'User2Answer:',
-  //       user2Answer.userId,
-  //       'Answer:',
-  //       user2Answer.answer
-  //     );
-
-  //     //Implement logic to display answers to users
-  //   };
-
-  //   socket.on('display_answers', handleDisplayAnswers);
-  // }, []);
 
   useEffect(() => {
     return () => {
-      // Remove fetched questions for the current room when leaving
-      setFetchedQuestions((prevQuestions) =>
-        prevQuestions.filter((q) => q.roomNumber !== roomNumber)
-      );
     };
   }, [roomNumber]);
 

@@ -1,6 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 
-const SingleFighter = ({ correctAnswersCount, inputIncorrect }) => {
+import Story from "../Story/Story";
+const SingleFighter = ({ correctAnswersCount, inputIncorrect, dialogue, last, questionIncrementHandler, showFireball }) => {
+
+
   const maxBackgroundChanges = 5;
 
 
@@ -33,6 +36,10 @@ const SingleFighter = ({ correctAnswersCount, inputIncorrect }) => {
 
   return (
     <div className={`background-transition ${getBackgroundStyle()}`}>
+      <div className="container h-100">
+      <div className="row h-100">
+        <div className="col-4 d-flex justify-content-start align-items-center">
+         
       {inputIncorrect ? (
         <img
           src="/assets/img/story/fallen-knight.gif"
@@ -42,11 +49,39 @@ const SingleFighter = ({ correctAnswersCount, inputIncorrect }) => {
         />
       ) : (
         <img
-          src="/assets/img/story/walking-knight.gif"
-          className="story-fighter-img"
+          src="/assets/img/story/standing-knight.gif"
+          className="standing-fighter-img"
           alt="Fighter Character"
         />
       )}
+        </div>
+        <div className="col-4 d-flex h-100 justify-content-center align-items-center">
+          {showFireball ?
+          <img className="lightning" src="/assets/img/lightning.gif"/>
+           :
+            <Story
+        // inputIncorrect={inputIncorrect}
+        inputIncorrect={''}
+        dialogue={dialogue}
+        last={false}
+        questionIncrementHandler={questionIncrementHandler}
+      />
+          }
+        </div>
+        <div className="col-4 d-flex justify-content-end align-items-center">
+          {correctAnswersCount == 0 && <img className="npc" src='/assets/img/avatars/m_m_w_300x400.png'/>}
+          {correctAnswersCount == 1 && <img className="npc" src='/assets/img/avatars/m_m_w_300x400.png'/>}
+          {correctAnswersCount == 2 && <img className="npc" src='/assets/img/avatars/m_m_b_300x400.png'/>}
+          {correctAnswersCount == 3 && <img className="npc" src='/assets/img/avatars/m_f_w_300x400.png'/>}
+          {correctAnswersCount == 4 && <img className="npc" src='/assets/img/avatars/m_f_b_300x400.png'/>}
+          {correctAnswersCount == 5 && <img className="npc" src='/assets/img/avatars/k_m_b_300x400.png'/>}
+          {correctAnswersCount == 6 && <img className="npc" src='/assets/img/avatars/k_f_w_300x400.png'/>}
+          {correctAnswersCount == 7 && <img className="npc" src='/assets/img/story/drac.png'/>}
+        </div>
+      </div>
+      </div>
+      
+
     </div>
   );
 };

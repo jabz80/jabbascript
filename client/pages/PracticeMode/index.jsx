@@ -15,10 +15,11 @@ function index() {
   const [healthPlayerOne, setHealthPlayerOne] = useState(100)
   const [healthPlayerTwo, setHealthPlayerTwo] = useState(100)
   const [fightResult, setFightResult] = useState('');
-  const [timer, setTimer] = useState(460)
+  const [timer, setTimer] = useState(60)
   const [gameStarted, setGameStarted] = useState(false)
   const [points, setPoints] = useState(0);
   const [currentCode, setCurrentCode] = useState('');
+  const [userCode, setUserCode] = useState('');
 
   const { userData } = useContext(UserContext);
   const { authToken } = useContext(AuthContext) || {};
@@ -36,7 +37,6 @@ function index() {
   };
 
   const startTheGame = async () => {
-    setCurrentCode(document.getElementById('codeOutput'))
     const token = localStorage.getItem('token');
     let winner = null;
     if (roundWinner === 1) {
@@ -79,8 +79,8 @@ function index() {
         const response = await fetch('https://jabbascript-api.onrender.com/battle');
         const data = await response.json();
         if (authToken) {
-          // setQuestions(data);
-          setQuestions(data.slice(0, 1));
+          setQuestions(data);
+          // setQuestions(data.slice(0, 1));
         } else {
           setQuestions(data.slice(0, 3));
         }
@@ -107,28 +107,26 @@ const startTheTimer = () => {
 };
 
   const checkTheAnswer = () => {
-    console.log(currentCode.innerHTML)
-    console.log(questions[currentQuestionIndex].answer.trim())
-
     if (currentCode.innerHTML.trim() == questions[currentQuestionIndex].answer.trim() && currentQuestionIndex + 1 <= questions.length) {
       setRoundWinner(1)
+      setTimer(60)
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setPointsPlayerOne((prevIndex) => prevIndex + 1);
       setHealthPlayerTwo((prevProgress) => Math.round((prevProgress - 100 / questions.length), 1))
-      addTenPointsToWinner()
-      startTheGame()
     } else {
       setRoundWinner(2)
+      setTimer(60)
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setPointsPlayerTwo((prevIndex) => prevIndex + 1);
       setHealthPlayerOne((prevProgress) => Math.round((prevProgress - 100 / questions.length), 1))
-      startTheGame()
     }
     showBeam();
     if (currentQuestionIndex == questions.length-1) {
       setTimer(0)
+      startTheGame()
       setCurrentQuestionIndex(currentQuestionIndex);
       if (pointsPlayerOne > pointsPlayerTwo) {
+        addTenPointsToWinner()
         setFightResult('You Win!');
       } else {
         setFightResult('You Lose!');
@@ -158,19 +156,16 @@ return (
       <div className="h-100 practice_bg d-flex flex-column align-items-center justify-content-center">
         <div className="row">
           <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center p-4 bg-light">
-
-
-        <h2>Game rules</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit omnis quaerat id ab veritatis sunt provident consequuntur, voluptate pariatur dolor distinctio aspernatur tenetur eveniet nostrum. Magnam fugit quidem ullam tempore.</p>
-                <button className='btn btn-fantasy text-white mt-4' onClick={gameStartHandler}>Start The Game</button>
+            <h2>Game rules</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit omnis quaerat id ab veritatis sunt provident consequuntur, voluptate pariatur dolor distinctio aspernatur tenetur eveniet nostrum. Magnam fugit quidem ullam tempore.</p>
+            <button className='btn btn-fantasy text-white mt-4' onClick={gameStartHandler}>Start The Game</button>
           </div>
-
         </div>
       </div>
     ) : (
       <>
         <div className='mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column'>
-          <FightCodeSection setPythonCode={setPythonCode} pythonCode={pythonCode} showBeam={showBeam} questions={questions} setQuestions={setQuestions} checkTheAnswer={checkTheAnswer} currentQuestionIndex={currentQuestionIndex} fightResult={fightResult} setCurrentCode={setCurrentCode} />
+          <FightCodeSection setPythonCode={setPythonCode} pythonCode={pythonCode} showBeam={showBeam} questions={questions} setQuestions={setQuestions} checkTheAnswer={checkTheAnswer} currentQuestionIndex={currentQuestionIndex} fightResult={fightResult} setCurrentCode={setCurrentCode} setUserCode={setUserCode } />
         </div>
         {!fightResult && (
           <Fighting beamVisible={beamVisible} roundWinner={roundWinner} pointsPlayerOne={pointsPlayerOne} pointsPlayerTwo={pointsPlayerTwo} healthPlayerOne={healthPlayerOne} healthPlayerTwo={healthPlayerTwo} timer={timer} fightResult={fightResult} />

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Read from '../../assets/img/read.png';
 import KidCoder from '../../assets/img/computer_boy.png';
 import { Link } from 'react-router-dom';
-import { Multiplayer } from '../../components';
+// import { Multiplayer } from '../../components';
 
 function index() {
   return (
@@ -56,7 +56,7 @@ function index() {
           <img src={KidCoder} className="img-fluid" />
         </div>
       </div>
-      <Multiplayer />
+      {/* <Multiplayer /> */}
     </>
   );
 }

@@ -1,9 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import {
-  MultiplayerFighting,
-  MultiplayerFightCodeSection,
-  Multiplayer,
-  ChatRoom,
+  
 } from '../../components';
 import { AuthContext } from '../../contexts/Auth';
 import { UserContext } from '../../contexts/User';
@@ -142,7 +139,7 @@ function index() {
   };
   return (
     <>
-    <ChatRoom/>
+    {/* <ChatRoom/> */}
       {/* <p>Available rooms to join: {Object.keys({ rooms }['rooms'])}</p> */}
       {/* <Multiplayer
         rooms={rooms}

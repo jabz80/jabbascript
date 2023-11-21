@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext }  from 'react';
-import { Fighting, FightCodeSection, Multiplayer } from "../../components";
+import { Fighting, FightCodeSection} from "../../components";
 import { AuthContext } from "../../contexts/Auth";
 import { UserContext } from '../../contexts/User';
 // const questions = require("../../assets/pythonQuestions/StoryMode/questions.json")

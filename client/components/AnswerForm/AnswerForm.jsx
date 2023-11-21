@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import Axios from 'axios';
-const API_ENDPOINT = 'http://localhost:3000/compile';
+const API_ENDPOINT = 'http://localhost:4000/compile';
 
 const AnswerForm = ({ setPythonCode }) => {
 
@@ -24,8 +24,6 @@ const AnswerForm = ({ setPythonCode }) => {
   return (
 
           <div className="form-group row w-100 h-100">
-          
-    
 
                 <Editor
                   height="25vh"
@@ -38,16 +36,18 @@ const AnswerForm = ({ setPythonCode }) => {
                     setUserCode(value);
                   }}
                 />
-                <div class="btn-group mt-3" role="group" aria-label="Basic example">
 
-                <button className="btn run-btn" onClick={compile}>
-                  Run ›
+                 <div className='mt-3'>
+
+                <button className="btn btn-info run-btn" onClick={compile}>
+                  Run
                 </button>
-                {/* <button className="btn border-dark run-btn" onClick={compile}>
-                  Submit ›
-                </button> */}
+                <button className="btn btn-info run-btn ms-2" onClick={compile}>
+                  Submit
+                </button>
                 </div>
-           
+              </div>
+
               {/* <div className="col-6">
                 <div className="input-box">
                   <textarea

@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Story, SingleFighter } from "../../components";
 import { AnswerForm, AnswerFormOutput } from '../../components';
+import PythonIDE from "../../components/PythonIDE/PythonIDE";
 
-const dummyData = [
-  "Hello! Welcome to the Story mode. Let's walk you through this. In the editor, you see your first question. Answer the question and hit ok.",
-  "Nice! Let's learn some more Python code to discover the mysteries of the forest. Are you ready? great you just need to answer the question and hit ok",
-  "You're doing great. As you tread deeper into the mystical forest, the whispers of ancient trees echo tales of your journey. Each question you answer brings you closer to unveiling the mysteries that lie ahead.",
-  "Wow! You're smashing this. The mystical creatures of the forest take notice of your growing prowess. The air is charged with magic, and your character is becoming a force to be reckoned with. Lets practice some magic. answer the question and watch your character do some magic",
-  "Excellent! Your journey through the mystical forest has sharpened your skills. The trees bow in respect to your determination. Now, armed with newfound knowledge, you're ready to face the challenges that await. Lets practice some more powers you have the power of lighting. answer the question to use your power.",
-  "Marvelous! The energy of the mystical forest responds to your progress. Enchanted flora and fauna guide your way. With each question answered, your character's strength becomes more profound. The time has come to put your skills to the test. Are you ready to confront the mysteries lurking in the heart of the forest?",
-  "Incredible! Your character's aura resonates with the ancient magic of the forest. Creatures of myth and legend acknowledge your presence. As you continue to answer questions, the path ahead becomes clearer. Now, armed with wisdom and strength, you stand at the threshold of a grand adventure. The forest awaits your next move. What challenges will you face next?"
-];
+// const dummyData = [
+//   "Hello! Welcome to the Story mode. Let's walk you through this. In the editor, you see your first question. Answer the question and hit ok.",
+//   "Nice! Let's learn some more Python code to discover the mysteries of the forest. Are you ready? great you just need to answer the question and hit ok",
+//   "You're doing great. As you tread deeper into the mystical forest, the whispers of ancient trees echo tales of your journey. Each question you answer brings you closer to unveiling the mysteries that lie ahead.",
+//   "Wow! You're smashing this. The mystical creatures of the forest take notice of your growing prowess. The air is charged with magic, and your character is becoming a force to be reckoned with. Lets practice some magic. answer the question and watch your character do some magic",
+//   "Excellent! Your journey through the mystical forest has sharpened your skills. The trees bow in respect to your determination. Now, armed with newfound knowledge, you're ready to face the challenges that await. Lets practice some more powers you have the power of lighting. answer the question to use your power.",
+//   "Marvelous! The energy of the mystical forest responds to your progress. Enchanted flora and fauna guide your way. With each question answered, your character's strength becomes more profound. The time has come to put your skills to the test. Are you ready to confront the mysteries lurking in the heart of the forest?",
+//   "Incredible! Your character's aura resonates with the ancient magic of the forest. Creatures of myth and legend acknowledge your presence. As you continue to answer questions, the path ahead becomes clearer. Now, armed with wisdom and strength, you stand at the threshold of a grand adventure. The forest awaits your next move. What challenges will you face next?"
+// ];
 export default function Index() {
   const [dialogueId, setDialogueId] = useState(0);
+  const [questionsList, setQuestionsList] = useState([])
   const [inputIncorrect, setInputIncorrect] = useState(false);
   const [dialogue, setDialogue] = useState("");
   const [userAnswer, setUserAnswer] = useState("");
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   const [incorrectMessage, setIncorrectMessage] = useState("");
-  const [storyMessage, setStoryMessage] = useState(dummyData[0]);
+  // const [storyMessage, setStoryMessage] = useState();
   const [showFireball, setShowFireball] = useState(false);
   const [showThunder, setShowThunder] = useState(false);
   const [showWind, setShowWind] = useState(false);
@@ -34,19 +36,23 @@ export default function Index() {
     fetchQuestion();
   }, [dialogueId]);
 
-  const fetchQuestion = () => {
+  const fetchQuestion = async () => {
     // Replace this with fetch call to the backend
-    const dummyQuestions = [
-      "What is the capital of France?",
-      "In which year did World War II end?",
-      "What is the square root of 144?",
-      "What is capital of UK",
-      "What is 2 + 2",
-      "Type 7",
-      "Enter 6",
-    ];
+    // const dummyQuestions = [
+    //   "What is the capital of France?",
+    //   "In which year did World War II end?",
+    //   "What is the square root of 144?",
+    //   "What is capital of UK",
+    //   "What is 2 + 2",
+    //   "Type 7",
+    //   "Enter 6",
+    // ];
 
-    setDialogue(dummyQuestions[dialogueId]);
+    const response = await fetch('http://localhost:3000/story')
+    const result = await response.json()
+    setQuestionsList(result)
+    console.log(result)
+    setDialogue(result[dialogueId]);
   };
 
   const handleOkClick = () => {
@@ -72,15 +78,12 @@ export default function Index() {
   const triggerFighterMove = () => {
     console.log("Fighter move triggered!");
   };
-  useEffect(() => {
-    console.log(dummyData.length);
-    console.log(dialogueId);
-    console.log(storyMessage);
-    console.log(dummyData[dialogueId]);
-    if (dialogueId <= dummyData.length) {
-      setStoryMessage(dummyData[dialogueId]);
-    }
-  }, [dialogueId]);
+
+  // useEffect(() => {
+  //   if (dialogueId <= dummyData.length) {
+  //     setStoryMessage(dummyData[dialogueId]);
+  //   }
+  // }, [dialogueId]);
 
   const showFireBallButton = dialogueId === 2;
   const showThunderButton = dialogueId === 3;
@@ -113,26 +116,48 @@ export default function Index() {
     }, 4000);
   };
 
+  const [last, setLast] = useState(false)
+  const questionIncrementHandler = () => {
+    if(questionsList.length <= dialogueId + 1){
+      setLast(true)
+      return;
+    }
+    setDialogueId((prevState) => prevState + 1);
+    setDialogue(questionsList[dialogueId + 1]);
+  } 
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setInputIncorrect(false)
+    }, 1000);
+  },[inputIncorrect])
+
+  const inputCorrectHandler = (payload) => {
+    setInputIncorrect(payload)
+  }
+
+
   return (
     <>
       <div className="container-md mb-5">
       <Story
-  incorrectAnswer={storyMessage === 9}
-  updateStory={setStoryMessage}
-  storyMessageData={storyMessage}
-  inputIncorrect={inputIncorrect}
-/>
+        // inputIncorrect={inputIncorrect}
+        inputIncorrect={''}
+        dialogue={dialogue}
+        last={false}
+      />
         <div>
           <div className="row">
             <div className="col-6">
-              <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} />
+              {/* <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} /> */}
+              <PythonIDE  last={false} inputIncorrect={inputCorrectHandler} setPythonCode={setPythonCode} pythonCode={pythonCode} questionIncrementHandler={questionIncrementHandler} />
             </div>
-            <div className="col-6">
+            <div className="col-6 text-wrap" >
               <AnswerFormOutput pythonCode={pythonCode} />
             </div>
           </div>
-          <div>
-            <p>{dialogue}</p>
+          {/* <div>
+            <p>{dialogue.title}</p>
             <input
               type="text"
               value={userAnswer}
@@ -202,10 +227,10 @@ export default function Index() {
                 {incorrectMessage}
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
-      <SingleFighter correctAnswersCount={dialogueId} />
+      <SingleFighter inputIncorrect={inputIncorrect} correctAnswersCount={dialogueId} />
     </>
   );
 }

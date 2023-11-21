@@ -1,8 +1,9 @@
 import React from 'react'
 function AnswerFormOutput({pythonCode, checkTheAnswer, questions, currentQuestionIndex, setCurrentCode}) {
-    setCurrentCode(document.getElementById('codeOutput'))
+    document.getElementById('codeOutput') && setCurrentCode(document.getElementById('codeOutput'))
 
   return (
+    
     <>
     <div className={`p-3 h-100 d-flex w-100 ${!pythonCode && 'align-items-center align-items-center'}`}>
       <div className='Output w-100' id='outputBlock'>

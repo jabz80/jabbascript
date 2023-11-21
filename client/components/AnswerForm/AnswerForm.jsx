@@ -30,7 +30,7 @@ const AnswerForm = ({ setPythonCode }) => {
                 <Editor
                   height="25vh"
                   width="100%"
-                  className='shadow-sm'
+                  className='shadow'
                   theme="vs-dark"
                   defaultLanguage="python"
                   defaultValue="#code and print your output"
@@ -38,13 +38,26 @@ const AnswerForm = ({ setPythonCode }) => {
                     setUserCode(value);
                   }}
                 />
-                <div className="btn-group mt-3" role="group" aria-label="Basic example">
+                <div class="btn-group mt-3" role="group" aria-label="Basic example">
 
                 <button className="btn run-btn" onClick={compile}>
                   Run ›
                 </button>
-
+                {/* <button className="btn border-dark run-btn" onClick={compile}>
+                  Submit ›
+                </button> */}
                 </div>
+           
+              {/* <div className="col-6">
+                <div className="input-box">
+                  <textarea
+                  placeholder='Your input here'
+                  className=' form-control'
+                    id="code-inp"
+                    onChange={(e) => setUserInput(e.target.value)}
+                  ></textarea>
+                </div>
+              </div> */}
           </div>
 
   );

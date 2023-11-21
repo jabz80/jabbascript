@@ -15,10 +15,11 @@ function index() {
   const [healthPlayerOne, setHealthPlayerOne] = useState(100)
   const [healthPlayerTwo, setHealthPlayerTwo] = useState(100)
   const [fightResult, setFightResult] = useState('');
-  const [timer, setTimer] = useState(460)
+  const [timer, setTimer] = useState(60)
   const [gameStarted, setGameStarted] = useState(false)
   const [points, setPoints] = useState(0);
   const [currentCode, setCurrentCode] = useState('');
+  const [userCode, setUserCode] = useState('');
 
   const { userData } = useContext(UserContext);
   const { authToken } = useContext(AuthContext) || {};
@@ -36,7 +37,6 @@ function index() {
   };
 
   const startTheGame = async () => {
-    setCurrentCode(document.getElementById('codeOutput'))
     const token = localStorage.getItem('token');
     let winner = null;
     if (roundWinner === 1) {
@@ -79,8 +79,8 @@ function index() {
         const response = await fetch('https://jabbascript-api.onrender.com/battle');
         const data = await response.json();
         if (authToken) {
-          // setQuestions(data);
-          setQuestions(data.slice(0, 1));
+          setQuestions(data);
+          // setQuestions(data.slice(0, 1));
         } else {
           setQuestions(data.slice(0, 3));
         }
@@ -168,7 +168,7 @@ return (
     ) : (
       <>
         <div className='mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column'>
-          <FightCodeSection setPythonCode={setPythonCode} pythonCode={pythonCode} showBeam={showBeam} questions={questions} setQuestions={setQuestions} checkTheAnswer={checkTheAnswer} currentQuestionIndex={currentQuestionIndex} fightResult={fightResult} setCurrentCode={setCurrentCode} />
+          <FightCodeSection setPythonCode={setPythonCode} pythonCode={pythonCode} showBeam={showBeam} questions={questions} setQuestions={setQuestions} checkTheAnswer={checkTheAnswer} currentQuestionIndex={currentQuestionIndex} fightResult={fightResult} setCurrentCode={setCurrentCode} setUserCode={setUserCode } />
         </div>
         {!fightResult && (
           <Fighting beamVisible={beamVisible} roundWinner={roundWinner} pointsPlayerOne={pointsPlayerOne} pointsPlayerTwo={pointsPlayerTwo} healthPlayerOne={healthPlayerOne} healthPlayerTwo={healthPlayerTwo} timer={timer} fightResult={fightResult} />

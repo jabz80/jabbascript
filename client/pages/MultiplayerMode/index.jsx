@@ -9,8 +9,6 @@ import { UserContext } from '../../contexts/User';
 import io from 'socket.io-client';
 
 const socket = io.connect('http://localhost:3000');
-import React, { useState } from 'react';
-import { Fighting, FightCodeSection, AnswerForm, Multiplayer } from "../../components";
 
 function index() {
   const [pythonCode, setPythonCode] = useState('');

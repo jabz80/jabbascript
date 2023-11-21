@@ -25,7 +25,7 @@ function index() {
           <Link to="/story">
             <button
               type="button"
-              className="btn btn-warning btn-lg me-4 shadow-sm"
+              className="btn btn-fantasy text-white btn-lg me-4"
               data-mdb-ripple-color="#c33232"
             >
               {' '}
@@ -35,7 +35,7 @@ function index() {
           <Link to="/multiplayer">
             <button
               type="button"
-              className="btn btn-warning btn-lg shadow-sm"
+              className="btn btn-fantasy text-white btn-lg"
               data-mdb-ripple-color="#c33232"
             >
               {' '}

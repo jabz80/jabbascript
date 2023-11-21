@@ -1,22 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from "react";
 
-const SingleFighter = ({ correctAnswersCount }) => {
+import Story from "../Story/Story";
+const SingleFighter = ({ correctAnswersCount, inputIncorrect, dialogue, last, questionIncrementHandler, showFireball }) => {
+
+
   const maxBackgroundChanges = 5;
+
 
   const getColorClass = (count) => {
     switch (count) {
       case 1:
-        return 'forest-1';
+        return "forest-1";
       case 2:
-        return 'forest-4';
+        return "forest-4";
       case 3:
-        return 'forest-night';
+        return "forest-night";
       case 4:
-        return 'forest-5';
+        return "forest-5";
       case 5:
-        return 'forest-2';
+        return "forest-2";
       default:
-        return 'forest-1';
+        return "forest-1";
     }
   };
 
@@ -32,11 +36,52 @@ const SingleFighter = ({ correctAnswersCount }) => {
 
   return (
     <div className={`background-transition ${getBackgroundStyle()}`}>
-      <img
-        src="/assets/img/char.png"
-        className="fighter-img"
-        alt="Fighter Character"
+      <div className="container h-100">
+      <div className="row h-100">
+        <div className="col-4 d-flex justify-content-start align-items-center">
+         
+      {inputIncorrect ? (
+        <img
+          src="/assets/img/story/fallen-knight.gif"
+          id="singlePlayGif"
+          className="fighter-img"
+          alt="Fighter Character"
+        />
+      ) : (
+        <img
+          src="/assets/img/story/standing-knight.gif"
+          className="standing-fighter-img"
+          alt="Fighter Character"
+        />
+      )}
+        </div>
+        <div className="col-4 d-flex h-100 justify-content-center align-items-center">
+          {showFireball ?
+          <img className="lightning" src="/assets/img/lightning.gif"/>
+           :
+            <Story
+        // inputIncorrect={inputIncorrect}
+        inputIncorrect={''}
+        dialogue={dialogue}
+        last={false}
+        questionIncrementHandler={questionIncrementHandler}
       />
+          }
+        </div>
+        <div className="col-4 d-flex justify-content-end align-items-center">
+          {correctAnswersCount == 0 && <img className="npc" src='/assets/img/avatars/m_m_w_300x400.png'/>}
+          {correctAnswersCount == 1 && <img className="npc" src='/assets/img/avatars/m_m_w_300x400.png'/>}
+          {correctAnswersCount == 2 && <img className="npc" src='/assets/img/avatars/m_m_b_300x400.png'/>}
+          {correctAnswersCount == 3 && <img className="npc" src='/assets/img/avatars/m_f_w_300x400.png'/>}
+          {correctAnswersCount == 4 && <img className="npc" src='/assets/img/avatars/m_f_b_300x400.png'/>}
+          {correctAnswersCount == 5 && <img className="npc" src='/assets/img/avatars/k_m_b_300x400.png'/>}
+          {correctAnswersCount == 6 && <img className="npc" src='/assets/img/avatars/k_f_w_300x400.png'/>}
+          {correctAnswersCount == 7 && <img className="npc" src='/assets/img/story/drac.png'/>}
+        </div>
+      </div>
+      </div>
+      
+
     </div>
   );
 };

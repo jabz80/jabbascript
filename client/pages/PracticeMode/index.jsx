@@ -153,50 +153,19 @@ return (
     {!gameStarted ? (
       <div className="h-100 practice_bg d-flex flex-column align-items-center justify-content-center">
         <div className="row">
-<<<<<<< HEAD
-          <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center">
-            <button
-              className="btn btn-fantasy text-white mb-5"
-              onClick={gameStartHandler}
-            >
-              Start The Game
-            </button>
-            <h2>Game rules</h2>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit
-              omnis quaerat id ab veritatis sunt provident consequuntur,
-              voluptate pariatur dolor distinctio aspernatur tenetur eveniet
-              nostrum. Magnam fugit quidem ullam tempore.
-            </p>
-=======
           <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center p-4 bg-light">
 
 
         <h2>Game rules</h2>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit omnis quaerat id ab veritatis sunt provident consequuntur, voluptate pariatur dolor distinctio aspernatur tenetur eveniet nostrum. Magnam fugit quidem ullam tempore.</p>
                 <button className='btn btn-fantasy text-white mt-4' onClick={gameStartHandler}>Start The Game</button>
->>>>>>> de2377b2e6810282b72712b5e0c9c79273b806ca
           </div>
         </div>
       </div>
     ) : (
       <>
-<<<<<<< HEAD
-        <div className="mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column pt-5 pb-4">
-          <FightCodeSection
-            setPythonCode={setPythonCode}
-            pythonCode={pythonCode}
-            showBeam={showBeam}
-            questions={questions}
-            setQuestions={setQuestions}
-            checkTheAnswer={checkTheAnswer}
-            currentQuestionIndex={currentQuestionIndex}
-            fightResult={fightResult}
-          />
-=======
         <div className='mb-auto flex-grow-1 d-flex justify-content-center align-items-center flex-column'>
           <FightCodeSection setPythonCode={setPythonCode} pythonCode={pythonCode} showBeam={showBeam} questions={questions} setQuestions={setQuestions} checkTheAnswer={checkTheAnswer} currentQuestionIndex={currentQuestionIndex} fightResult={fightResult} />
->>>>>>> de2377b2e6810282b72712b5e0c9c79273b806ca
         </div>
         {!fightResult && (
           <Fighting

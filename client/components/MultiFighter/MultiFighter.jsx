@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/User';
 
 function MultiplayerFighter({
@@ -9,7 +9,12 @@ function MultiplayerFighter({
   healthPlayerTwo = 100,
   currentAmountOfPlayers,
 }) {
+  const [userAvatar, setUserAvatar] = useState('')
   const { userData } = useContext(UserContext);
+  useEffect(() => {
+    setUserAvatar(userData?.img_url)
+  }, [])
+  console.log('userData: ' + userData)
   return (
     <div className="text-center h-100">
       <div>
@@ -38,8 +43,8 @@ function MultiplayerFighter({
         style={{
           backgroundImage: `url(${
             currentAmountOfPlayers === 2
-              ? userData?.img_url
-              : currentAmountOfPlayers === 1 && userData?.img_url
+              ? userAvatar
+              : currentAmountOfPlayers === 1 && userAvatar
           })`,
         }}
         className="fighterBlock char-bg h-75 mt-4"

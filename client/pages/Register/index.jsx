@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 
 export default function Register() {
   const [error, setError] = useState('');
-  const [fieldsValidated, setFieldsValidated] = useState(false);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -22,11 +21,11 @@ export default function Register() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+        setError('');
 
     if (formData.password !== formData.confirmPassword) {
       toast.error('Passwords do not match');
-      setError('Error! Try again');
+      setError('Passwords do not match');
       return;
     }
 

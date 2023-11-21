@@ -9,7 +9,7 @@ export default function Gamepage({
   setRooms,
   setGameStarted,
   fetchedQuestions,
-  setFetchedQuestions,
+  // setFetchedQuestions,
   roomNumber,
   setRoomNumber,
   currentAmountOfPlayers,
@@ -30,31 +30,31 @@ export default function Gamepage({
     gameStartHandler();
   };
 
-  const leaveRoom = () => {
-    // Manually leave the room
-    socket.emit('jermaine');
+  // const leaveRoom = () => {
+  //   // Manually leave the room
+  //   socket.emit('jermaine');
 
-    // Remove fetched questions for the current room
-    setFetchedQuestions((prevQuestions) =>
-      prevQuestions.filter((q) => q.roomNumber !== roomNumber)
-    );
-  };
+  //   // Remove fetched questions for the current room
+  //   setFetchedQuestions((prevQuestions) =>
+  //     prevQuestions.filter((q) => q.roomNumber !== roomNumber)
+  //   );
+  // };
 
-  // socket.on('updated_rooms', (updatedRooms) => {
-  //   console.log('Received rooms updated: ', updatedRooms);
-  // });
+  // // socket.on('updated_rooms', (updatedRooms) => {
+  // //   console.log('Received rooms updated: ', updatedRooms);
+  // // });
 
-  // useEffect(() => {
-  //   const handleBeforeUnload = () => {
-  //     leaveRoom();
-  //   };
+  // // useEffect(() => {
+  // //   const handleBeforeUnload = () => {
+  // //     leaveRoom();
+  // //   };
 
-  //   window.addEventListener('beforeunload', handleBeforeUnload);
+  // //   window.addEventListener('beforeunload', handleBeforeUnload);
 
-  //   return () => {
-  //     window.removeEventListener('beforeunload', handleBeforeUnload);
-  //   };
-  // }, []);
+  // //   return () => {
+  // //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  // //   };
+  // // }, []);
 
   // set room Number in state
   useEffect(() => {
@@ -149,12 +149,12 @@ export default function Gamepage({
           );
 
           // If the room doesn't exist, update the state
-          if (!roomExists) {
-            setFetchedQuestions((prevQuestions) => [
-              ...prevQuestions,
-              { roomNumber, questions },
-            ]);
-          }
+          // if (!roomExists) {
+          //   setFetchedQuestions((prevQuestions) => [
+          //     ...prevQuestions,
+          //     { roomNumber, questions },
+          //   ]);
+          // }
           console.log('fetched questions: ', fetchedQuestions);
         } else {
           console.log(
@@ -194,14 +194,14 @@ export default function Gamepage({
   //   socket.on('display_answers', handleDisplayAnswers);
   // }, []);
 
-  useEffect(() => {
-    return () => {
-      // Remove fetched questions for the current room when leaving
-      setFetchedQuestions((prevQuestions) =>
-        prevQuestions.filter((q) => q.roomNumber !== roomNumber)
-      );
-    };
-  }, [roomNumber]);
+  // useEffect(() => {
+  //   return () => {
+  //     // Remove fetched questions for the current room when leaving
+  //     setFetchedQuestions((prevQuestions) =>
+  //       prevQuestions.filter((q) => q.roomNumber !== roomNumber)
+  //     );
+  //   };
+  // }, [roomNumber]);
 
   // Listen for the 'player_left' event to handle the case when a player leaves
   useEffect(() => {
@@ -227,7 +227,7 @@ export default function Gamepage({
   return (
     <div>
       <button onClick={joinRoom}>Play Multiplayer</button>
-      <button onClick={leaveRoom}>Leave Game</button>
+      {/* <button onClick={leaveRoom}>Leave Game</button> */}
       <button onClick={() => submitAnswer('Submitted Answer')}>Submit</button>
     </div>
   );

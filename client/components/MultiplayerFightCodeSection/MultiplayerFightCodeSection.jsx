@@ -11,7 +11,7 @@ function MultiplayerFightCodeSection({
   pythonCode,
   checkTheAnswer,
   fetchedQuestions,
-  setFetchedQuestions,
+  // setFetchedQuestions,
   currentQuestionIndex,
   setCurrentQuestionIndex,
   fightResult,
@@ -45,14 +45,14 @@ function MultiplayerFightCodeSection({
     // setCurrentRoomQuestion([]);
   };
 
-  const leaveRoom = () => {
-    // Manually leave the room
-    socket.emit('jermaine');
-    // Remove fetched questions for the current room
-    setFetchedQuestions((prevQuestions) =>
-      prevQuestions.filter((q) => q.roomNumber !== roomNumber)
-    );
-  };
+  // const leaveRoom = () => {
+  //   // Manually leave the room
+  //   socket.emit('jermaine');
+  //   // Remove fetched questions for the current room
+  //   setFetchedQuestions((prevQuestions) =>
+  //     prevQuestions.filter((q) => q.roomNumber !== roomNumber)
+  //   );
+  // };
 
   // socket.on('updated_rooms', (updatedRooms) => {
   //   console.log('Received rooms updated: ', updatedRooms);
@@ -164,12 +164,12 @@ function MultiplayerFightCodeSection({
           );
 
           // If the room doesn't exist, update the state
-          if (!roomExists) {
-            setFetchedQuestions((prevQuestions) => [
-              ...prevQuestions,
-              { roomNumber, questions },
-            ]);
-          }
+          // if (!roomExists) {
+          //   setFetchedQuestions((prevQuestions) => [
+          //     ...prevQuestions,
+          //     { roomNumber, questions },
+          //   ]);
+          // }
           console.log('fetched questions: ', fetchedQuestions);
         } else {
           console.log(
@@ -212,14 +212,14 @@ function MultiplayerFightCodeSection({
     socket.on('display_answers', handleDisplayAnswers);
   }, []);
 
-  useEffect(() => {
-    return () => {
-      // Remove fetched questions for the current room when leaving
-      setFetchedQuestions((prevQuestions) =>
-        prevQuestions.filter((q) => q.roomNumber !== roomNumber)
-      );
-    };
-  }, [roomNumber]);
+  // useEffect(() => {
+  //   return () => {
+  //     // Remove fetched questions for the current room when leaving
+  //     setFetchedQuestions((prevQuestions) =>
+  //       prevQuestions.filter((q) => q.roomNumber !== roomNumber)
+  //     );
+  //   };
+  // }, [roomNumber]);
 
   // Listen for the 'player_left' event to handle the case when a player leaves
   useEffect(() => {

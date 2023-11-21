@@ -181,7 +181,6 @@ return (
         )}
       </>
     )}
-    <Multiplayer />
   </>
 );}
 export default index

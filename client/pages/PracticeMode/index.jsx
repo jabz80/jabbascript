@@ -107,6 +107,8 @@ const startTheTimer = () => {
 };
 
   const checkTheAnswer = () => {
+    console.log(currentCode.innerHTML)
+    console.log(questions[currentQuestionIndex].answer.trim())
 
     if (currentCode.innerHTML.trim() == questions[currentQuestionIndex].answer.trim() && currentQuestionIndex + 1 <= questions.length) {
       setRoundWinner(1)

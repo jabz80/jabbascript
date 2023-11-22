@@ -4,6 +4,7 @@ import { PythonIDE, StoryAnswerFormOutput } from '../../components';
 import { AuthContext } from "../../contexts/Auth";
 import { Link } from "react-router-dom";
 import Knight from '../../assets/img/dragon.png'
+import Swal from "sweetalert2";
 
 export default function Index() {
   const [gameStarted, setGameStarted] = useState(false)
@@ -36,18 +37,31 @@ export default function Index() {
   };
 
   const handleOkClick = () => {
-    if (currentCode.innerHTML.trim() === dialogue.example.trim()) {
-      setIsAnswerCorrect(true);
-      setIncorrectMessage("");
-      setUserAnswer("");
-      handleShowFireballClick();
-      setInputIncorrect(false);
-      setIncorrectMessage("");
-    } else {
-      setIncorrectMessage('Wrong answer!');
-      setInputIncorrect(true);
+    if (currentCode){
+      if (currentCode.innerHTML.trim() === dialogue.example.trim()) {
+        Swal.fire({
+          title:'Correct',
+          text:'Nice Work, Keep it up',
+          icon:'success'
+        })
+        setIsAnswerCorrect(true);
+        setIncorrectMessage("");
+        setUserAnswer("");
+        handleShowFireballClick();
+        setInputIncorrect(false);
+        setIncorrectMessage("");
+      } else {
+        Swal.fire({
+          title: 'Incorrect',
+          text: "Good Attempt, Take your time and keep on trying!",
+          icon: 'error'
+        })
+        setIncorrectMessage('Wrong answer!');
+        setInputIncorrect(true);
+      }
+    };
     }
-  };
+    
   const handleShowFireballClick = () => {
     setShowFireball(true);
     setTimeout(() => {

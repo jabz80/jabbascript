@@ -4,6 +4,7 @@ import { PythonIDE, StoryAnswerFormOutput } from '../../components';
 import { AuthContext } from "../../contexts/Auth";
 import { UserContext } from "../../contexts/User";
 export default function Index() {
+  const [gameStarted, setGameStarted] = useState(false)
   const [dialogueId, setDialogueId] = useState(0);
   const [questionsList, setQuestionsList] = useState([]);
   const [inputIncorrect, setInputIncorrect] = useState(false);
@@ -96,7 +97,13 @@ export default function Index() {
     }, 4000);
   };
 
+
+  const gameStartHandler = () => {
+    setGameStarted(true);
+  }
+
   const [last, setLast] = useState(false);
+
   const questionIncrementHandler = () => {
     if (questionsList.length <= dialogueId + 1) {
       setLast(true);
@@ -118,6 +125,18 @@ export default function Index() {
 
   return (
     <>
+    {!gameStarted ? (
+      <div className="h-100 practice_bg d-flex flex-column align-items-center justify-content-center">
+        <div className="row">
+          <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center p-4 bg-light">
+            <h2>Quest Mode</h2>
+            <p> Welcome fellow student, here you shall learn the ways of Python code. Follow the examples and answer the questions given to become stronger. Remember to click "Run" after answering your question to double check. Click "Start" when you are ready train for battle!</p>
+            <button className='btn btn-fantasy text-white mt-4' onClick={gameStartHandler}>Start The Game</button>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <>
     {dialogueId == 0 ? 
           '' : dialogueId == 8 ? 
           '' :
@@ -133,6 +152,8 @@ export default function Index() {
       </div>
     }
       <SingleFighter inputIncorrect={inputIncorrect} correctAnswersCount={dialogueId} dialogue={dialogue} last={last} questionIncrementHandler={questionIncrementHandler} showFireball={showFireball} />
+    </>
+    )}
     </>
   );
 }

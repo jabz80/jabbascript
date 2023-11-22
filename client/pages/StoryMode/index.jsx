@@ -4,6 +4,7 @@ import { PythonIDE, StoryAnswerFormOutput } from '../../components';
 import { AuthContext } from "../../contexts/Auth";
 import { Link } from "react-router-dom";
 import Knight from '../../assets/img/dragon.png'
+import Swal from "sweetalert2";
 
 export default function Index() {
   const [gameStarted, setGameStarted] = useState(false)

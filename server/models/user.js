@@ -95,21 +95,21 @@ class User {
   static async updateUser(data, token, updateAvatar = false, avatarId = null) {
     try {
       const user = await User.getOneByToken(token);
-      const { username, password, email } = data;
+      const { username, email } = data;
 
       let response;
 
       if (updateAvatar) {
         // Update both user information and avatar
         response = await db.query(
-          'UPDATE users SET username = $1, password = $2, email = $3, avatar_id = $4 WHERE user_id = $5 RETURNING *',
-          [username, password, email, avatarId, user.user_id]
+          'UPDATE users SET username = $1, email = $2, avatar_id = $3 WHERE user_id = $4 RETURNING *',
+          [username, email, avatarId, user.user_id]
         );
       } else {
         // Update only user information
         response = await db.query(
-          'UPDATE users SET username = $1, password = $2, email = $3 WHERE user_id = $4 RETURNING *',
-          [username, password, email, user.user_id]
+          'UPDATE users SET username = $1, email = $2 WHERE user_id = $3 RETURNING *',
+          [username, email, user.user_id]
         );
       }
 

@@ -30,10 +30,13 @@ const logIn = async (req, res) => {
   try {
     // Storing the data from req.body
     const { username, password } = req.body;
+    console.log('req.body.password:, ', password)
     // Check if username exists
     const user = await User.checkUsername(username);
+    console.log('user password: ', user )
     // Compare passwords using bcrypt
-    const legit = await bcrypt.compare(password, user.password);
+    const legit = await bcrypt.compare(password, user.password );
+    console.log('bcrypt compare: ', legit)
 
     // Checking if the password is correct
     if (!legit) {
@@ -81,23 +84,23 @@ const updateUser = async (req, res) => {
   try {
     const token = req.headers.authorization;
     const editedToken = token.split(' ')[1];
-    let userPassword = req.body.password;
+    // let userPassword = req.body.password;
 
     const userToUpdate = await User.getOneByToken(editedToken);
     req.body.username ||= userToUpdate.username;
-    userPassword ||= userToUpdate.password;
+    // userPassword ||= userToUpdate.password;
     req.body.email ||= userToUpdate.email;
     req.body.avatar_id ||= userToUpdate.avatar_id;
 
-    if (userPassword) {
-      const salt = await bcrypt.genSalt(
-        parseInt(process.env.BCRYPT_SALT_ROUNDS)
-      )
+    // if (userPassword) {
+    //   const salt = await bcrypt.genSalt(
+    //     parseInt(process.env.BCRYPT_SALT_ROUNDS)
+    //   )
 
-      const hashedPassword = await bcrypt.hash(userPassword, salt);
+    //   const hashedPassword = await bcrypt.hash(userPassword, salt);
 
-      req.body.password = hashedPassword;
-    }
+    //   req.body.password = hashedPassword;
+    // }
 
     const updatedUser = await User.updateUser(
       req.body,

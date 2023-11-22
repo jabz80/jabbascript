@@ -28,7 +28,7 @@ useEffect(() => {
 
   const fetchUserPoints = async () => {
     try {
-      const response = await fetch(`https://jabbascript-api.onrender.com/score/${userData.user_id}`);
+      const response = await fetch(`https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/score/${userData.user_id}`);
       const data = await response.json();
       setPoints(data.score);
     } catch (error) {
@@ -38,7 +38,7 @@ useEffect(() => {
 
   const getAllAvatars = async () => {
     try {
-      const response = await fetch(`https://jabbascript-api.onrender.com/avatar`);
+      const response = await fetch(`https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/avatar`);
       const data = await response.json();
       setAvatars(data);
     } catch (error) {
@@ -48,7 +48,7 @@ useEffect(() => {
 
   const getAllGames = async () => {
     try {
-      const response = await fetch(`https://jabbascript-api.onrender.com/games`);
+      const response = await fetch(`https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/games`);
       const data = await response.json();
       const userGames = data.filter(game => game.user_id === userData.user_id);
       setGames(userGames);
@@ -72,7 +72,7 @@ useEffect(() => {
   const changeAvatar = async () => {
     const token = localStorage.getItem('token');
     try {
-      await fetch(`https://jabbascript-api.onrender.com/update`, {
+      await fetch(`https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/update`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer: ${token}`,
@@ -109,7 +109,14 @@ useEffect(() => {
 
 
   if (loading) {
-    return <div>Loading...</div>
+    return (
+    <div style={{'height':'100dvh'}}  className='d-flex flex-column justify-content-center align-items-center'>
+        <div class="spinner-border mb-3" role="status">
+  
+  </div>
+    <div className='d-flex justify-content-center align-items-center'>Loading...</div>
+    </div>
+    )
   }
 
   return (

@@ -36,14 +36,8 @@ function index() {
     }
   };
 
-  const startTheGame = async () => {
+  const startTheGame = async (status) => {
     const token = localStorage.getItem('token');
-    let winner = null;
-    if (roundWinner === 1) {
-      winner = true;
-    } else {
-      winner = false;
-    }
     try {
       await fetch(`https://jabbascript-api.onrender.com/games`, {
         headers: {
@@ -51,7 +45,7 @@ function index() {
           Authorization: `Bearer: ${token}`,
         },
         method: 'POST',
-        body: JSON.stringify({ game_status: winner }),
+        body: JSON.stringify({ game_status: status }),
       });
     } catch (error) {
       console.error('Error creating a game:', error);
@@ -84,7 +78,6 @@ function index() {
         const data = await response.json();
         if (authToken) {
           setQuestions(data);
-          // setQuestions(data.slice(0, 1));
         } else {
           setQuestions(data.slice(0, 3));
         }
@@ -137,13 +130,15 @@ function index() {
     showBeam();
     if (currentQuestionIndex == questions.length - 1) {
       setTimer(0);
-      startTheGame();
+      
       setCurrentQuestionIndex(currentQuestionIndex);
       if (pointsPlayerOne > pointsPlayerTwo) {
         addTenPointsToWinner();
         setFightResult('You Win!');
+        startTheGame(true);
       } else {
         setFightResult('You Lose!');
+        startTheGame(false);
       }
     }
   };
@@ -171,11 +166,9 @@ function index() {
           <div className="row">
             <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center p-4 bg-light">
               <h2>Game rules</h2>
+              <p class="lead">Welcome fellow student</p>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Suscipit omnis quaerat id ab veritatis sunt provident
-                consequuntur, voluptate pariatur dolor distinctio aspernatur
-                tenetur eveniet nostrum. Magnam fugit quidem ullam tempore.
+                Use your coding training to battle your opponent. Write your answers in the code editor and hit <b>«Run»</b> as fast as possible to win. The fight ends when all questions are answered or if one of the player’s health reaches 0
               </p>
               <button
                 className="btn btn-fantasy text-white mt-4"

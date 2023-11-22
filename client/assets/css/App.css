@@ -47,6 +47,7 @@ a {
   height: 100vh;
 }
 
+
 .main-page-marketing-block {
   padding: 8rem 0;
 }
@@ -266,6 +267,12 @@ h3 {
 
 .practice_bg {
   background-image: url('../img/practice_bg.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.quest_bg {
+  background-image: url('../img/quest_bg.png');
   background-size: cover;
   background-repeat: no-repeat;
 }

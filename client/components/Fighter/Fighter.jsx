@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/User';
-import RobotImage from '../../assets/img/robot.png';
-import DefaultImage from '../../assets/img/char.png';
+import RobotImage from '../../assets/img/avatars/default.png';
+import DefaultImage from '../../assets/img/knight-1.png';
 import '../../assets/css/App.css';
 
 function Fighter({

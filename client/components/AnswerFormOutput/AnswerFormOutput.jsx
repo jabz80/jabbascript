@@ -12,7 +12,7 @@ function AnswerFormOutput({
   return (
     <>
       <div
-        className={`p-3 h-100 d-flex w-100 ${
+        className={`h-100 d-flex w-100 ${
           !pythonCode && 'align-items-center align-items-center'
         }`}
       >
@@ -22,8 +22,9 @@ function AnswerFormOutput({
             className="justify-content-between flex-column h-100 align-content-center w-100"
           >
             {pythonCode ? (
-              <div className="d-flex justify-content-center align-content-center w-100 flex-column h-100">
-                <pre className="bg-warning p-1 flex-grow-1">
+              <div className="d-flex justify-content-center align-content-center w-100 flex-column h-100 bg-dark-subtle p-3 rounded shadow-sm">
+                <h3 className='text-center mb-3'>Output</h3>
+                <pre className="bg-white p-1 flex-grow-1">
                   › <span id="codeOutput">{pythonCode}</span>
                 </pre>
                 <button
@@ -38,7 +39,7 @@ function AnswerFormOutput({
                 </button>
               </div>
             ) : (
-              <h3>Your Answer will be here</h3>
+              <h3 style={{'margin-bottom': '1rem'}}>Your Answer will be here</h3>
             )}
           </div>
         </div>

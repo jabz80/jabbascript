@@ -1,18 +1,32 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/User';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 
 function Account() {
   const { userData } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [avatars, setAvatars] = useState([]);
-  const [selectedAvatar, setSelectedAvatar] = useState(0);
+  const [selectedAvatar, setSelectedAvatar] = useState(1);
   const [points, setPoints] = useState(0);
   const [submitClicked, setSubmitClicked] = useState(false);
   const [currentAvatarUrl, setCurrentAvatarUrl] = useState('')
   const [games, setGames] = useState([])
-  const [currentPlayerGames, setCurrentPlayerGames] = useState([])
+  const [show, setShow] = useState(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const navigate = useNavigate();
+
+    
+useEffect(() => {
+  if (userData?.img_url === 'https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/default.png?raw=true') {
+    setShow(true);
+  } else {
+    setShow(false);
+  }
+}, [userData]);
 
   const fetchUserPoints = async () => {
     try {
@@ -43,12 +57,20 @@ function Account() {
       console.error('Error fetching games:', error);
     }
   };
+      const clickHandler = (e) => {
+        setSelectedAvatar(Number(e.target.id))
+      }
 
-  const clickHandler = (e) => setSelectedAvatar(Number(e.target.id))
   const handleAvatarChange = (e) => {
     e.preventDefault()
-    setSubmitClicked(true);
+    // setSubmitClicked(true);
     setCurrentAvatarUrl(avatars.find((avatar) => avatar.avatar_id === selectedAvatar)?.img_url)
+    // console.log(currentAvatarUrl)
+    changeAvatar();
+    setShow(false)
+    setTimeout(() => {
+      window.location.reload()
+    }, 500);
   };
 
   const changeAvatar = async () => {
@@ -73,17 +95,21 @@ function Account() {
     if (userData) {
       fetchUserPoints()
       getAllAvatars();
-      getAllGames();
       setLoading(false);
+      getAllGames();
     }
   }, [userData]);
 
- useEffect(() => {
-  if (selectedAvatar !== 0 && submitClicked) {
-    changeAvatar();
-    setSubmitClicked(false);
-  }
-}, [submitClicked]);
+
+
+//  useEffect(() => {
+//   if (selectedAvatar !== 0 && submitClicked) {
+//     setShow(false)
+//     changeAvatar();
+//     setSubmitClicked(false);
+
+//   }
+// }, [submitClicked]);
 
 
   if (loading) {
@@ -98,8 +124,17 @@ function Account() {
           <h1>Your data</h1>
           
 <div className="avatar-container d-flex justify-content-center">
+  {userData?.img_url == 'https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/default.png?raw=true' ? 
+     <img
+        src={userData?.img_url}
+        className="w-50"
+        alt="User Avatar"
+      />
+  :
+  <>
       <svg
       data-bs-toggle="modal" data-bs-target="#exampleModal"
+      onClick={handleShow}
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
@@ -114,10 +149,12 @@ function Account() {
         />
       </svg>
       <img
-        src={currentAvatarUrl || userData.img_url}
+        src={userData?.img_url}
         className="w-50"
         alt="User Avatar"
       />
+      </>
+  }
     </div>
 
 
@@ -133,7 +170,32 @@ function Account() {
           <div className='p-4 rounded bg-light shadow-sm'>
             <h1>Your recent games</h1>
                     {games.length === 0 ? (
+                      <>
               <div>You haven't play a game yet!</div>
+                      <div className='mt-4'>
+                        <p><i>Begin your journey right now...</i></p>
+          <Link to="/story">
+            <button
+              type="button"
+              className="btn btn-fantasy text-white btn-lg me-4"
+              data-mdb-ripple-color="#c33232"
+            >
+              
+              Quest
+            </button>
+          </Link>
+          <Link to="/practice">
+            <button
+              type="button"
+              className="btn btn-fantasy text-white btn-lg"
+              data-mdb-ripple-color="#c33232"
+            >
+              
+              Fighting 
+            </button>
+          </Link>
+        </div>
+                      </>
             ) : (
               <>
                 <div className='row border-bottom py-3'>
@@ -157,35 +219,47 @@ function Account() {
 
         </div>
       </div>
-      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-            <div className="d-flex flex-wrap text-center">
-            <form onSubmit={handleAvatarChange}>
-              {avatars.map(avatar => (
+ <Modal show={show} id="exampleModal">
+        <Modal.Header closeButton>
+          <Modal.Title>Choose Avatar</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleAvatarChange}>
+            <div className='d-flex flex-wrap text-center'>
+               {avatars
+                .filter((avatar) => avatar.avatar_id !== 1)
+                .map((avatar) => (
                 <label key={avatar.avatar_id}>
-                  <input type="radio" id={avatar.avatar_id} name="avatar" onChange={clickHandler} style={{ display: 'none' }} />
-                  <img id={avatar.avatar_id} style={{'margin': '.5rem', 'width': '100px', cursor: 'pointer', opacity: selectedAvatar === avatar.avatar_id ? 0.5 : 1, }} src={avatar.img_url} alt={`Avatar ${avatar.avatar_id}`} />
+                  <input
+                    type='radio'
+                    id={avatar.avatar_id}
+                    name='avatar'
+                    onChange={clickHandler}
+                    style={{ display: 'none' }}
+                  />
+                  <img
+                    id={avatar.avatar_id}
+                    style={{
+                      margin: '.5rem',
+                      width: '100px',
+                      cursor: 'pointer',
+                      opacity: selectedAvatar === avatar.avatar_id ? 0.5 : 1,
+                    }}
+                    src={avatar.img_url}
+                    alt={`Avatar ${avatar.avatar_id}`}
+                  />
                 </label>
               ))}
-                    <div className="modal-footer d-flex justify-content-center">
-
+            </div>
+            <Modal.Footer className='d-flex justify-content-center'>
               <button className='btn btn-fantasy text-white' type="submit" >
                 Change Avatar
               </button>
-              <button type="button" className="btn btn-fantasy text-white" data-bs-dismiss="modal">Close</button>
-              </div>
-            </form>
-          </div>
-            </div>
 
-          </div>
-        </div>
-      </div>
+            </Modal.Footer>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

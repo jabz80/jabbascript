@@ -11,8 +11,8 @@ function Banner() {
           <p role="paragraph-first" className='main-page-subheading'>Koding Kombat is a competitive programming game where two users engage in a battle of wits by answering challenging programming questions.</p>
           <p role="paragraph-second" className='main-page-subheading'><b>Players take turns tackling a series of coding challenges</b>, ranging from algorithmic puzzles to debugging exercises.</p>
           <div className='d-flex flex-row align-items-center'>
-            <Link to={`/story`}><button type="button" className="btn btn-fantasy btn-lg text-white me-4 p-4" data-mdb-ripple-color="#c33232"> Try Story Mode </button></Link>
-            <Link to={`/practice`}><button type="button" className="btn btn-fantasy btn-lg text-white me-4 p-4" data-mdb-ripple-color="#c33232"> Try Fighting Mode </button></Link>
+            <Link to={`/story`}><button type="button" className="btn btn-fantasy btn-lg text-white me-4 p-4" data-mdb-ripple-color="#c33232"> Try Quest </button></Link>
+            <Link to={`/practice`}><button type="button" className="btn btn-fantasy btn-lg text-white me-4 p-4" data-mdb-ripple-color="#c33232"> Try Fighting  </button></Link>
             <Link to={`/login`}>Login ›</Link>
           </div>
         </div>

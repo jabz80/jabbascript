@@ -12,6 +12,7 @@ function FightCodeSection({ setPythonCode, pythonCode, checkTheAnswer, questions
         {fightResult ? (
           <div className='d-flex flex-column justify-content-center align-items-center'>
             <h1>{fightResult}</h1>
+            <img src={LoseImage}/>
             {!authToken && 
             <>
             <img src={LoseImage}/>

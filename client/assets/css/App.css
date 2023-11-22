@@ -3,6 +3,36 @@ body {
   font-family: 'Fira Sans', sans-serif;
 }
 
+.hidden-overflow {
+  overflow: hidden
+}
+
+.fade-enter {
+  opacity: 0;
+
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+
+}
+
+.fade-exit {
+  opacity: 1;
+
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+
+}
+
+.fade-enter, .fade-exit, .fade-enter-active, .fade-exit-active {
+  overflow: hidden;
+}
+
 a {
   text-decoration: none;
 }
@@ -142,7 +172,7 @@ h3 {
   background-repeat: no-repeat;
   background-position: center;
   max-width: 200px;
-  min-width: 180px;
+  min-width: 140px;
   white-space: nowrap;
   font-size: 1rem;
 }

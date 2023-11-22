@@ -13,11 +13,7 @@ export const UserProvider = ({ children }) => {
       const token = localStorage.getItem('token');
       if (!token) {
         //toast.error('No authentication token');
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'No authentication token'
-        })
+        
       }
 
       try {
@@ -30,11 +26,7 @@ export const UserProvider = ({ children }) => {
         setUserData(response.data);
       } catch (error) {
         //toast.error(error.response?.data?.error || 'Unable to locate user');
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Unable to locate user'
-        })
+        
       } 
     };
 

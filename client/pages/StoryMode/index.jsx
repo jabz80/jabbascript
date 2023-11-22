@@ -4,13 +4,14 @@ import { PythonIDE, StoryAnswerFormOutput } from '../../components';
 import { AuthContext } from "../../contexts/Auth";
 import { UserContext } from "../../contexts/User";
 export default function Index() {
+  const [gameStarted, setGameStarted] = useState(false)
   const [dialogueId, setDialogueId] = useState(0);
-  const [questionsList, setQuestionsList] = useState([])
+  const [questionsList, setQuestionsList] = useState([]);
   const [inputIncorrect, setInputIncorrect] = useState(false);
-  const [dialogue, setDialogue] = useState("");
-  const [userAnswer, setUserAnswer] = useState("");
+  const [dialogue, setDialogue] = useState('');
+  const [userAnswer, setUserAnswer] = useState('');
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
-  const [incorrectMessage, setIncorrectMessage] = useState("");
+  const [incorrectMessage, setIncorrectMessage] = useState('');
   // const [storyMessage, setStoryMessage] = useState();
   const [showFireball, setShowFireball] = useState(false);
   const [showThunder, setShowThunder] = useState(false);
@@ -19,7 +20,6 @@ export default function Index() {
   const [currentCode, setCurrentCode] = useState('');
   const [userCode, setUserCode] = useState('');
   const [userInput, setUserInput] = useState('');
-  const [answerPlaceholder, setAnswerPlaceholder] = useState(`Your Answer will be here`)
 
   const fireAudio = new Audio("assets/img/magic-strike-5856.mp3");
   const thunderAudio = new Audio("assets/img/loud-thunder-7932.mp3");
@@ -50,7 +50,7 @@ export default function Index() {
       setInputIncorrect(false);
       setIncorrectMessage("");
     } else {
-      setIncorrectMessage("Wrong answer!");
+      setIncorrectMessage('Wrong answer!');
       setInputIncorrect(true);
     }
   };
@@ -97,21 +97,27 @@ export default function Index() {
     }, 4000);
   };
 
-  const [last, setLast] = useState(false)
+
+  const gameStartHandler = () => {
+    setGameStarted(true);
+  }
+
+  const [last, setLast] = useState(false);
+
   const questionIncrementHandler = () => {
-    if(questionsList.length <= dialogueId + 1){
-      setLast(true)
+    if (questionsList.length <= dialogueId + 1) {
+      setLast(true);
       return;
     }
     setDialogueId((prevState) => prevState + 1);
     setDialogue(questionsList[dialogueId + 1]);
-  } 
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     setTimeout(() => {
-      setInputIncorrect(false)
+      setInputIncorrect(false);
     }, 1000);
-  },[inputIncorrect])
+  }, [inputIncorrect]);
 
   const inputCorrectHandler = (payload) => {
     setInputIncorrect(payload)
@@ -119,6 +125,18 @@ export default function Index() {
 
   return (
     <>
+    {!gameStarted ? (
+      <div className="h-100 practice_bg d-flex flex-column align-items-center justify-content-center">
+        <div className="row">
+          <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center p-4 bg-light">
+            <h2>Quest Mode</h2>
+            <p> Welcome fellow student, here you shall learn the ways of Python code. Follow the examples and answer the questions given to become stronger. Remember to click "Run" after answering your question to double check. Click "Start" when you are ready train for battle!</p>
+            <button className='btn btn-fantasy text-white mt-4' onClick={gameStartHandler}>Start The Game</button>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <>
     {dialogueId == 0 ? 
           '' : dialogueId == 8 ? 
           '' :
@@ -128,13 +146,14 @@ export default function Index() {
               <PythonIDE  last={false} inputIncorrect={inputCorrectHandler} setPythonCode={setPythonCode} pythonCode={pythonCode} questionIncrementHandler={questionIncrementHandler} storyMode={true} userCode={userCode} setUserCode={setUserCode} userInput={userInput} setUserInput={setUserInput} />
             </div>
             <div className="col-6 text-wrap" >
-              <StoryAnswerFormOutput pythonCode={pythonCode} setPythonCode={setPythonCode} questions={questionsList} setCurrentCode={setCurrentCode} storyMode={true} userCode={userCode} setUserCode={setUserCode} userInput={userInput} setUserInput={setUserInput} questionIncrementHandler={questionIncrementHandler} handleOkClick={handleOkClick} answerPlaceholder={answerPlaceholder}/>
+              <StoryAnswerFormOutput pythonCode={pythonCode} setPythonCode={setPythonCode} questions={questionsList} setCurrentCode={setCurrentCode} storyMode={true} userCode={userCode} setUserCode={setUserCode} userInput={userInput} setUserInput={setUserInput} questionIncrementHandler={questionIncrementHandler} handleOkClick={handleOkClick}/>
             </div>
           </div>
       </div>
     }
       <SingleFighter inputIncorrect={inputIncorrect} correctAnswersCount={dialogueId} dialogue={dialogue} last={last} questionIncrementHandler={questionIncrementHandler} showFireball={showFireball} />
     </>
+    )}
+    </>
   );
 }
-

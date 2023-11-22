@@ -31,7 +31,7 @@ export default function Register() {
     }
 
     try {
-      const response = await axios.post('https://jabbascript-api.onrender.com/register', {
+      const response = await axios.post('https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/register', {
         username: formData.username,
         email: formData.email,
         password: formData.password,

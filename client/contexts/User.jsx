@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
       }
 
       try {
-        const response = await fetch('https://jabbascript-api.onrender.com/token', {
+        const response = await fetch('https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/token', {
           headers: {
             Authorization: `Bearer ${token}`
           },

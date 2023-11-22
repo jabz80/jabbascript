@@ -34,7 +34,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await fetch('https://jabbascript-api.onrender.com/login', {
+    const response = await fetch('https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

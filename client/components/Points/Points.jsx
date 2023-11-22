@@ -6,7 +6,7 @@ const Points = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://jabbascript-api.onrender.com/score');
+        const response = await fetch('https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/score');
         const data = await response.json();
         setPointsData(data);
       } catch (error) {

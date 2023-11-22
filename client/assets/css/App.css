@@ -37,11 +37,9 @@ a {
   text-decoration: none;
 }
 
-
-
-.monaco-mouse-cursor-text {
-  font-size: 1.25rem !important;
-}
+/* .monaco-mouse-cursor-text {
+  font-size: 1.1rem !important;
+} */
 
 .logo {
   font-family: 'Kdam Thmor Pro', sans-serif;

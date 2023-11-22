@@ -28,7 +28,7 @@ function index() {
   const fetchUserPoints = async () => {
     try {
       const response = await fetch(
-        `https://jabbascript-api.onrender.com/score/${userData.user_id}`
+        `https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/score/${userData.user_id}`
       );
       const data = await response.json();
       setPoints(data.score);
@@ -40,7 +40,7 @@ function index() {
   const startTheGame = async (status) => {
     const token = localStorage.getItem('token');
     try {
-      await fetch(`https://jabbascript-api.onrender.com/games`, {
+      await fetch(`https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/games`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer: ${token}`,
@@ -55,7 +55,7 @@ function index() {
   const addTenPointsToWinner = async () => {
     try {
       await fetch(
-        `https://jabbascript-api.onrender.com/score/${userData.user_id}`,
+        `https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/score/${userData.user_id}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ function index() {
     const fetchQuestions = async () => {
       try {
         const response = await fetch(
-          'https://jabbascript-api.onrender.com/battle'
+          'https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/battle'
         );
         const data = await response.json();
         if (authToken) {
@@ -107,15 +107,8 @@ function index() {
   const checkTheAnswer = () => {
     if (currentCode) {
       if (
-        currentCode.innerHTML.trim() ==
-          questions[currentQuestionIndex].answer.trim() &&
-        currentQuestionIndex + 1 <= questions.length
+        currentCode.innerHTML.trim() == questions[currentQuestionIndex].answer.trim() && currentQuestionIndex + 1 <= questions.length
       ) {
-        Swal.fire({
-          title:'Correct',
-          text:'Nice Work, Keep it up',
-          icon:'success'
-        })
         setRoundWinner(1);
         setTimer(60);
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -124,11 +117,6 @@ function index() {
           Math.round(prevProgress - 100 / questions.length, 1)
         );
       } else {
-        Swal.fire({
-          title: 'Incorrect',
-          text: "Good Attempt, Take your time and keep on trying!",
-          icon: 'error'
-        })
         setRoundWinner(2);
         setTimer(60);
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -177,7 +165,7 @@ function index() {
           <div className="row">
             <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center p-4 bg-light">
               <h2>Game rules</h2>
-              <p class="lead">Welcome fellow student</p>
+              <p className="lead">Welcome fellow student</p>
               <p>
                 Use your coding training to battle your opponent. Write your answers in the code editor and hit <b>«Run»</b> as fast as possible to win. The fight ends when all questions are answered or if one of the player’s health reaches 0
               </p>

@@ -13,10 +13,7 @@ export const UserProvider = ({ children }) => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
-
         toast.error('No authentication token');
-    
-
       }
 
       try {
@@ -35,8 +32,7 @@ export const UserProvider = ({ children }) => {
         setUserData(responseData);
       } catch (error) {
 
-        //toast.error(error.response?.data?.error || 'Unable to locate user');
-
+        toast.error(error.response?.data?.error || 'Unable to locate user');
       } 
 
     };

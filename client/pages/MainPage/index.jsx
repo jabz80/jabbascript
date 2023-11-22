@@ -29,17 +29,17 @@ function index() {
               data-mdb-ripple-color="#c33232"
             >
               {' '}
-              Try Story Mode{' '}
+              Try Quest{' '}
             </button>
           </Link>
-          <Link to="/multiplayer">
+          <Link to="/practice">
             <button
               type="button"
               className="btn btn-fantasy text-white btn-lg"
               data-mdb-ripple-color="#c33232"
             >
               {' '}
-              Try Fighting Mode{' '}
+              Try Fighting {' '}
             </button>
           </Link>
         </div>

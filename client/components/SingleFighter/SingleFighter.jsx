@@ -57,7 +57,7 @@ const SingleFighter = ({ correctAnswersCount, inputIncorrect, dialogue, last, qu
         </div>
         <div className="col-4 d-flex h-100 justify-content-center align-items-center">
           {showFireball ?
-          <img className="lightning" src="/assets/img/lightning.gif"/>
+          <img className="lightning" src="/assets/img/beam.gif"/>
            :
             <Story
         // inputIncorrect={inputIncorrect}

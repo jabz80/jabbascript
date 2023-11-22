@@ -47,22 +47,22 @@ describe('Banner', () => {
         const loginButton = screen.getByText("Login ›");
     
         expect(storyModeButton).toBeInTheDocument();
-        expect(storyModeButton).toHaveTextContent("Try Story Mode");
+        expect(storyModeButton).toHaveTextContent("Try Quest");
     
         expect(fightingModeButton).toBeInTheDocument();
-        expect(fightingModeButton).toHaveTextContent("Try Fighting Mode");
+        expect(fightingModeButton).toHaveTextContent("Try Fighting ");
     
         expect(loginButton).toBeInTheDocument();
         expect(loginButton).toHaveTextContent("Login ›");
     });
 
-    it("Clicking on 'Try Story Mode' button navigates to the story page", () => {
+    it("Clicking on 'Try Quest' button navigates to the story page", () => {
         const storyModeButton = screen.getByRole("button", { name: /try story mode/i });
         fireEvent.click(storyModeButton);
         
     });
 
-    it("Clicking on 'Fighting Mode' button navigates to the Fighting page", () => {
+    it("Clicking on 'Fighting ' button navigates to the Fighting page", () => {
         const fightingModeButton = screen.getByRole("button", { name: /try fighting mode/i });
         fireEvent.click(fightingModeButton);
         

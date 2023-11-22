@@ -24,7 +24,7 @@ const AnswerForm = ({ setPythonCode }) => {
   return (
 
           <div className="form-group row w-100 h-100">
-          
+          <h3 className='text-center mb-3'>Input</h3>
     
 
                 <Editor
@@ -38,9 +38,9 @@ const AnswerForm = ({ setPythonCode }) => {
                     setUserCode(value);
                   }}
                 />
-                <div className="btn-group mt-3" role="group" aria-label="Basic example">
+                <div className="btn-group mt-3 d-flex justify-content-center" role="group" aria-label="Basic example">
 
-                <button className="btn run-btn" onClick={compile}>
+                <button className="btn  run-btn btn-fantasy text-white" onClick={compile}>
                   Run ›
                 </button>
                 {/* <button className="btn border-dark run-btn" onClick={compile}>

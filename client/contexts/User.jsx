@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -12,22 +13,28 @@ export const UserProvider = ({ children }) => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
-        //toast.error('No authentication token');
-        
+        toast.error('No authentication token');
       }
 
       try {
-        const response = await axios.get('https://jabbascript-api.onrender.com/token', {
+        const response = await fetch('https://jabbascript-api.onrender.com/token', {
           headers: {
-            Authorization: `Bearer: ${token}`
+            Authorization: `Bearer ${token}`
           },
         });
 
-        setUserData(response.data);
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Unable to locate user');
+        }
+
+        const responseData = await response.json();
+        setUserData(responseData);
       } catch (error) {
-        //toast.error(error.response?.data?.error || 'Unable to locate user');
-        
+
+        toast.error(error.response?.data?.error || 'Unable to locate user');
       } 
+
     };
 
     fetchUserData();

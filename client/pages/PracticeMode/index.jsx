@@ -157,7 +157,7 @@ return (
         <div className="row">
           <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center p-4 bg-light">
             <h2>Game rules</h2>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit omnis quaerat id ab veritatis sunt provident consequuntur, voluptate pariatur dolor distinctio aspernatur tenetur eveniet nostrum. Magnam fugit quidem ullam tempore.</p>
+            <p>Use your coding training to battle your opponent. Write your answers in the code editor and hit “Run” as fast as possible to win. The fight ends when all questions are answered or if one of the player’s health reaches 0</p>
             <button className='btn btn-fantasy text-white mt-4' onClick={gameStartHandler}>Start The Game</button>
           </div>
         </div>

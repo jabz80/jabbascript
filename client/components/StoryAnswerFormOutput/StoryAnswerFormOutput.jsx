@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Axios from 'axios';
 
 const API_ENDPOINT = 'http://localhost:3000/compile';
-function AnswerFormOutput({pythonCode, checkTheAnswer, questions, currentQuestionIndex, setCurrentCode, setPythonCode, questionIncrementHandler, inputIncorrect, handleOkClick}) {
+function AnswerFormOutput({pythonCode, checkTheAnswer, questions, currentQuestionIndex, setCurrentCode, setPythonCode, questionIncrementHandler, inputIncorrect, handleOkClick, answerPlaceholder}) {
     const [userCode, setUserCode] = useState("print('hi')");
   const [userInput, setUserInput] = useState('');
     document.getElementById('codeOutput') && setCurrentCode(document.getElementById('codeOutput'))
@@ -44,7 +44,7 @@ const clickHandler = () => {
             <button onClick={clickHandler} className={`align-self-center btn btn-fantasy text-white ${questions.length+1 == currentQuestionIndex ? 'disabled' : ''}`}>Check</button>
             </div>
             : 
-            <h3>Your Answer will be here</h3>}
+            <h3>{answerPlaceholder}</h3>}
         </div>
       </div>
     </div>

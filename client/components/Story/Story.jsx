@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-const Story = ({inputIncorrect, dialogue, last, questionIncrementHandler }) => {
+
+const Story = ({inputIncorrect, dialogue, last, questionIncrementHandler}) => {
 
   return (
     <>

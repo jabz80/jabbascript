@@ -19,6 +19,7 @@ export default function Index() {
   const [currentCode, setCurrentCode] = useState('');
   const [userCode, setUserCode] = useState('');
   const [userInput, setUserInput] = useState('');
+  const [answerPlaceholder, setAnswerPlaceholder] = useState(`Your Answer will be here`)
 
   const fireAudio = new Audio("assets/img/magic-strike-5856.mp3");
   const thunderAudio = new Audio("assets/img/loud-thunder-7932.mp3");
@@ -127,7 +128,7 @@ export default function Index() {
               <PythonIDE  last={false} inputIncorrect={inputCorrectHandler} setPythonCode={setPythonCode} pythonCode={pythonCode} questionIncrementHandler={questionIncrementHandler} storyMode={true} userCode={userCode} setUserCode={setUserCode} userInput={userInput} setUserInput={setUserInput} />
             </div>
             <div className="col-6 text-wrap" >
-              <StoryAnswerFormOutput pythonCode={pythonCode} setPythonCode={setPythonCode} questions={questionsList} setCurrentCode={setCurrentCode} storyMode={true} userCode={userCode} setUserCode={setUserCode} userInput={userInput} setUserInput={setUserInput} questionIncrementHandler={questionIncrementHandler} handleOkClick={handleOkClick}/>
+              <StoryAnswerFormOutput pythonCode={pythonCode} setPythonCode={setPythonCode} questions={questionsList} setCurrentCode={setCurrentCode} storyMode={true} userCode={userCode} setUserCode={setUserCode} userInput={userInput} setUserInput={setUserInput} questionIncrementHandler={questionIncrementHandler} handleOkClick={handleOkClick} answerPlaceholder={answerPlaceholder}/>
             </div>
           </div>
       </div>

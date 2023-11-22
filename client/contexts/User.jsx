@@ -1,4 +1,8 @@
-import React, { createContext, useState, useEffect } from 'react';
+
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 export const UserContext = createContext();
 
@@ -9,8 +13,14 @@ export const UserProvider = ({ children }) => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
-        console.error('No authentication token');
-        return;
+
+        //toast.error('No authentication token');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No authentication token'
+        })
+
       }
 
       try {
@@ -28,8 +38,15 @@ export const UserProvider = ({ children }) => {
         const responseData = await response.json();
         setUserData(responseData);
       } catch (error) {
-        console.error(error.message || 'Unable to locate user');
-      }
+
+        //toast.error(error.response?.data?.error || 'Unable to locate user');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Unable to locate user'
+        })
+      } 
+
     };
 
     fetchUserData();

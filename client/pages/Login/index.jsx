@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'; 
 
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2'
+
 
 
 
@@ -42,9 +45,29 @@ const handleSubmit = async (e) => {
       }),
     });
 
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.error || 'Failed to login');
+
+      localStorage.setItem('token', response.data.token);
+      //toast.success('Successfully logged in');
+      Swal.fire({
+        title: "Successfully logged in",
+        text: "You are now being redirected",
+        icon: "success"
+      });
+      navigate('/account');
+      window.location.reload()
+    } catch (error) {
+      console.log(error);
+      //toast.error(error.response?.data?.error || 'Failed to login');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Check you entered the correct details or register an account.'
+      })
+
     }
 
     const responseData = await response.json();

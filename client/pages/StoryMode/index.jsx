@@ -37,6 +37,11 @@ export default function Index() {
 
   const handleOkClick = () => {
     if (currentCode.innerHTML.trim() === dialogue.example.trim()) {
+      Swal.fire({
+        title:'Correct',
+        text:'Nice Work, Keep it up',
+        icon:'success'
+      })
       setIsAnswerCorrect(true);
       setIncorrectMessage("");
       setUserAnswer("");
@@ -44,6 +49,11 @@ export default function Index() {
       setInputIncorrect(false);
       setIncorrectMessage("");
     } else {
+      Swal.fire({
+        title: 'Incorrect',
+        text: "Good Attempt, Take your time and keep on trying!",
+        icon: 'error'
+      })
       setIncorrectMessage('Wrong answer!');
       setInputIncorrect(true);
     }

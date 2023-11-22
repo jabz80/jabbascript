@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios'; // axios to post data
 import { useNavigate } from 'react-router-dom'; 
 import { toast } from 'react-toastify';
-
+import Swal from 'sweetalert2'
 
 export default function Register() {
 
@@ -21,7 +21,12 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match');
+      //toast.error('Passwords do not match');
+      Swal.fire({
+        icon: 'error',
+        title: 'Passwords do not match',
+        text: 'Check you entered the correct details or register an account.'
+      })
       return;
     }
 
@@ -32,13 +37,28 @@ export default function Register() {
         password: formData.password,
       });
       if (response.status === 200 || response.status === 201) {
-        toast.success('Successfully registered');
+        //toast.success('Successfully registered');
+        Swal.fire({
+          title: "Successfully registered",
+          text: "You are now being redirected",
+          icon: "success"
+        });
         navigate('/login');
       } else {
-        toast.error('Failed to register');
+        //toast.error('Failed to register');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Failed to register'
+        })
       }
     } catch (error) {
-      toast.error(error.response?.data?.error || 'Failed to register');
+      //toast.error(error.response?.data?.error || 'Failed to register');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Check you entered the correct details or register an account.'
+      })
     }
   };
   

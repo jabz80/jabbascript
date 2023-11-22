@@ -30,7 +30,7 @@ export default function Index() {
   }, [dialogueId]);
 
   const fetchQuestion = async () => {
-    const response = await fetch('https://jabbascript-api.onrender.com/story')
+    const response = await fetch('https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/story')
     const result = await response.json()
     setQuestionsList(result)
     setDialogue(result[dialogueId]);
@@ -112,7 +112,7 @@ export default function Index() {
           <div className="offset-4 col-4 d-flex flex-column justify-content-center p-4 bg-light">
             <h2 className="align-self-center">Quest Mode</h2>
 
-            <p class="lead align-self-center">Welcome fellow student</p><p>Here you shall learn the ways of Python code.</p><p> Follow the examples and answer the questions given to become stronger. Remember to click <b>«Run»</b> after answering your question to double check.</p> <p>Click <b>«Start The Game»</b> when you are ready train for battle!</p>
+            <p className="lead align-self-center">Welcome fellow student</p><p>Here you shall learn the ways of Python code.</p><p> Follow the examples and answer the questions given to become stronger. Remember to click <b>«Run»</b> after answering your question to double check.</p> <p>Click <b>«Start The Game»</b> when you are ready train for battle!</p>
 
             <button className='align-self-center btn btn-fantasy text-white mt-4' onClick={gameStartHandler}>Start The Game</button>
           </div>

@@ -6,12 +6,12 @@ import { UserContext } from "../../contexts/User";
 export default function Index() {
   const [gameStarted, setGameStarted] = useState(false)
   const [dialogueId, setDialogueId] = useState(0);
-  const [questionsList, setQuestionsList] = useState([])
+  const [questionsList, setQuestionsList] = useState([]);
   const [inputIncorrect, setInputIncorrect] = useState(false);
-  const [dialogue, setDialogue] = useState("");
-  const [userAnswer, setUserAnswer] = useState("");
+  const [dialogue, setDialogue] = useState('');
+  const [userAnswer, setUserAnswer] = useState('');
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
-  const [incorrectMessage, setIncorrectMessage] = useState("");
+  const [incorrectMessage, setIncorrectMessage] = useState('');
   // const [storyMessage, setStoryMessage] = useState();
   const [showFireball, setShowFireball] = useState(false);
   const [showThunder, setShowThunder] = useState(false);
@@ -50,7 +50,7 @@ export default function Index() {
       setInputIncorrect(false);
       setIncorrectMessage("");
     } else {
-      setIncorrectMessage("Wrong answer!");
+      setIncorrectMessage('Wrong answer!');
       setInputIncorrect(true);
     }
   };
@@ -97,25 +97,27 @@ export default function Index() {
     }, 4000);
   };
 
+
   const gameStartHandler = () => {
     setGameStarted(true);
   }
 
-  const [last, setLast] = useState(false)
+  const [last, setLast] = useState(false);
+
   const questionIncrementHandler = () => {
-    if(questionsList.length <= dialogueId + 1){
-      setLast(true)
+    if (questionsList.length <= dialogueId + 1) {
+      setLast(true);
       return;
     }
     setDialogueId((prevState) => prevState + 1);
     setDialogue(questionsList[dialogueId + 1]);
-  } 
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     setTimeout(() => {
-      setInputIncorrect(false)
+      setInputIncorrect(false);
     }, 1000);
-  },[inputIncorrect])
+  }, [inputIncorrect]);
 
   const inputCorrectHandler = (payload) => {
     setInputIncorrect(payload)
@@ -155,4 +157,3 @@ export default function Index() {
     </>
   );
 }
-

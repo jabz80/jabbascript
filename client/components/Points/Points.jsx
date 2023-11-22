@@ -24,7 +24,7 @@ const Points = () => {
               {!Array.isArray(pointsData)   ?
               <>
        <p>'No players → no leaders!'</p>
-       <p><Link to="/register" className='btn btn-success'>Be the first one!</Link></p>
+       <p><Link to="/register" className='btn btn-fantasy text-white'>Be the first one!</Link></p>
               </>
        :
        <>

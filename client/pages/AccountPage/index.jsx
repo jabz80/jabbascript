@@ -11,11 +11,9 @@ function Account() {
   const [avatars, setAvatars] = useState([]);
   const [selectedAvatar, setSelectedAvatar] = useState(1);
   const [points, setPoints] = useState(0);
-  const [submitClicked, setSubmitClicked] = useState(false);
   const [currentAvatarUrl, setCurrentAvatarUrl] = useState('')
   const [games, setGames] = useState([])
   const [show, setShow] = useState(true);
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
 
@@ -47,6 +45,7 @@ useEffect(() => {
       console.error('Error fetching avatars:', error);
     }
   };
+
   const getAllGames = async () => {
     try {
       const response = await fetch(`https://jabbascript-api.onrender.com/games`);
@@ -57,15 +56,12 @@ useEffect(() => {
       console.error('Error fetching games:', error);
     }
   };
-      const clickHandler = (e) => {
-        setSelectedAvatar(Number(e.target.id))
-      }
+
+  const clickHandler = (e) => setSelectedAvatar(Number(e.target.id))
 
   const handleAvatarChange = (e) => {
     e.preventDefault()
-    // setSubmitClicked(true);
     setCurrentAvatarUrl(avatars.find((avatar) => avatar.avatar_id === selectedAvatar)?.img_url)
-    // console.log(currentAvatarUrl)
     changeAvatar();
     setShow(false)
     setTimeout(() => {
@@ -195,7 +191,7 @@ useEffect(() => {
             </button>
           </Link>
         </div>
-                      </>
+          </>
             ) : (
               <>
                 <div className='row border-bottom py-3'>

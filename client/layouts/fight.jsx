@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Header, Footer, Multiplayer } from '../components';
+import { Header } from '../components';
 
 function index() {
   return (

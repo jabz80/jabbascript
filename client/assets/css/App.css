@@ -37,6 +37,10 @@ a {
   text-decoration: none;
 }
 
+.monaco-mouse-cursor-text {
+  font-size: 1.5rem !important;
+}
+
 .logo {
   font-family: 'Kdam Thmor Pro', sans-serif;
 }
@@ -200,7 +204,7 @@ h3 {
   background: url('../img/account_bg.png'), #defbfe;
   background-size: auto;
   background-repeat: no-repeat;
-  background-position: right bottom;
+  background-position: 90% bottom;
 }
 
 .leaderboard-bg {

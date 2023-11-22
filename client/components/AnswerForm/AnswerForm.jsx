@@ -33,7 +33,7 @@ const AnswerForm = ({ setPythonCode }) => {
                   className='shadow'
                   theme="vs-dark"
                   defaultLanguage="python"
-                  defaultValue="#code and print your output"
+                  defaultValue="#code here"
                   onChange={(value) => {
                     setUserCode(value);
                   }}

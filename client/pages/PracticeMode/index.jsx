@@ -3,6 +3,7 @@ import { Fighting, FightCodeSection } from '../../components';
 import { AuthContext } from '../../contexts/Auth';
 import { UserContext } from '../../contexts/User';
 // const questions = require("../../assets/pythonQuestions/StoryMode/questions.json")
+import Swal from 'sweetalert2';
 
 function index() {
   const [pythonCode, setPythonCode] = useState('');
@@ -110,6 +111,11 @@ function index() {
           questions[currentQuestionIndex].answer.trim() &&
         currentQuestionIndex + 1 <= questions.length
       ) {
+        Swal.fire({
+          title:'Correct',
+          text:'Nice Work, Keep it up',
+          icon:'success'
+        })
         setRoundWinner(1);
         setTimer(60);
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -118,6 +124,11 @@ function index() {
           Math.round(prevProgress - 100 / questions.length, 1)
         );
       } else {
+        Swal.fire({
+          title: 'Incorrect',
+          text: "Good Attempt, Take your time and keep on trying!",
+          icon: 'error'
+        })
         setRoundWinner(2);
         setTimer(60);
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);

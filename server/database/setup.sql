@@ -61,7 +61,7 @@ VALUES
 ('Create a variable called number and assign it to the number 10. Then print the value of the variable.', '10'),
 ('Create a function that adds two numbers and returns the result. Then call the function with add the numbers 6 and 7 together. Then print the results.','15'),
 ('Create a function that checks if a number is even or odd and returns the "Even" or "Odd". Then check your function works by testing the number 3. Then print the results.','Odd'),
-('Create a function that takes a list of numbers as an arugment and returns the average of those numbers. Then check your function works by testing the list [2,5,7,9]. Then print the results.','23');
+('Create a function that takes a list of numbers as an arugment and returns the average of those numbers. Then check your function works by testing the list [2,5,8,9]. Then print the results.','13');
 
 INSERT INTO avatar(img_url)
 VALUES (

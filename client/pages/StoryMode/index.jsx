@@ -118,6 +118,19 @@ export default function Index() {
 
   return (
     <>
+
+    {!gameStarted ? (
+      <div className="h-100 practice_bg d-flex flex-column align-items-center justify-content-center">
+        <div className="row">
+          <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center p-4 bg-light">
+            <h2>Quest Mode</h2>
+            <p> .Welcome fellow student, here you shall learn the ways of Python code. Follow the examples and answer the questions given to become stronger. Remember to click "Run" after answering your question to double check. Click "Start" when you are ready train for battle!</p>
+            <button className='btn btn-fantasy text-white mt-4' onClick={gameStartHandler}>Start The Game</button>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <>
     {dialogueId == 0 ? 
           '' : dialogueId == 8 ? 
           '' :
@@ -134,5 +147,6 @@ export default function Index() {
     }
       <SingleFighter inputIncorrect={inputIncorrect} correctAnswersCount={dialogueId} dialogue={dialogue} last={last} questionIncrementHandler={questionIncrementHandler} showFireball={showFireball} />
     </>
-  );
-}
+  })
+ </>
+);

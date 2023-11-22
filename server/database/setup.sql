@@ -128,7 +128,7 @@ VALUES (
     1,
     'Question 1',
     'Good, now you try. Print "Hello World" for me.',
-    'print("Hello World)'
+    'print("Hello World")'
   ),
   (
     1,

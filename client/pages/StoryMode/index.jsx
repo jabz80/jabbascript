@@ -4,7 +4,6 @@ import { PythonIDE, StoryAnswerFormOutput } from '../../components';
 import { AuthContext } from "../../contexts/Auth";
 import { UserContext } from "../../contexts/User";
 export default function Index() {
-  const [gameStarted, setGameStarted] = useState(false)
   const [dialogueId, setDialogueId] = useState(0);
   const [questionsList, setQuestionsList] = useState([]);
   const [inputIncorrect, setInputIncorrect] = useState(false);
@@ -97,13 +96,7 @@ export default function Index() {
     }, 4000);
   };
 
-
-  const gameStartHandler = () => {
-    setGameStarted(true);
-  }
-
   const [last, setLast] = useState(false);
-
   const questionIncrementHandler = () => {
     if (questionsList.length <= dialogueId + 1) {
       setLast(true);
@@ -125,6 +118,7 @@ export default function Index() {
 
   return (
     <>
+
     {!gameStarted ? (
       <div className="h-100 practice_bg d-flex flex-column align-items-center justify-content-center">
         <div className="row">
@@ -153,7 +147,6 @@ export default function Index() {
     }
       <SingleFighter inputIncorrect={inputIncorrect} correctAnswersCount={dialogueId} dialogue={dialogue} last={last} questionIncrementHandler={questionIncrementHandler} showFireball={showFireball} />
     </>
-    )}
-    </>
-  );
-}
+  })
+ </>
+);

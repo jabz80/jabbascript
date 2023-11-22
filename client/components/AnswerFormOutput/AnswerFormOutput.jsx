@@ -1,9 +1,15 @@
-import React from 'react'
-function AnswerFormOutput({pythonCode, checkTheAnswer, questions, currentQuestionIndex, setCurrentCode}) {
-    document.getElementById('codeOutput') && setCurrentCode(document.getElementById('codeOutput'))
+import React, { useEffect } from 'react';
+function AnswerFormOutput({
+  pythonCode,
+  checkTheAnswer,
+  questions,
+  currentQuestionIndex,
+  setCurrentCode,
+}) {
+  document.getElementById('codeOutput') &&
+    setCurrentCode(document.getElementById('codeOutput'));
 
   return (
-    
     <>
       <div
         className={`p-3 h-100 d-flex w-100 ${

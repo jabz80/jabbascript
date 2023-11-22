@@ -19,7 +19,6 @@ a {
 
 .main-page-marketing-block {
   padding: 8rem 0;
-
 }
 
 .main-page-marketing-block-bg-1 {
@@ -37,13 +36,12 @@ a {
 }
 
 .bg-main-page-links-block {
-  background-color: #FFF2DB;
+  background-color: #fff2db;
 }
 
 .main-page-buttons {
   padding: 4rem 0;
 }
-
 
 .main-page-subheading {
   font-size: 24px;
@@ -57,7 +55,9 @@ a {
   background-position: center;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: 'Kdam Thmor Pro', sans-serif;
   margin-bottom: 2rem;
 }
@@ -68,7 +68,6 @@ h1, h2, h3 {
   margin: 0 auto;
 }
 
-
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
@@ -76,8 +75,6 @@ h1, h2, h3 {
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
-
-
 
 .banner {
   background-image: url('../img/bnr-bg-new.gif');
@@ -94,41 +91,33 @@ h1, h2, h3 {
   width: 100%;
   position: absolute;
   z-index: -1;
-  opacity: .8;
+  opacity: 0.8;
   animation: left-to-right 20s infinite;
 }
 
 @keyframes slidein {
   0% {
     background-position: -20% 150px;
-
   }
 
   50% {
     background-position: 50% 50px;
-
   }
 
   100% {
     background-position: 130% 10px;
-
   }
-
 }
 
 @keyframes left-to-right {
   0% {
     background-position: 0%;
-
   }
 
   100% {
     background-position: 100%;
-
   }
-
 }
-
 
 .card {
   padding: 2em;
@@ -198,7 +187,7 @@ h1, h2, h3 {
   position: absolute;
   top: 0;
   right: 25%;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .fight-bg {
@@ -219,7 +208,7 @@ h1, h2, h3 {
 }
 
 #fighter-shaking {
-  animation: horizontal-shaking .5s;
+  animation: horizontal-shaking 0.5s;
 }
 
 @keyframes horizontal-shaking {
@@ -243,6 +232,7 @@ h1, h2, h3 {
     transform: translateX(0)
   }
 }
+
 
 .practice_bg {
   background-image: url('../img/practice_bg.webp');
@@ -280,12 +270,10 @@ h1, h2, h3 {
 }
 
 .curtain__panel--left {
-
   background: url('../img/left_wall.jpg');
 }
 
 .curtain__panel--right {
-
   background: url('../img/right_wall.jpg');
 }
 
@@ -339,7 +327,6 @@ h1, h2, h3 {
 @keyframes slideRight {
   0% {
     transform: translateX(0);
-
   }
 
   25% {
@@ -352,14 +339,12 @@ h1, h2, h3 {
 
   100% {
     transform: translateX(100%);
-
   }
 }
 
 #fightRoundDescription {
   min-height: 3rem;
 }
-
 
 .char-bg {
   background-size: contain;
@@ -412,7 +397,6 @@ h1, h2, h3 {
   width: 100vw;
 }
 
-
 .fight-container {
   background-color: aquamarine;
   width: 100vw;
@@ -448,7 +432,6 @@ h1, h2, h3 {
   background-image: url('assets/img/forest-night.jpeg');
 }
 
-
 @keyframes horizontalMove {
   0% {
     transform: translateX(0);
@@ -462,7 +445,7 @@ h1, h2, h3 {
 }
 
 .dialog-box-container {
-  background: rgb(255, 255, 255, 0.80);
+  background: rgb(255, 255, 255, 0.8);
 }
 
 .npc {
@@ -494,7 +477,6 @@ h1, h2, h3 {
   animation: horizontalMove 3s linear infinite;
   /* Adjust time as needed */
 }
-
 
 .fighter-img {
   height: 200px;

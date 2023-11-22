@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/User';
 import RobotImage from '../../assets/img/robot.png';
 import DefaultImage from '../../assets/img/char.png';
+import '../../assets/css/App.css';
 
 function Fighter({
   firstFighter,
   robot,
   roundWinner,
+  setRoundWinner,
   healthPlayerOne = 100,
   healthPlayerTwo = 100,
 }) {
@@ -14,20 +16,25 @@ function Fighter({
 
   // State to manage the shaking animation
   const [isShaking, setIsShaking] = useState(false);
+  console.log('isShaking state outside of useEffect: ', isShaking);
 
   useEffect(() => {
-    if (roundWinner === 1 || (firstFighter && roundWinner === 2)) {
+    if (
+      (robot && roundWinner === 1) ||
+      (firstFighter && roundWinner === 2 && roundWinner !== 0)
+    ) {
       setIsShaking(true);
 
       // Remove the shaking class after 0.5s
       const timeoutId = setTimeout(() => {
         setIsShaking(false);
+        setRoundWinner(0);
       }, 500);
 
       // Cleanup the timeout to avoid memory leaks
       return () => clearTimeout(timeoutId);
     }
-  }, [roundWinner, firstFighter]);
+  }, [roundWinner, firstFighter, robot, setRoundWinner]);
   return (
     <div className="text-center h-100">
       <div>
@@ -63,9 +70,8 @@ function Fighter({
               : RobotImage
           })`,
         }}
-        className={`fighterBlock char-bg h-75 mt-4 ${
-          isShaking ? 'fighter-shaking' : ''
-        }`}
+        className={`fighterBlock char-bg h-75 mt-4`}
+        id={`${isShaking ? 'fighter-shaking' : ''}`}
       />
     </div>
   );

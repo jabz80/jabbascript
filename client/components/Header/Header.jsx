@@ -39,7 +39,7 @@ export default function Header() {
             <div className="collapse navbar-collapse" id="mainNav">
               <div className="navbar-nav ms-auto">
                 <NavLink className="ms-5 nav-link" to="/practice">
-                  Practice
+                  Fighting Mode
                 </NavLink>
                 <NavLink className="ms-5 nav-link" to="/story">
                   Story Mode
@@ -49,9 +49,9 @@ export default function Header() {
                 </NavLink>
                 {authToken ? (
                   <>
-                    <NavLink className="ms-5 nav-link" to="/multiplayer">
+                    {/* <NavLink className="ms-5 nav-link" to="/multiplayer">
                       Multiplayer
-                    </NavLink>
+                    </NavLink> */}
                     <NavLink className="ms-5 nav-link" to="/account">
                       Account
                     </NavLink>

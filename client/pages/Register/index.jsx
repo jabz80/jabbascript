@@ -38,27 +38,15 @@ export default function Register() {
       });
       if (response.status === 200 || response.status === 201) {
         //toast.success('Successfully registered');
-        Swal.fire({
-          title: "Successfully registered",
-          text: "You are now being redirected",
-          icon: "success"
-        });
+  
         navigate('/login');
       } else {
         //toast.error('Failed to register');
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Failed to register'
-        })
+  
       }
     } catch (error) {
       //toast.error(error.response?.data?.error || 'Failed to register');
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Check you entered the correct details or register an account.'
-      })
+ 
     }
   };
   

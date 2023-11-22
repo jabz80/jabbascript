@@ -93,7 +93,11 @@ VALUES (
   );
 
 INSERT INTO avatar(img_url, gender, skin_colour)
-VALUES (
+VALUES 
+  ('https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/default.png?raw=true',
+   'N/A',
+   'N/A'),
+  (
     'https://github.com/jabz80/jabbascript/blob/backend/server/avatar_images/k_f_b_300x400.png?raw=true', 
     'Female', 
     'Dark'

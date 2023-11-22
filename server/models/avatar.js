@@ -7,7 +7,7 @@ class Avatar {
     }
   
     static async getAll() {
-      const response = await db.query('SELECT * FROM avatar');
+      const response = await db.query('SELECT * FROM avatar WHERE avatar_id <> 1');
   
       if (response.rows.length == 0) {
         throw new Error('No avatars were found');

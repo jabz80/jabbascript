@@ -37,6 +37,12 @@ a {
   text-decoration: none;
 }
 
+
+
+.monaco-mouse-cursor-text {
+  font-size: 1.25rem !important;
+}
+
 .logo {
   font-family: 'Kdam Thmor Pro', sans-serif;
 }
@@ -88,9 +94,10 @@ a {
 
 h1,
 h2,
-h3 {
-  font-family: 'Kdam Thmor Pro', sans-serif;
-  margin-bottom: 2rem;
+h3,
+.swal2-title {
+  font-family: 'Kdam Thmor Pro', sans-serif !important;
+  margin-bottom: 2rem !important;
 }
 
 #root {
@@ -167,15 +174,15 @@ h3 {
   background-position: center;
 }
 
-.btn-fantasy {
-  background: url('../img/btn.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  max-width: 200px;
-  min-width: 140px;
-  white-space: nowrap;
-  font-size: 1rem;
+.btn-fantasy, .swal2-styled {
+  background: url('../img/btn.jpg') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  max-width: 200px !important;
+  min-width: 140px !important;
+  white-space: nowrap !important;
+  font-size: 1rem !important;
 }
 
 .form-fantasy {
@@ -200,7 +207,7 @@ h3 {
   background: url('../img/account_bg.png'), #defbfe;
   background-size: auto;
   background-repeat: no-repeat;
-  background-position: right bottom;
+  background-position: 90% bottom;
 }
 
 .leaderboard-bg {

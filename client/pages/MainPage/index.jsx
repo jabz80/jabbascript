@@ -13,10 +13,7 @@ function index() {
         </div>
         <div className="col-4 ms-4">
           <h2 className="main-page-h2">Play and learn</h2>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam in
-          rem inventore, ex temporibus ipsum. Soluta ea corporis quia recusandae
-          laborum quos iure, praesentium assumenda consectetur obcaecati
-          consequuntur laboriosam. Assumenda?
+          <p>Learn to code by fighting monsters and dragons! Follow your code master’s guide in Quest Mode to start your training. Once you have learned the ways of coding, challenge yourself to battle others with your knowledge and fight your way to the top of the leaderboard!</p>
         </div>
       </div>
       <div className="d-flex bg-main-page-links-block justify-content-center main-page-buttons align-items-center flex-column">
@@ -47,10 +44,8 @@ function index() {
       <div className="d-flex main-page-marketing-block main-page-marketing-block-bg-2 align-items-center">
         <div className="offset-2 col-4 me-4">
           <h2 className="main-page-h2">Text-Based Coding</h2>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam in
-          rem inventore, ex temporibus ipsum. Soluta ea corporis quia recusandae
-          laborum quos iure, praesentium assumenda consectetur obcaecati
-          consequuntur laboriosam. Assumenda?
+          <p>Aimed to develop innovative thinking and foster problem-solving skills - Koding Kombat aims to to teach in an engaging and fun manner.
+Koding Kombat is currently solely based on teaching Python, stay tuned for future updates and additional language games!</p>
         </div>
         <div className="col-4">
           <img src={KidCoder} className="img-fluid" />

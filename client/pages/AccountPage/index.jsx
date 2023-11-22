@@ -246,7 +246,7 @@ function Account() {
           </div>
         </div>
       </div>
-      <Modal show={show} id="exampleModal">
+ <Modal show={show} id="exampleModal" centered>
         <Modal.Header closeButton>
           <Modal.Title>Choose Avatar</Modal.Title>
         </Modal.Header>

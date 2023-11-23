@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import Axios from 'axios';
 
-const API_ENDPOINT = 'http://localhost:3000/compile';
+//const API_ENDPOINT = 'http://localhost:3000/compile';
+const API_ENDPOINT = "https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/compile"
 
 function pythonIDE({setPythonCode, inputIncorrect, last}) {
   const [userCode, setUserCode] = useState("print('hi')");

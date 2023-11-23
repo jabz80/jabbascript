@@ -30,17 +30,17 @@ function FightCodeSection({ setPythonCode, pythonCode, checkTheAnswer, questions
           }
         {fightResult == '' && (
           <div className='row'>
-            <div className='col-3'>
+            <div className='col-12 col-sm-3 mt-3'>
               <div className='h-100 flex-column d-flex justify-content-center'>
               <h3 role="heading" id='fightRoundNumber'>Round {currentQuestionIndex + 1}/{questions.length}</h3>
               <p id='fightRoundDescription'>{questions[currentQuestionIndex]?.question}</p>
               </div>
             </div>
-            <div className='col-4 d-flex align-items-center justify-content-center bg-dark-subtle p-3 rounded shadow-sm'>
+            <div className='col-12 col-sm-4 d-flex align-items-center justify-content-center bg-dark-subtle p-3 rounded shadow-sm'>
               <AnswerForm setPythonCode={setPythonCode} pythonCode={pythonCode} />
             </div>
-            <div className="col-1 d-flex justify-content-center align-items-center flex-column"><p style={{'fontSize': '4rem'}}>›</p></div>
-            <div className="col-4">
+            <div className="col-1 d-none d-sm-flex justify-content-center align-items-center flex-column"><p style={{'fontSize': '4rem'}}>›</p></div>
+            <div className="col-4 d-none d-sm-flex">
               <AnswerFormOutput pythonCode={pythonCode} checkTheAnswer={checkTheAnswer} questions={questions} currentQuestionIndex={currentQuestionIndex} setCurrentCode={setCurrentCode} />
             </div>
           </div>

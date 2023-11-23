@@ -28,7 +28,7 @@ const Points = () => {
               </>
        :
        <>
-      <div className='col-3'>
+      <div className='col-sm-3 col-12'>
         <div className='row border-bottom py-3'>
           <div className='col-2 d-flex align-items-center justify-content-center'>Rank</div>
           <div className='col-6 d-flex align-items-center justify-content-start'>Username</div>

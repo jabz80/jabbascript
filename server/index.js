@@ -13,7 +13,7 @@ let roomNumber = 1;
 
 const getQuestions = async () => {
   try {
-    const res = await fetch(`https://jabbascript-api.onrender.com/battle`);
+    const res = await fetch(`https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/battle`);
     const data = await res.json();
     return data;
   } catch (err) {

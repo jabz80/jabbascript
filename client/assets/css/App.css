@@ -113,7 +113,7 @@ h3,
 }
 
 .banner {
-  background-image: url('../img/bnr-bg-new.gif');
+  background-image: url('../img/bnr-bg-new-new.gif');
   background-repeat: no-repeat;
   animation: slidein 12s infinite;
   position: relative;
@@ -170,6 +170,7 @@ h3,
 .beam {
   background-image: url(../../assets/img/beam.gif);
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 .btn-fantasy, .swal2-styled {
@@ -488,6 +489,7 @@ h3,
 
 .dialog-box-container {
   background: rgb(255, 255, 255, 0.8);
+  position: relative;
 }
 
 .npc {
@@ -544,3 +546,12 @@ h3,
 }
 
 /* end of story page styling */
+.rightArrowPopup {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+  border-left: 30px solid rgb(255, 255, 255, 0.8);
+  right: -7.3%;
+}

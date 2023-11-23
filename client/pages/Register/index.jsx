@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'; // axios to post data
 import { useNavigate } from 'react-router-dom'; 
-import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'
 
 export default function Register() {

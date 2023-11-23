@@ -223,8 +223,8 @@ useEffect(() => {
         </div>
       </div>
  <Modal show={show} id="exampleModal" centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Choose Avatar</Modal.Title>
+        <Modal.Header className='d-flex justify-content-center'>
+          <Modal.Title>Choose Your Avatar</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleAvatarChange}>

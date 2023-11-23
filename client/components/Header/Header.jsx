@@ -52,12 +52,12 @@ export default function Header() {
                     <NavLink className="ms-5 nav-link" to="/account">
                       Account
                     </NavLink>
-                    <button
-                    className="ms-5 nav-link btn btn-link"
+                    <a
+                    className="ms-5 nav-link"
                     onClick={handleLogout}
                   >
                     Logout
-                  </button>
+                  </a>
                   </>
                 ):(
                   <>

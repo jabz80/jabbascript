@@ -9,7 +9,7 @@ const Story = ({inputIncorrect, dialogue, last, questionIncrementHandler}) => {
           <img src="assets/img/avatar.jpeg" alt="Character Avatar" />
         </div> */}
         <div className="dialog-box-container border rounded d-flex justify-content-center align-items-center p-4 my-3 shadow">
-          <span className='rightArrowPopup'></span>
+          <span className='rightArrowPopup d-none d-sm-block'></span>
       {
         last ? (
           <p>Congratulations! You've reached the end of the questions.</p>

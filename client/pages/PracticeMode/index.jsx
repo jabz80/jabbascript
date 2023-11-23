@@ -163,7 +163,7 @@ function index() {
       {!gameStarted ? (
         <div className="h-100 practice_bg d-flex flex-column align-items-center justify-content-center">
           <div className="row">
-            <div className="offset-4 col-4 d-flex flex-column align-items-center justify-content-center p-4 bg-light">
+            <div className="offset-sm-4 col-10 offset-1 col-sm-4 d-flex flex-column align-items-center justify-content-center p-4 bg-light">
               <h2>Game rules</h2>
               <p className="lead">Welcome fellow student</p>
               <p>

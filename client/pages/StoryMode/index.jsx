@@ -109,7 +109,7 @@ export default function Index() {
     !gameStarted ? (
       <div className="h-100 quest_bg d-flex flex-column align-items-center justify-content-center">
         <div className="row">
-          <div className="offset-4 col-4 d-flex flex-column justify-content-center p-4 bg-light">
+          <div className="offset-sm-4 col-10 offset-1 col-sm-4  d-flex flex-column justify-content-center p-4 bg-light">
             <h2 className="align-self-center">Quest Mode</h2>
 
             <p className="lead align-self-center">Welcome fellow student</p><p>Here you shall learn the ways of Python code.</p><p> Follow the examples and answer the questions given to become stronger. Remember to click <b>«Run»</b> after answering your question to double check.</p> <p>Click <b>«Start The Game»</b> when you are ready train for battle!</p>
@@ -123,11 +123,11 @@ export default function Index() {
     {dialogueId !== 0 && 
       <div className="container-md my-4">
           <div className="row">
-            <div className='col-5'>            
+            <div className='col-sm-5 col-12'>            
               <PythonIDE  last={false} inputIncorrect={inputCorrectHandler} setPythonCode={setPythonCode} />
             </div>
-            {dialogueId !== 0 && <div className="col-2 d-flex justify-content-center align-items-center flex-column"><p style={{'fontSize': '4rem'}}>›</p></div>}
-            <div className="col-5 text-wrap" >
+            {dialogueId !== 0 && <div className="col-2 d-none d-sm-flex justify-content-center align-items-center flex-column"><p style={{'fontSize': '4rem'}}>›</p></div>}
+            <div className="col-sm-5 col-12 text-wrap mt-4 mt-sm-0" >
               <StoryAnswerFormOutput pythonCode={pythonCode} setPythonCode={setPythonCode} questions={questionsList} setCurrentCode={setCurrentCode} storyMode={true} userCode={userCode} setUserCode={setUserCode} userInput={userInput} setUserInput={setUserInput} questionIncrementHandler={questionIncrementHandler} handleOkClick={handleOkClick} answerPlaceholder={answerPlaceholder}/>
             </div>
           </div>

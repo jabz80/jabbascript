@@ -123,7 +123,7 @@ function Account() {
   return (
     <div className="d-flex flex-column flex-grow-1 mb-auto py-5 container">
       <div className="row">
-        <div className="col-4">
+        <div className="col-sm-4 col-12 mb-sm-0 mb-4">
           <div className="p-4 bg-light d-flex justify-content-center flex-column w-100 align-items-center shadow-sm">
             <h1>Your data</h1>
 
@@ -182,7 +182,7 @@ function Account() {
           </div>
         </div>
 
-        <div className="col-8">
+        <div className="col-sm-8 col-12">
           <div className="p-4 rounded bg-light shadow-sm">
             <h1>Your recent games</h1>
             {games.length === 0 ? (

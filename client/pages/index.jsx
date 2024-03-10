@@ -7,7 +7,6 @@ export { default as Register } from "./Register";
 //Game
 export { default as StoryMode } from './StoryMode'
 export { default as PracticeMode } from './PracticeMode'
-export { default as MultiplayerMode } from './MultiplayerMode'
 export { default as Leaderboard } from './Leaderboard'
 
 //Account

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import Axios from 'axios';
 
-const API_ENDPOINT = 'http://localhost:3000/compile';
+//const API_ENDPOINT = 'http://localhost:3000/compile';
+const API_ENDPOINT = "https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/compile"
 
-function pythonIDE({setPythonCode, questionIncrementHandler, inputIncorrect, last}) {
+function pythonIDE({setPythonCode, inputIncorrect, last}) {
   const [userCode, setUserCode] = useState("print('hi')");
   const [userInput, setUserInput] = useState('');
 
@@ -30,8 +31,10 @@ function pythonIDE({setPythonCode, questionIncrementHandler, inputIncorrect, las
       })
   }
   return (
-      <div className="bg-dark-subtle p-3 rounded">
+      <div className="bg-dark-subtle p-3 rounded shadow-sm">
+        <h3 className='text-center mb-3'>Input</h3>
         <Editor
+      
           height="30vh"
           width="100%"
           theme="vs-dark"
@@ -43,7 +46,7 @@ function pythonIDE({setPythonCode, questionIncrementHandler, inputIncorrect, las
         />
 
         {!last && <div className='mt-3 text-center'>
-          <button className="btn run-btn" onClick={compile}>
+          <button className="btn btn-run btn-fantasy text-white" onClick={compile}>
             Run ›
           </button>
         </div>}

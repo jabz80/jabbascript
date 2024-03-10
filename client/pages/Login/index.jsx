@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
+
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2'
 
 
 
@@ -29,23 +30,40 @@ export default function Login() {
   };
 
   const navigate = useNavigate();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('https://jabbascript-api.onrender.com/login', {
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch('https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         username: loginData.username,
         password: loginData.password,
-      });
+      }),
+    });
+
+  
+    if (!response.ok) {
+
 
       localStorage.setItem('token', response.data.token);
-      toast.success('Successfully logged in');
+      //toast.success('Successfully logged in');
+   
       navigate('/account');
       window.location.reload()
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response?.data?.error || 'Failed to login');
     }
-  };
+
+    const responseData = await response.json();
+    localStorage.setItem('token', responseData.token);
+    navigate('/account');
+    window.location.reload();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     

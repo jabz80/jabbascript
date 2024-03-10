@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import Axios from 'axios';
-const API_ENDPOINT = 'http://localhost:3000/compile';
+
+//const API_ENDPOINT = 'http://localhost:3000/compile';
+const API_ENDPOINT = "https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/compile"
 
 const AnswerForm = ({ setPythonCode }) => {
 
@@ -24,7 +26,7 @@ const AnswerForm = ({ setPythonCode }) => {
   return (
 
           <div className="form-group row w-100 h-100">
-          
+          <h3 className='text-center mb-3'>Input</h3>
     
 
                 <Editor
@@ -33,14 +35,14 @@ const AnswerForm = ({ setPythonCode }) => {
                   className='shadow'
                   theme="vs-dark"
                   defaultLanguage="python"
-                  defaultValue="#code and print your output"
+                  defaultValue="#code here"
                   onChange={(value) => {
                     setUserCode(value);
                   }}
                 />
-                <div className="btn-group mt-3" role="group" aria-label="Basic example">
+                <div className="btn-group mt-3 d-flex justify-content-center" role="group" aria-label="Basic example">
 
-                <button className="btn run-btn" onClick={compile}>
+                <button className="btn  run-btn btn-fantasy text-white" onClick={compile}>
                   Run ›
                 </button>
                 {/* <button className="btn border-dark run-btn" onClick={compile}>

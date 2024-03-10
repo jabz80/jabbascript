@@ -39,28 +39,25 @@ export default function Header() {
             <div className="collapse navbar-collapse" id="mainNav">
               <div className="navbar-nav ms-auto">
                 <NavLink className="ms-5 nav-link" to="/practice">
-                  Fighting Mode
+                  Fighting 
                 </NavLink>
                 <NavLink className="ms-5 nav-link" to="/story">
-                  Story Mode
+                  Quest
                 </NavLink>
                 <NavLink className="ms-5 nav-link" to="/leaderboard">
                   Leaderboard
                 </NavLink>
                 {authToken ? (
                   <>
-                    {/* <NavLink className="ms-5 nav-link" to="/multiplayer">
-                      Multiplayer
-                    </NavLink> */}
                     <NavLink className="ms-5 nav-link" to="/account">
                       Account
                     </NavLink>
-                    <button
-                    className="ms-5 nav-link btn btn-link"
+                    <a
+                    className="ms-5 nav-link"
                     onClick={handleLogout}
                   >
                     Logout
-                  </button>
+                  </a>
                   </>
                 ):(
                   <>

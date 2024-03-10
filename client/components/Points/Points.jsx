@@ -6,7 +6,7 @@ const Points = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://jabbascript-api.onrender.com/score');
+        const response = await fetch('https://jabbascript-backend-79d72b5d4bfa.herokuapp.com/score');
         const data = await response.json();
         setPointsData(data);
       } catch (error) {
@@ -24,11 +24,11 @@ const Points = () => {
               {!Array.isArray(pointsData)   ?
               <>
        <p>'No players → no leaders!'</p>
-       <p><Link to="/register" className='btn btn-success'>Be the first one!</Link></p>
+       <p><Link to="/register" className='btn btn-fantasy text-white'>Be the first one!</Link></p>
               </>
        :
        <>
-      <div className='col-3'>
+      <div className='col-sm-3 col-12'>
         <div className='row border-bottom py-3'>
           <div className='col-2 d-flex align-items-center justify-content-center'>Rank</div>
           <div className='col-6 d-flex align-items-center justify-content-start'>Username</div>

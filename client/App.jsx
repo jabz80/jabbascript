@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import * as Layouts from "./layouts";
-import * as Pages from "./pages";
-import {AuthProvider} from "../client/contexts/Auth";
-import {UserProvider} from "../client/contexts/User";
+import * as Layouts from './layouts';
+import * as Pages from './pages';
+import { AuthProvider } from '../client/contexts/Auth';
+import { UserProvider } from '../client/contexts/User';
 function App() {
   const location = useLocation();
   return (
@@ -37,5 +37,6 @@ function App() {
     </AuthProvider>
   );
 }
+// changes
 
-export default App
+export default App;

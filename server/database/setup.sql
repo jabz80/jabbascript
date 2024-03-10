@@ -65,6 +65,7 @@ CREATE TABLE games(
   game_status BOOLEAN default NULL,
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+-- a
 
 INSERT INTO questions_battle(question, answer)
 VALUES (
